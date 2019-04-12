@@ -1,5 +1,15 @@
 package personal;
 
-public class UndergradStudent {
+public class UndergradStudent extends Student{
+
+    private final String TYPE = "UndergradStudent";
+
+    public UndergradStudent(String id, Name name, String email){
+        super();
+    }
+
+    public String getTYPE(){
+        return TYPE;
+    }
 
 }
