@@ -5,7 +5,7 @@ package course;
  * @author: Zhizhou Qiu
  * @date: 04-12-2019
  */
-public class CriComp extends Criterion{
+public class CriComp {
     private final static double DEFAULT_TOTALSCORE = 100.0;
     private final static int DEFAULT_NUMBER = 2;
     private double weights;
@@ -17,7 +17,7 @@ public class CriComp extends Criterion{
     }
 
     /**
-    * @Description: default constructor,
+    * @Description: default constructor
     * @Author: Zhizhou Qiu
     * @Date: 2019/4/12
     **/

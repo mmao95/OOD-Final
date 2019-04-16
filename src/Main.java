@@ -1,3 +1,4 @@
+import course.Criterion;
 import personal.GraduateStudent;
 import personal.Name;
 import personal.Student;
@@ -11,5 +12,6 @@ public class Main {
     public static void main(String[] args){
         Name name = new Name("1","2","3");
         System.out.println(name);
+        Criterion criterion = new Criterion();
     }
 }
