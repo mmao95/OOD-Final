@@ -13,5 +13,6 @@ public class Main {
         Name name = new Name("1","2","3");
         System.out.println(name);
         Criterion criterion = new Criterion();
+        criterion.writeToFile("test.txt");
     }
 }

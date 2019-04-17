@@ -1,5 +1,6 @@
 package course;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * @descriptions: this is a class that when a course is initialized,
  * the number of assignments, exams etc are assigned and each weight is clarified
  */
-public class Criterion {
+public class Criterion implements IO<Criterion>, Serializable {
 
     private final static int DEFAULT_NUMBER = 2;
     private List<CriComp> assignments;
@@ -61,6 +62,43 @@ public class Criterion {
     **/
     public Criterion() {
         createDefaultCriterion();
+    }
+
+    @Override
+    public Criterion readFromFile(String path) {
+        Criterion criterion = null;
+        try{
+            FileInputStream file = new FileInputStream
+                    (path);
+            ObjectInputStream in = new ObjectInputStream
+                    (file);
+
+            criterion = (Criterion) in.readObject();
+            in.close();
+            file.close();
+        } catch (IOException io){
+            io.printStackTrace();
+        } catch (ClassNotFoundException cl){
+            cl.printStackTrace();
+        }
+        return criterion;
+    }
+
+    @Override
+    public void writeToFile(String path){
+        try{
+            FileOutputStream file = new FileOutputStream
+                    (path);
+            ObjectOutputStream out = new ObjectOutputStream
+                    (file);
+            out.writeObject(this);
+            out.close();
+            file.close();
+//            System.out.println("object has been serialized\n + Data before serialization.");
+
+        } catch (IOException io){
+            io.printStackTrace();
+        }
     }
 
     public int getNumberOfAssignments() {
