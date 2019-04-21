@@ -34,8 +34,8 @@ public class Main {
         g2.setAttendence("90");
         g2.setAssignment("80",0);
         g2.setAssignment("70",1);
-        g2.setExam("80",0);
-        g2.setExam("70",1);
+        g2.setExam("90",0);
+        g2.setExam("60",1);
         g2.setProject("80",0);
         g2.setProject("70",1);
         c1.calculateAll();//calculate total grade of one course
@@ -43,7 +43,7 @@ public class Main {
         System.out.println(c1.getsGrade(s1).getAtt());//get assignment total score
         System.out.println(c1.getsGrade(s2).getEtt());//get exam total score
         System.out.println(c1.getsGrade(s2).getPtt());//get project total score
-        System.out.println(c1.getAnalysis()[0]);//print analysis [0] is ave [1] is max [2] is min
+        System.out.println(c1.getAnalysis("e",0)[0]);//print analysis [0] is ave [1] is max [2] is min
         c1.writeToFile("a.txt");
 
 //        Course c = new Course();
