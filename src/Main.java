@@ -22,6 +22,7 @@ public class Main {
         c1.enrollStudent(s2);
         Grade g = c1.getsGrade(s1);//get the grade of a specific student
         //set grade of student s1 for each component
+        // Updated upstream
         g.setAttendence("-20");
         g.setAssignment("80",0);
         g.setAssignment("70",1);
@@ -29,6 +30,15 @@ public class Main {
         g.setExam("70",1);
         g.setProject("80",0);
         g.setProject("70",1);
+
+        g.setAttendence("200%");
+        g.setAssignment("80%",0);
+        g.setAssignment("70%",1);
+        g.setExam("80%",0);
+        g.setExam("70%",1);
+        g.setProject("70%",0);
+        g.setProject("80%",1);
+
         Grade g2 = c1.getsGrade(s2);
         //set grade of student s1 for each component
         g2.setAttendence("90");
