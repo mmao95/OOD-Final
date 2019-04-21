@@ -2,7 +2,6 @@ package course;
 
 import grade.Grade;
 import personal.Student;
-
 import java.util.HashMap;
 
 public class Course implements Analysis{
@@ -32,6 +31,9 @@ public class Course implements Analysis{
         Grade temp = new Grade(ccriterion);
         cgrade.put(s,temp);
     }
+    public Grade getsGrade(Student s){
+        return cgrade.get(s);
+    }
     public HashMap<Student, Grade> getList(){
         return cgrade;
     }
@@ -41,9 +43,22 @@ public class Course implements Analysis{
     }
     public String[] getAnalysis(){
         String[] res = new String[4];
+        double tt = 0;
+        int count = 0;
+        double maxd = 0;
+        double mind = 100;
+        for (Student key : cgrade.keySet()) {
+            tt += cgrade.get(key).getTtscore();
+            maxd = Math.max(maxd,cgrade.get(key).getTtscore());
+            mind = Math.min(mind,cgrade.get(key).getTtscore());
+            count += 1;
+        }
+        res[0] = Double.toString(tt/(double)count);
+        res[1] = Double.toString(maxd);
+        res[2] = Double.toString(mind);
         return res;
     }
-    public double normalizeGrade(Grade g){
+    public void calculateTotal(Grade g){
         double total = 0;
         for(int i=0;i<ccriterion.getNumberOfAssignments();i++){
             String oc = g.getAssignment(i).getScore();
@@ -57,7 +72,7 @@ public class Course implements Analysis{
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
-            total+=sc*temp.getWeights()*100;
+            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfAssignments();
         }
         for(int i=0;i<ccriterion.getNumberOfExams();i++){
             String oc = g.getExam(i).getScore();
@@ -71,7 +86,7 @@ public class Course implements Analysis{
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
-            total+=sc*temp.getWeights()*100;
+            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfExams();
         }
         for(int i=0;i<ccriterion.getNumberOfProjects();i++){
             String oc = g.getProject(i).getScore();
@@ -85,7 +100,7 @@ public class Course implements Analysis{
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
-            total+=sc*temp.getWeights()*100;
+            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfProjects();
         }
         String att = g.getAttendence().getScore();
         double attsc;
@@ -97,6 +112,12 @@ public class Course implements Analysis{
             attsc = Double.valueOf(att)/100;
         }
         total+=attsc*ccriterion.getWeightsOfAttendance()*100;
-        return total;
+        g.setTtscore(total);
+    }
+    public void calculateAll(){
+        for (Student key : cgrade.keySet()) {
+            calculateTotal(cgrade.get(key));
+        }
     }
 }
+
