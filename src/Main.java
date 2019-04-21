@@ -14,6 +14,7 @@ public class Main {
         Name name1 = new Name("1","2","3");//initialize name
         Name name2 = new Name("4","5","6");
         Criterion cc= new Criterion();
+
         Course c1 = new Course("OOD","591P","Spring","2019",cc);//initialize course with default criterion
         Student s1 = new Student("U001",name1,"001@bu.edu");//initialize student
         Student s2 = new Student("U002",name2,"002@bu.edu");
@@ -21,7 +22,7 @@ public class Main {
         c1.enrollStudent(s2);
         Grade g = c1.getsGrade(s1);//get the grade of a specific student
         //set grade of student s1 for each component
-        g.setAttendence("80");
+        g.setAttendence("-20");
         g.setAssignment("80",0);
         g.setAssignment("70",1);
         g.setExam("80",0);
@@ -38,8 +39,10 @@ public class Main {
         g2.setProject("80",0);
         g2.setProject("70",1);
         c1.calculateAll();//calculate total grade of one course
-        System.out.println(c1.getsGrade(s1).getTtscore());
-        System.out.println(c1.getsGrade(s2).getTtscore());
+        System.out.println(c1.getsGrade(s1).getTtscore());//get total score
+        System.out.println(c1.getsGrade(s1).getAtt());//get assignment total score
+        System.out.println(c1.getsGrade(s2).getEtt());//get exam total score
+        System.out.println(c1.getsGrade(s2).getPtt());//get project total score
         System.out.println(c1.getAnalysis()[0]);//print analysis [0] is ave [1] is max [2] is min
         c1.writeToFile("a.txt");
 
