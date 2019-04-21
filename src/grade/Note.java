@@ -2,24 +2,18 @@ package grade;
 
 import java.io.*;
 
-
-public class GradeComp implements Serializable{
-    private String score;
-    private Note gNote;
-    public GradeComp() {
-        score = "0";
-        gNote = new Note();
+public class Note implements Serializable{
+    private String content;
+    public Note() {
+        content = "";
     }
-    public GradeComp(String s) {
-        score = s;
-        gNote = new Note();
+    public Note(String s) {
+        content = s;
     }
-
-    public String getScore(){
-        return score;
+    public void setNote(String s) {
+        content = s;
     }
-    public Note getNote(){
-        return gNote;
+    public String getNote() {
+        return content;
     }
-
 }
