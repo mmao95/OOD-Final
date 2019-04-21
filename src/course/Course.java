@@ -1,10 +1,11 @@
 package course;
 
+import java.io.*;
 import grade.Grade;
 import personal.Student;
 import java.util.HashMap;
 
-public class Course implements Analysis{
+public class Course implements Analysis,IO<Course>,Serializable{
     private String cname;
     private String cid;
     private String semester;
@@ -40,6 +41,9 @@ public class Course implements Analysis{
     public String[] getInfo(){
         String[] res =new String[]{cname,cid,semester,cyear};
         return res;
+    }
+    public Criterion getCcriterion(){
+        return ccriterion;
     }
     public String[] getAnalysis(){
         String[] res = new String[4];
@@ -114,10 +118,46 @@ public class Course implements Analysis{
         total+=attsc*ccriterion.getWeightsOfAttendance()*100;
         g.setTtscore(total);
     }
+
     public void calculateAll(){
         for (Student key : cgrade.keySet()) {
             calculateTotal(cgrade.get(key));
         }
     }
-}
 
+    @Override
+    public Course readFromFile(String path) {
+        Course c = null;
+        try{
+            FileInputStream file = new FileInputStream
+                    (path);
+            ObjectInputStream in = new ObjectInputStream
+                    (file);
+
+            c = (Course) in.readObject();
+            in.close();
+            file.close();
+        } catch (IOException io){
+            io.printStackTrace();
+        } catch (ClassNotFoundException cl){
+            cl.printStackTrace();
+        }
+        return c;
+    }
+
+    @Override
+    public void writeToFile(String path) {
+        try{
+            FileOutputStream file = new FileOutputStream
+                    (path);
+            ObjectOutputStream out = new ObjectOutputStream
+                    (file);
+            out.writeObject(this);
+            out.close();
+            file.close();
+
+        } catch (IOException io){
+            io.printStackTrace();
+        }
+    }
+}
