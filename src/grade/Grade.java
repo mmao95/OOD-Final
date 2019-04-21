@@ -13,6 +13,9 @@ public class Grade implements Serializable{
     private GradeComp attendence;
     private GradeComp extraCredit;
     private double ttscore = 0;
+    private double att = 0;
+    private double ett = 0;
+    private double ptt = 0;
     public Grade(){
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
@@ -83,8 +86,27 @@ public class Grade implements Serializable{
     public void setTtscore(double a){
         ttscore = a;
     }
+    public void setAtt(double a){
+        att = a;
+    }
+    public void setEtt(double a){
+        ett = a;
+    }
+    public void setptt(double a){
+        ptt = a;
+    }
+
     public double getTtscore(){
         return ttscore;
+    }
+    public double getAtt(){
+        return att;
+    }
+    public double getEtt(){
+        return ett;
+    }
+    public double getPtt(){
+        return ptt;
     }
 
     public void setAttendence(String s){
