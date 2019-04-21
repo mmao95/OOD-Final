@@ -1,17 +1,18 @@
 package grade;
 
-import course.Analysis;
-import course.Criterion;
 
+import course.Criterion;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grade{
+public class Grade implements Serializable{
     private List<GradeComp> aGrade;
     private List<GradeComp> eGrade;
     private List<GradeComp> pGrade;
     private GradeComp attendence;
     private GradeComp extraCredit;
+    private double ttscore = 0;
     public Grade(){
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
@@ -79,6 +80,13 @@ public class Grade{
         GradeComp temp = new GradeComp(s);
         pGrade.set(ind,temp);
     }
+    public void setTtscore(double a){
+        ttscore = a;
+    }
+    public double getTtscore(){
+        return ttscore;
+    }
+
     public void setAttendence(String s){
         attendence = new GradeComp(s);
     }
