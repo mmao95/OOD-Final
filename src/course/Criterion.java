@@ -156,6 +156,9 @@ public class Criterion implements IO<Criterion>, Serializable {
         this.weightsOfExams = 0.25;
         this.weightsOfAttendance = 0.25;
         this.weightsOfAssignments = 0.25;
+        this.numberOfProjects = DEFAULT_NUMBER;
+        this.numberOfAssignments = DEFAULT_NUMBER;
+        this.numberOfExams = DEFAULT_NUMBER;
         for (int i = 0; i < DEFAULT_NUMBER; i++) {
             this.assignments.add(new CriComp());
             this.projects.add(new CriComp());
