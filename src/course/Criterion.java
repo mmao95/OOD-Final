@@ -1,5 +1,6 @@
 package course;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * @descriptions: this is a class that when a course is initialized,
  * the number of assignments, exams etc are assigned and each weight is clarified
  */
-public class Criterion {
+public class Criterion implements IO<Criterion>, Serializable {
 
     private final static int DEFAULT_NUMBER = 2;
     private List<CriComp> assignments;
@@ -63,6 +64,43 @@ public class Criterion {
         createDefaultCriterion();
     }
 
+    @Override
+    public Criterion readFromFile(String path) {
+        Criterion criterion = null;
+        try{
+            FileInputStream file = new FileInputStream
+                    (path);
+            ObjectInputStream in = new ObjectInputStream
+                    (file);
+
+            criterion = (Criterion) in.readObject();
+            in.close();
+            file.close();
+        } catch (IOException io){
+            io.printStackTrace();
+        } catch (ClassNotFoundException cl){
+            cl.printStackTrace();
+        }
+        return criterion;
+    }
+
+    @Override
+    public void writeToFile(String path){
+        try{
+            FileOutputStream file = new FileOutputStream
+                    (path);
+            ObjectOutputStream out = new ObjectOutputStream
+                    (file);
+            out.writeObject(this);
+            out.close();
+            file.close();
+//            System.out.println("object has been serialized\n + Data before serialization.");
+
+        } catch (IOException io){
+            io.printStackTrace();
+        }
+    }
+
     public int getNumberOfAssignments() {
         return numberOfAssignments;
     }
@@ -111,17 +149,20 @@ public class Criterion {
      * @Date: 2019/4/12
      **/
     private void createDefaultCriterion() {
-        weightsOfProjects = 0.25;
-        weightsOfExams = 0.25;
-        weightsOfAttendance = 0.25;
-        weightsOfAssignments = 0.25;
-        assignments = new ArrayList<>();
-        projects = new ArrayList<>();
-        exams = new ArrayList<>();
+        this.assignments = new ArrayList<CriComp>();
+        this.projects = new ArrayList<CriComp>();
+        this.exams = new ArrayList<CriComp>();
+        this.weightsOfProjects = 0.25;
+        this.weightsOfExams = 0.25;
+        this.weightsOfAttendance = 0.25;
+        this.weightsOfAssignments = 0.25;
+        this.numberOfProjects = DEFAULT_NUMBER;
+        this.numberOfAssignments = DEFAULT_NUMBER;
+        this.numberOfExams = DEFAULT_NUMBER;
         for (int i = 0; i < DEFAULT_NUMBER; i++) {
-            assignments.add(new CriComp());
-            projects.add(new CriComp());
-            exams.add(new CriComp());
+            this.assignments.add(new CriComp());
+            this.projects.add(new CriComp());
+            this.exams.add(new CriComp());
         }
     }
 }
