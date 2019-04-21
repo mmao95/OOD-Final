@@ -51,15 +51,24 @@ public class Criterion implements IO<Criterion>, Serializable {
         assignments = new ArrayList<>();
         exams = new ArrayList<>();
         projects = new ArrayList<>();
+        for(int i=0;i<numberOfAssignments;i++){
+            assignments.add(new CriComp(weightsOfAssignments/numberOfAssignments,100));
+        }
+        for(int i=0;i<numberOfExams;i++){
+            exams.add(new CriComp(weightsOfExams/numberOfExams,100));
+        }
+        for(int i=0;i<numberOfProjects;i++){
+            projects.add(new CriComp(weightsOfProjects/numberOfProjects,100));
+        }
     }
 
     /**
-    * @Description: default constructor
-    * @Param:
-    * @Return:
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/12
-    **/
+     * @Description: default constructor
+     * @Param:
+     * @Return:
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/12
+     **/
     public Criterion() {
         createDefaultCriterion();
     }
