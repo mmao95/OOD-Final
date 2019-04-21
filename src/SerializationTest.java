@@ -15,5 +15,6 @@ public class SerializationTest {
         Criterion testCri = criterion.readFromFile("test.txt");
         System.out.println(testCri.getNumberOfAssignments());
         System.out.println(testCri.getWeightsOfAttendance());
+//        System.out.println(testCri.getAssignments().get(0).getWeights());
     }
 }
