@@ -63,7 +63,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         return res;
     }
     public void calculateTotal(Grade g){
-        double total = 0;
+        double total = 0,at = 0,et = 0,pt = 0;
         for(int i=0;i<ccriterion.getNumberOfAssignments();i++){
             String oc = g.getAssignment(i).getScore();
             CriComp temp = ccriterion.getAssignments().get(i);
@@ -77,6 +77,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 sc = Double.valueOf(oc)/fs;
             }
             total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfAssignments();
+            at+=sc*temp.getWeights()*100;
         }
         for(int i=0;i<ccriterion.getNumberOfExams();i++){
             String oc = g.getExam(i).getScore();
@@ -91,6 +92,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 sc = Double.valueOf(oc)/fs;
             }
             total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfExams();
+            et+=sc*temp.getWeights()*100;
         }
         for(int i=0;i<ccriterion.getNumberOfProjects();i++){
             String oc = g.getProject(i).getScore();
@@ -105,6 +107,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 sc = Double.valueOf(oc)/fs;
             }
             total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfProjects();
+            pt+=sc*temp.getWeights()*100;
         }
         String att = g.getAttendence().getScore();
         double attsc;
@@ -117,6 +120,9 @@ public class Course implements Analysis,IO<Course>,Serializable{
         }
         total+=attsc*ccriterion.getWeightsOfAttendance()*100;
         g.setTtscore(total);
+        g.setAtt(at);
+        g.setEtt(et);
+        g.setptt(pt);
     }
 
     public void calculateAll(){
