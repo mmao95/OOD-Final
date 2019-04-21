@@ -62,6 +62,69 @@ public class Course implements Analysis,IO<Course>,Serializable{
         res[2] = Double.toString(mind);
         return res;
     }
+    public String[] getAnalysis(String type,int index){
+        String[] res = new String[4];
+        double tt = 0;
+        int count = 0;
+        double maxd = 0;
+        double mind = 100;
+        if(type=="a") {
+            double fs = ccriterion.getAssignments().get(index).getToatalScore();
+            double sc;
+            for (Student key : cgrade.keySet()) {
+                String rawsc = cgrade.get(key).getAssignment(index).getScore();
+                if (rawsc.charAt(rawsc.length() - 1) == '%') {
+                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
+                } else if (rawsc.charAt(0) == '-') {
+                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
+                } else {
+                    sc = Double.valueOf(rawsc) / fs;
+                }
+                maxd = Math.max(maxd,sc * fs);
+                mind = Math.min(mind,sc * fs);
+                tt += sc * fs;
+                count += 1;
+            }
+        }else if(type=="e") {
+            double fs = ccriterion.getExams().get(index).getToatalScore();
+            double sc;
+            for (Student key : cgrade.keySet()) {
+                String rawsc = cgrade.get(key).getExam(index).getScore();
+                if (rawsc.charAt(rawsc.length() - 1) == '%') {
+                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
+                } else if (rawsc.charAt(0) == '-') {
+                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
+                } else {
+                    sc = Double.valueOf(rawsc) / fs;
+                }
+                maxd = Math.max(maxd,sc * fs);
+                mind = Math.min(mind,sc * fs);
+                tt += sc * fs;
+                count += 1;
+            }
+        }else if(type=="p"){
+            double fs = ccriterion.getProjects().get(index).getToatalScore();
+            double sc;
+            for (Student key : cgrade.keySet()) {
+                String rawsc = cgrade.get(key).getProject(index).getScore();
+                if (rawsc.charAt(rawsc.length() - 1) == '%') {
+                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
+                } else if (rawsc.charAt(0) == '-') {
+                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
+                } else {
+                    sc = Double.valueOf(rawsc) / fs;
+                }
+                maxd = Math.max(maxd,sc * fs);
+                mind = Math.min(mind,sc * fs);
+                tt += sc * fs;
+                count += 1;
+            }
+        }
+        res[0] = Double.toString(tt / (double) count);
+        res[1] = Double.toString(maxd);
+        res[2] = Double.toString(mind);
+        return res;
+    }
     public void calculateTotal(Grade g){
         double total = 0,at = 0,et = 0,pt = 0;
         for(int i=0;i<ccriterion.getNumberOfAssignments();i++){
