@@ -1,6 +1,9 @@
 package grade;
 
-public class GradeComp {
+import java.io.*;
+
+
+public class GradeComp implements Serializable{
     private String score;
     private Note gNote;
     public GradeComp() {
@@ -18,4 +21,5 @@ public class GradeComp {
     public Note getNote(){
         return gNote;
     }
+
 }
