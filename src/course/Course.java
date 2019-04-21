@@ -70,9 +70,9 @@ public class Course implements Analysis,IO<Course>,Serializable{
             double fs = temp.getToatalScore();
             double sc;
             if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-2))/100;
+                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
             } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1,oc.length()-1)))/fs;
+                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
@@ -84,9 +84,9 @@ public class Course implements Analysis,IO<Course>,Serializable{
             double fs = temp.getToatalScore();
             double sc;
             if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-2))/100;
+                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
             } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1,oc.length()-1)))/fs;
+                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
@@ -98,9 +98,9 @@ public class Course implements Analysis,IO<Course>,Serializable{
             double fs = temp.getToatalScore();
             double sc;
             if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-2))/100;
+                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
             } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1,oc.length()-1)))/fs;
+                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
             } else {
                 sc = Double.valueOf(oc)/fs;
             }
@@ -109,9 +109,9 @@ public class Course implements Analysis,IO<Course>,Serializable{
         String att = g.getAttendence().getScore();
         double attsc;
         if(att.charAt(att.length()-1)=='%'){
-            attsc = Double.valueOf(att.substring(0,att.length()-2))/100;
+            attsc = Double.valueOf(att.substring(0,att.length()-1))/100;
         }else if(att.charAt(0)=='-'){
-            attsc = (100-Double.valueOf(att.substring(1,att.length()-1)))/100;
+            attsc = (100-Double.valueOf(att.substring(1)))/100;
         }else{
             attsc = Double.valueOf(att)/100;
         }
