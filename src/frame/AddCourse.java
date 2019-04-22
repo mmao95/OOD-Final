@@ -190,41 +190,30 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         return -1;
     }
 
+    // When adding course work is finished (Click OK), a "Course" object is initialized.
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() == "OK") {
             boolean index = judgeInput();
             if (index)
                 switch (radioButtonIndex){
                     case 1:
-                        System.out.println(courseIDTextField.getText());
-                        System.out.println(courseNameTextField.getText());
-                        System.out.println(semesterTextField.getText());
-                        System.out.println(yearComboBox.getSelectedItem().toString());
-                        System.out.println(assignmentNumberTextField.getText());
-                        System.out.println(examNumberTextField.getText());
-                        System.out.println(projectNumberTextField.getText());
-                        System.out.println(participationNumberTextField.getText());
+                        Criterion tempCriterion1 = new Criterion(0.25, 0.25, 0.25, 0.25,
+                                Integer.valueOf(assignmentNumberTextField.getText()), Integer.valueOf(examNumberTextField.getText()),
+                                Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
+                        Course returnCourse1 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                                tempCriterion1);
                         break;
                     case 2:
-                        System.out.println(courseIDTextField.getText());
-                        System.out.println(courseNameTextField.getText());
-                        System.out.println(semesterTextField.getText());
-                        System.out.println(yearComboBox.getSelectedItem().toString());
-                        System.out.println(previousCourseComboBox.getSelectedItem().toString());
+                        Course returnCourse2 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                                savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
                         break;
                     case 3:
-                        System.out.println(courseIDTextField.getText());
-                        System.out.println(courseNameTextField.getText());
-                        System.out.println(semesterTextField.getText());
-                        System.out.println(yearComboBox.getSelectedItem().toString());
-                        System.out.println(assignmentNumberTextField.getText());
-                        System.out.println(assignmentWeightTextField.getText());
-                        System.out.println(examNumberTextField.getText());
-                        System.out.println(examWeightTextField.getText());
-                        System.out.println(projectNumberTextField.getText());
-                        System.out.println(projectWeightTextField.getText());
-                        System.out.println(participationNumberTextField.getText());
-                        System.out.println(participationWeightTextField.getText());
+                        Criterion tempCriterion3 = new Criterion(Double.valueOf(assignmentWeightTextField.getText()), Double.valueOf(examWeightTextField.getText()),
+                                Double.valueOf(projectWeightTextField.getText()), Double.valueOf(participationWeightTextField.getText()),
+                                Integer.valueOf(assignmentNumberTextField.getText()), Integer.valueOf(examNumberTextField.getText()),
+                                Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
+                        Course returnCourse3 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                                tempCriterion3);
                         break;
                 }
         }
