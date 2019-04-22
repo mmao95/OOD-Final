@@ -165,6 +165,7 @@ public class Criterion implements IO<Criterion>, Serializable {
      * @Date: 2019/4/12
      **/
     private void createDefaultCriterion() {
+        this.name = "DefaultCriterion";
         this.assignments = new ArrayList<CriComp>();
         this.projects = new ArrayList<CriComp>();
         this.exams = new ArrayList<CriComp>();
