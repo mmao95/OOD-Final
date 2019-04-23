@@ -1,18 +1,12 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import javax.swing.tree.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import UI.*;
 import course.Course;
@@ -39,16 +33,26 @@ public class MainFrame extends JFrame {
     /*** Components ***/
     private JMenuBar menuBar;
     private JTable gradeTable;
-    private JTree jTree;
     private JTextField weightingField;
     //Right panel components
     private JLabel label;
     private JList detailGradeList;
+    //Left panel components
+    //JTree
+    private JTree jTree;
+    //Initialization of JTree Node
+    private DefaultMutableTreeNode root = new DefaultMutableTreeNode("All courses");
+    private DefaultTreeModel jMode = new DefaultTreeModel(root);
 
-    private int width = 1280;
-    private int height = 720;
+    private int windowWidth = 1280;
+    private int windowHeight = 720;
 
-    //Sample Data
+    /*** Data ***/
+    private Map<String, Map<String, Course>> courseMap = new HashMap<>();
+    private Course currentCourse = null;
+    //private Class[] type = { String.class, String.class, String.class, String.class, String.class, String.class, String.class,
+    //        String.class, String.class, String.class, String.class, String.class, String.class, double.class};
+    private Class[] type = {};
 
     public void initialization() {
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -57,26 +61,16 @@ public class MainFrame extends JFrame {
         container = getContentPane();
         container.setLayout(new BorderLayout());
 
-        //Initialization of JTree Node
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("All courses");
-        DefaultTreeModel jMode = new DefaultTreeModel(root);
-
         //Setting up navigation bar
         menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File (F)");
         fileMenu.setMnemonic('f');
-        final JMenuItem newCourseMenuItem = new JMenuItem("New Course");
-        newCourseMenuItem.addActionListener(e-> {
-            //root.add(new DefaultMutableTreeNode("Test"));
-        });
-        final JMenuItem importCourseMenuItem = new JMenuItem("Import Course from File");
-        importCourseMenuItem.addActionListener(e-> {
-            Course course = NavigationBarMethods.importCourse("a.txt");
-            addCourse(course, root);
+        final JMenuItem saveChangesItem = new JMenuItem("Save changes");
+        saveChangesItem.addActionListener(e-> {
+
         });
         final JMenuItem exitMenuItem = new JMenuItem("Exit");
-        fileMenu.add(newCourseMenuItem);
-        fileMenu.add(importCourseMenuItem);
+        fileMenu.add(saveChangesItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
 
@@ -84,9 +78,37 @@ public class MainFrame extends JFrame {
         final JMenuItem deleteCourse = new JMenuItem("Delete Selected Course");
         deleteCourse.addActionListener(e-> {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+            DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+
+            if (courseMap.containsKey(node.getUserObject())) {
+                courseMap.remove(node.getUserObject());
+            } else {
+                courseMap.get(parent.getUserObject()).get(node.getUserObject());
+            }
+
             DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
             model.removeNodeFromParent(node);
         });
+        final JMenuItem newCourseMenuItem = new JMenuItem("New Course");
+        newCourseMenuItem.addActionListener(e-> {
+            Course course = new Course();
+            addCourse(course, root);
+//            try {
+//                List<Criterion> criterionList = new ArrayList<>();
+//                new AddCourse(criterionList);
+//            } catch (IOException ioe) {
+//                ioe.printStackTrace();
+//            } catch (ClassNotFoundException cnfe) {
+//                cnfe.printStackTrace();
+//            }
+        });
+        final JMenuItem importCourseMenuItem = new JMenuItem("Import Course from File");
+        importCourseMenuItem.addActionListener(e-> {
+            Course course = NavigationBarMethods.importCourse("b.txt");
+            addCourse(course, root);
+        });
+        courseMenu.add(newCourseMenuItem);
+        courseMenu.add(importCourseMenuItem);
         courseMenu.add(deleteCourse);
 
         JMenu studentMenu = new JMenu("Student (S)");
@@ -108,19 +130,23 @@ public class MainFrame extends JFrame {
             public void valueChanged(TreeSelectionEvent e) {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)
                         jTree.getLastSelectedPathComponent();
-            /* if nothing is selected */
-                if (node == null) return;
-            /* retrieve the node that was selected */
+                if (node == null)
+                    return;
                 if (node.isLeaf()) {
-                    Object nodeInfo = node.getUserObject();
-                    System.out.println(nodeInfo);
-            }
-            /* React to the node selection. */
+                    try {
+                        Object nodeInfo = node.getUserObject();
+                        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+                        Course course = courseMap.get(parent.getUserObject()).get(nodeInfo);
+                        setUpGradeTable(course.getCcriterion(), course.getList());
+                    } catch (NullPointerException exception) {
+                        exception.printStackTrace();
+                    }
+                }
             }
         });
 
         JScrollPane treeScrollPane = new JScrollPane(jTree);
-        treeScrollPane.setPreferredSize(new Dimension(width / 8, height));
+        treeScrollPane.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
         container.add(treeScrollPane, BorderLayout.WEST);
 
         /*** Middle Panel ***/
@@ -132,12 +158,20 @@ public class MainFrame extends JFrame {
             }
         };
 
-        Class[] types = { String.class, String.class, String.class, String.class, String.class,
-                String.class, String.class, String.class, String.class, String.class, double.class};
+        //Set up table model
         SortTableModel sortTableModel = new SortTableModel();
-        sortTableModel.setClassList(Arrays.asList(types));
+        sortTableModel.setClassList(Arrays.asList(type));
+       // sortTableModel.addTableModelListener(new TableChangedListener());
+
+        //Set up Selection model
+        ListSelectionModel lsm = gradeTable.getSelectionModel();
+        lsm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lsm.addListSelectionListener(new GradeTableSelectionHandler());
+
+        //Add models to table and set up mouse listener
         gradeTable.setModel(sortTableModel);
         gradeTable.addMouseListener(new TableMouseListener(gradeTable, weightingField));
+        gradeTable.setSelectionModel(lsm);
 
         //Pop up menu of table
         JPopupMenu popupMenu = new JPopupMenu();
@@ -162,12 +196,12 @@ public class MainFrame extends JFrame {
 
         middlePanel = new JPanel(new BorderLayout());
         middlePanel.add(middleSubPanel, BorderLayout.CENTER);
-        middlePanel.setPreferredSize(new Dimension(width * (5 / 8), height));
+        middlePanel.setPreferredSize(new Dimension(windowWidth * (6 / 8), windowHeight));
         container.add(middlePanel, BorderLayout.CENTER);
 
         /*** Right Panel ***/
         rightPanel = new JPanel(new BorderLayout(5, 5));
-        rightPanel.setPreferredSize(new Dimension(width / 8, height));
+        rightPanel.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
 
         label = new JLabel("Index");
         detailGradeList = new JList();
@@ -178,13 +212,22 @@ public class MainFrame extends JFrame {
 
         /*** Bottom Panel ***/
         bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(width * (6 / 8), height / 8));
+        bottomPanel.setPreferredSize(new Dimension(windowWidth * (6 / 8), windowHeight / 8));
+
+//        JButton addRow = new JButton("Add new row");
+//        addRow.addActionListener(e-> {
+//            addRow(new Object[]{});
+//        });
+//        bottomPanel.add(addRow);
+
         container.add(bottomPanel, BorderLayout.SOUTH);
 
+
+        /*** Settings of MainFrame ***/
         setTitle("Grading System");
-        setBounds((int)(screenSize.getWidth() - width)/ 2,
-                (int)(screenSize.getHeight() - height)/ 2,
-                width, height);
+        setBounds((int)(screenSize.getWidth() - windowWidth)/ 2,
+                (int)(screenSize.getHeight() - windowHeight)/ 2,
+                windowWidth, windowHeight);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -199,23 +242,44 @@ public class MainFrame extends JFrame {
         String courseName = course.getInfo()[0];
         String courseSemester = course.getInfo()[2] + course.getInfo()[3];
         TreePath coursePath = find(root, courseName);
-        TreePath semesterPath = find(root, courseSemester);
-        DefaultMutableTreeNode courseNode = new DefaultMutableTreeNode(courseName);
-        DefaultMutableTreeNode semesterNode = new DefaultMutableTreeNode(courseSemester);
-        courseNode.add(semesterNode);
-        root.add(courseNode);
+        TreePath semesterPath;
 
-        HashMap<Student, Grade> grade = course.getList();
+        HashMap<Student, Grade> gradeMap = course.getList();
 
-        if (coursePath == null && semesterPath == null) {
-            setUpGradeTable(course.getCcriterion(), grade);
-        } else if (coursePath != null && semesterPath == null) {
-
-        } else {
-            System.out.println("All exists!");
-            jTree.setSelectionPath(semesterPath);
-            jTree.scrollPathToVisible(semesterPath);
+        Map<String, Course> subCourseMap = new HashMap<>();
+        if (!courseMap.containsKey(courseName)) {
+            //Set up new table model
+            setUpGradeTable(course.getCcriterion(), gradeMap);
+            //Update Tree
+            DefaultMutableTreeNode courseNode = new DefaultMutableTreeNode(courseName);
+            DefaultMutableTreeNode semesterNode = new DefaultMutableTreeNode(courseSemester);
+            courseNode.add(semesterNode);
+            root.add(courseNode);
+            //Update Map
+            subCourseMap.put(courseSemester, course);
+            courseMap.put(courseName, subCourseMap);
+        } else if (courseMap.containsKey(courseName)) {
+            if (courseMap.get(courseName).containsKey(courseSemester)) {
+                System.out.println("Already exists!");
+            } else {
+                //Set up new table model
+                setUpGradeTable(course.getCcriterion(), gradeMap);
+                //Update Tree
+                DefaultMutableTreeNode courseNode = (DefaultMutableTreeNode) coursePath.getLastPathComponent();
+                DefaultMutableTreeNode semesterNode = new DefaultMutableTreeNode(courseSemester);
+                courseNode.add(semesterNode);
+                //Update Map
+                subCourseMap = courseMap.get(courseName);
+                subCourseMap.put(courseSemester, course);
+                courseMap.put(courseName, subCourseMap);
+            }
         }
+        currentCourse = course;
+        jTree.setModel(new DefaultTreeModel(root));
+        //Expand the newest node
+        semesterPath = find(root, courseSemester);
+        jTree.setSelectionPath(semesterPath);
+        jTree.scrollPathToVisible(semesterPath);
     }
 
     private TreePath find(DefaultMutableTreeNode root, String s) {
@@ -230,18 +294,22 @@ public class MainFrame extends JFrame {
         return null;
     }
 
-    /*** Table Methods ***/
+    /*** Table Set-ups ***/
     private void setUpGradeTable(Criterion criterion, HashMap<Student, Grade> grade) {
         Vector<String> headers = setUpTableHeader(criterion);
         Vector<Object> grades = loadData(grade);
 
+        setUpTypes(grade);
+
         SortTableModel dm = (SortTableModel) gradeTable.getModel();
+        dm.setClassList(Arrays.asList(type));
         dm.setDataVector(grades, headers);
 
         groupingHeaders(criterion);
 
-        gradeTable.setModel(dm);
-        gradeTable = new JTable(dm);
+        dm.addTableModelListener(new TableChangedListener());
+
+        //gradeTable.getColumnModel().getColumn(10).setCellRenderer(new CommentRenderer());
     }
 
     private Vector<String> setUpTableHeader(Criterion criterion) {
@@ -258,7 +326,6 @@ public class MainFrame extends JFrame {
         //Assignment Headers
         for (int i = 0 ; i < assignments ; i++) {
             vector.add(String.valueOf(i + 1));
-
         }
         //Exam headers
         for (int i = 0 ; i < exams ; i++) {
@@ -298,6 +365,23 @@ public class MainFrame extends JFrame {
         return grades;
     }
 
+    private void setUpTypes(HashMap<Student, Grade> gradeMap) {
+        Vector<Class> classes = new Vector<>();
+        classes.add(String.class);
+        classes.add(String.class);
+        classes.add(String.class);
+        Student key = gradeMap.keySet().iterator().next();
+        Grade grade = gradeMap.get(key);
+        //Types for assignments, exams and projects
+        int items = grade.getaGrade().size() + grade.geteGrade().size() + grade.getpGrade().size();
+        for (int i = 0 ; i < items; i++) {
+            classes.add(String.class);
+        }
+        classes.add(String.class);
+        classes.add(double.class);
+        type = classes.toArray(new Class[]{});
+    }
+
     private void groupingHeaders(Criterion criterion) {
         int assignments = criterion.getNumberOfAssignments();
         int exams = criterion.getNumberOfExams();
@@ -314,13 +398,11 @@ public class MainFrame extends JFrame {
             g_assignment.add(cm.getColumn(startIndex));
             startIndex++;
         }
-
         //Exam headers
         for (int i = 0 ; i < exams ; i++) {
             g_exam.add(cm.getColumn(startIndex));
             startIndex++;
         }
-
         //Project headers
         for (int i = 0 ; i < projects ; i++) {
             g_project.add(cm.getColumn(startIndex));
@@ -331,40 +413,82 @@ public class MainFrame extends JFrame {
         header.addColumnGroup(g_assignment);
         header.addColumnGroup(g_exam);
         header.addColumnGroup(g_project);
+        gradeTable.setTableHeader(header);
     }
 
-    private Object getValueOfSelectedCell() {
-        int row = gradeTable.getSelectedRow();
-        int col = gradeTable.getSelectedColumn();
-        return gradeTable.getValueAt(row, col);
+    /*** Table Methods **/
+    private void saveTableChanges(String id, String category, int index, String value) {
+        Student student = currentCourse.getStudent(id);
+        Grade grade = currentCourse.getsGrade(student);
+
+        switch (category) {
+            case "Name":
+                //student.setName();
+                break;
+            case "Id":
+                student.setId(value);
+                break;
+            case "Email":
+                student.setEmail(value);
+                break;
+            case "Assignment":
+                grade.setAssignment(value, index);
+                break;
+            case "Exams":
+                grade.setExam(value, index);
+                break;
+            case "Projects":
+                grade.setProject(value, index);
+                break;
+            case "Attendance":
+                grade.setAttendence(value);
+                break;
+            default:
+                break;
+
+        }
+        currentCourse.getList().put(student, grade);
+        currentCourse.writeToFile("b.txt");
     }
 
-    private void hideColumn(int column) {
-        TableColumn tc = gradeTable.getTableHeader().getColumnModel().getColumn(column);
-        tc.setMaxWidth(5);
-        tc.setPreferredWidth(5);
-        tc.setWidth(5);
-        tc.setMinWidth(5);
-        gradeTable.getTableHeader().getColumnModel().getColumn(column).setMaxWidth(5);
-        gradeTable.getTableHeader().getColumnModel().getColumn(column).setMinWidth(5);
-    }
+//    private void addRow(Object[] data) {
+//        SortTableModel sortTableModel = (SortTableModel) gradeTable.getModel();
+//        sortTableModel.addRow(data);
+//    }
 
-    private void showColumn(int column, int width) {
-        TableColumn tc = gradeTable.getColumnModel().getColumn(column);
-        tc.setMaxWidth(width);
-        tc.setPreferredWidth(width);
-        tc.setWidth(width);
-        tc.setMinWidth(width);
-        gradeTable.getTableHeader().getColumnModel().getColumn(column).setMaxWidth(width);
-        gradeTable.getTableHeader().getColumnModel().getColumn(column).setMinWidth(width);
-    }
-
+    /*** Table Listener ***/
     //Display weighting in the textfield
     private class GradeTableSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            weightingField.setText(String.valueOf(gradeTable.getSelectedColumn()));
             label.setText(String.valueOf(gradeTable.getSelectedColumn()));
         }
     }
 
+    private class TableChangedListener implements TableModelListener {
+        @Override
+        public void tableChanged(TableModelEvent e) {
+            GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+            int selectedColumn = gradeTable.getSelectedColumn();
+            int selectedRow = gradeTable.getSelectedRow();
+            if (selectedColumn == -1 || selectedRow == -1) {
+                System.out.println("Nothing is selected!");
+            } else {
+                //!!Only useful when student id is in the second column!!
+                String id = gradeTable.getValueAt(selectedRow, 1).toString();
+                String value = gradeTable.getValueAt(selectedRow, selectedColumn).toString();
+                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+                List<ColumnGroup> list = header.getColumnGroups(tc);
+                String category;
+                int index = -1;
+                if (list.size() != 0) {
+                    category = list.get(0).getHeaderValue();
+                    index = Integer.parseInt(gradeTable.getColumnName(selectedColumn));
+                } else {
+                    category = gradeTable.getColumnName(selectedColumn);
+                }
+                System.out.println("Changed!");
+                saveTableChanges(id, category, index - 1, value);
+            }
+        }
+    }
 }
