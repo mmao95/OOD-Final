@@ -2,19 +2,24 @@ package course;
 
 import java.io.*;
 import grade.Grade;
+import javafx.util.Pair;
 import personal.Student;
-import java.util.HashMap;
+import java.util.*;
 
-public class Course implements Analysis, IO<Course>, Serializable{
+/**
+ * @Auther:Maoxuan Zhu
+ * @Date:04-15-201921:20
+ * @Description: this class represent a course and store grade of each students enroll in this course in a hashmap
+ **/
+public class Course implements Analysis,IO<Course>,Serializable{
     private String cname;
     private String cid;
     private String semester;
     private String cyear;
     private Criterion ccriterion;
     private HashMap<Student, Grade> cgrade;
-
     private static final long serialVersionUID = -4689572748727448978L;
-
+    // Default constructor
     public Course(){
         cname = "Course01";
         cid = "000";
@@ -23,7 +28,7 @@ public class Course implements Analysis, IO<Course>, Serializable{
         ccriterion = new Criterion();
         cgrade = new HashMap<>();
     }
-    public Course(String name, String id, String s, String y, Criterion c) {
+    public Course(String name, String id, String s, String y, Criterion c){
         cname = name;
         cid = id;
         semester = s;
@@ -31,46 +36,75 @@ public class Course implements Analysis, IO<Course>, Serializable{
         ccriterion = c;
         cgrade = new HashMap<>();
     }
+    //enroll a student to this course
     public void enrollStudent(Student s){
-        Grade temp = new Grade(ccriterion);
+        Grade temp = new Grade(ccriterion,s.getId());
         cgrade.put(s,temp);
     }
+    //get student object
+    public Student getStudent(String id){
+        for(Student key: cgrade.keySet()){
+            if(key.getId()==id){
+                return key;
+            }
+        }
+        return null;
+    }
+    //get the grade object of student s
     public Grade getsGrade(Student s){
         return cgrade.get(s);
     }
+    //get grade list
     public HashMap<Student, Grade> getList(){
         return cgrade;
     }
+    //get course information
     public String[] getInfo(){
         String[] res =new String[]{cname,cid,semester,cyear};
         return res;
     }
+    //get grading criterion
     public Criterion getCcriterion(){
         return ccriterion;
     }
+    //get analysis data of total score
     public String[] getAnalysis(){
         String[] res = new String[4];
         double tt = 0;
         int count = 0;
         double maxd = 0;
         double mind = 100;
+        double dd;
+        List<Grade> sortList = new ArrayList<>();
         for (Student key : cgrade.keySet()) {
             tt += cgrade.get(key).getTtscore();
             maxd = Math.max(maxd,cgrade.get(key).getTtscore());
             mind = Math.min(mind,cgrade.get(key).getTtscore());
             count += 1;
+            sortList.add(cgrade.get(key));
         }
+        Collections.sort(sortList);
         res[0] = Double.toString(tt/(double)count);
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
+        if(sortList.size()%2==0){
+            dd = sortList.get(sortList.size()/2).getTtscore()+sortList.get(sortList.size()/2+1).getTtscore();
+            dd /= 2;
+        }else{
+            dd = sortList.get(sortList.size()/2).getTtscore();
+        }
+        res[3] = Double.toString(dd);
         return res;
     }
+    //get analysis data of one chosen field("a" for assignment. "e" for exam, "p" for project)
     public String[] getAnalysis(String type,int index){
         String[] res = new String[4];
         double tt = 0;
         int count = 0;
         double maxd = 0;
         double mind = 100;
+        double dd;
+        List<Pair<String,Double>> sg = new ArrayList<>();
         if(type=="a") {
             double fs = ccriterion.getAssignments().get(index).getToatalScore();
             double sc;
@@ -83,6 +117,7 @@ public class Course implements Analysis, IO<Course>, Serializable{
                 } else {
                     sc = Double.valueOf(rawsc) / fs;
                 }
+                sg.add(new Pair<>(key.getId(),sc * fs));
                 maxd = Math.max(maxd,sc * fs);
                 mind = Math.min(mind,sc * fs);
                 tt += sc * fs;
@@ -100,6 +135,7 @@ public class Course implements Analysis, IO<Course>, Serializable{
                 } else {
                     sc = Double.valueOf(rawsc) / fs;
                 }
+                sg.add(new Pair<>(key.getId(),sc * fs));
                 maxd = Math.max(maxd,sc * fs);
                 mind = Math.min(mind,sc * fs);
                 tt += sc * fs;
@@ -117,17 +153,27 @@ public class Course implements Analysis, IO<Course>, Serializable{
                 } else {
                     sc = Double.valueOf(rawsc) / fs;
                 }
+                sg.add(new Pair<>(key.getId(),sc * fs));
                 maxd = Math.max(maxd,sc * fs);
                 mind = Math.min(mind,sc * fs);
                 tt += sc * fs;
                 count += 1;
             }
         }
+        Collections.sort(sg, Comparator.comparing(p -> p.getValue()));
         res[0] = Double.toString(tt / (double) count);
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
+        if(sg.size()%2==0){
+            dd = sg.get(sg.size()/2).getValue()+sg.get(sg.size()/2+1).getValue();
+            dd /= 2;
+        }else{
+            dd = sg.get(sg.size()/2).getValue();
+        }
+        res[3] = Double.toString(dd);
         return res;
     }
+    //calculate the total score of a given grade object
     public void calculateTotal(Grade g){
         double total = 0,at = 0,et = 0,pt = 0;
         for(int i=0;i<ccriterion.getNumberOfAssignments();i++){
@@ -190,20 +236,11 @@ public class Course implements Analysis, IO<Course>, Serializable{
         g.setEtt(et);
         g.setptt(pt);
     }
-
+    //calculate total score of all students
     public void calculateAll(){
         for (Student key : cgrade.keySet()) {
             calculateTotal(cgrade.get(key));
         }
-    }
-
-    public Student getStudent(String id) {
-        for (Student key : cgrade.keySet()) {
-            if (key.getId() == id) {
-                return key;
-            }
-        }
-        return null;
     }
 
     @Override
