@@ -1,13 +1,9 @@
 package UI;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.*;
-import javax.swing.table.TableColumnModel;
 
 /**
  * @Author Di Zhu
@@ -32,8 +28,5 @@ public class TableMouseListener extends MouseAdapter {
         } else if (event.getClickCount() == 1) {
             weightingField.setText(table.getColumnName(table.getSelectedColumn()));
         }
-        //Point point = event.getPoint();
-       // int currentRow = table.rowAtPoint(point);
-        //table.setRowSelectionInterval(currentRow, currentRow);
     }
 }

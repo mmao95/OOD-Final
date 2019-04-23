@@ -5,13 +5,16 @@ import grade.Grade;
 import personal.Student;
 import java.util.HashMap;
 
-public class Course implements Analysis,IO<Course>,Serializable{
+public class Course implements Analysis, IO<Course>, Serializable{
     private String cname;
     private String cid;
     private String semester;
     private String cyear;
     private Criterion ccriterion;
     private HashMap<Student, Grade> cgrade;
+
+    private static final long serialVersionUID = -4689572748727448978L;
+
     public Course(){
         cname = "Course01";
         cid = "000";
@@ -20,7 +23,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         ccriterion = new Criterion();
         cgrade = new HashMap<>();
     }
-    public Course(String name, String id, String s, String y, Criterion c){
+    public Course(String name, String id, String s, String y, Criterion c) {
         cname = name;
         cid = id;
         semester = s;
@@ -192,6 +195,15 @@ public class Course implements Analysis,IO<Course>,Serializable{
         for (Student key : cgrade.keySet()) {
             calculateTotal(cgrade.get(key));
         }
+    }
+
+    public Student getStudent(String id) {
+        for (Student key : cgrade.keySet()) {
+            if (key.getId() == id) {
+                return key;
+            }
+        }
+        return null;
     }
 
     @Override
