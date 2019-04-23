@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import course.*;
 
 /**
  * @Auther: wangqitong
@@ -16,20 +17,28 @@ import javax.swing.table.TableColumn;
  */
 public class Statistics extends JFrame implements ActionListener {
     protected JButton closeButton;
-    protected JLabel meanString, stdString, aboveMeanString, belowMeanString;
+    protected JLabel meanString, maxString, minString, stdString, aboveMeanString, belowMeanString;
     protected JTable aboveMeanTable, belowMeanTable;
     protected JScrollPane aboveMeanTableScrollPane, belowMeanTableScrollPane;
-    protected JPanel meanPanel, stdPanel, aboveMeanStringPanel, aboveMeanTablePanel, belowMeanStringPanel, belowMeanTablePanel, buttonPanel, nullPanel;
+    protected JPanel meanPanel, maxPanel, minPanel, stdPanel, aboveMeanStringPanel, aboveMeanTablePanel, belowMeanStringPanel, belowMeanTablePanel, buttonPanel, nullPanel;
     protected TableColumn aboveMeanTableColumn, belowMeanTableColumn;
+    private String maxScore, minScore;
+//    private Course courseInfo;
 
     String Acc_type = "";
     String weight_type = "";
 
-    public Statistics() {
+    public Statistics(Course inputCourse) {
         // TODO Auto-generated constructor stub
 
         closeButton = new JButton("Close");
         closeButton.addActionListener(this);
+
+        String [] pointScore = inputCourse.getAnalysis();
+        String initMeanString = "Mean: " + pointScore[0] + "                                               ";
+        String initMaxString = "Max Score: " + pointScore[1];
+        String initMinString = "Min Score: " + pointScore[2];
+        String initStdString = "Std: " + "5.2";
 
         String[] tableHead = {"Student Name"};
         Object[][] aboveMeanStuInfo = {
@@ -83,16 +92,20 @@ public class Statistics extends JFrame implements ActionListener {
 //        center.setHorizontalAlignment(JLabel.CENTER);
         belowMeanTable.setDefaultRenderer(Object.class, center);
 
-        meanString = new JLabel("Mean: 91                                               ");
-        stdString = new JLabel("Std: 5                                                    ");
-        aboveMeanString = new JLabel("4 Students above the mean                   ");
-        belowMeanString = new JLabel("4 Students below the mean                   ");
+        meanString = new JLabel(initMeanString);
+        maxString = new JLabel(initMaxString);
+        minString = new JLabel(initMinString);
+        stdString = new JLabel(initStdString);
+        aboveMeanString = new JLabel("3 Students above the mean                   ");
+        belowMeanString = new JLabel("3 Students below the mean                   ");
         aboveMeanTableScrollPane = new JScrollPane(aboveMeanTable);
         belowMeanTableScrollPane = new JScrollPane(belowMeanTable);
 //        add(tableScrollPane);
 //        table.setFillsViewportHeight(true);
 
         meanPanel = new JPanel();
+        maxPanel = new JPanel();
+        minPanel = new JPanel();
         stdPanel = new JPanel();
         aboveMeanStringPanel = new JPanel();
         aboveMeanTablePanel = new JPanel();
@@ -102,6 +115,8 @@ public class Statistics extends JFrame implements ActionListener {
         nullPanel = new JPanel();
 
         meanPanel.add(meanString);
+        maxPanel.add(maxString);
+        minPanel.add(minString);
         stdPanel.add(stdString);
         aboveMeanStringPanel.add(aboveMeanString);
         aboveMeanTablePanel.add(aboveMeanTable);
@@ -111,12 +126,14 @@ public class Statistics extends JFrame implements ActionListener {
 
         nullPanel.setBounds(0, 0, 300, 10);
         meanPanel.setBounds(25, 25, 250, 25);
-        stdPanel.setBounds(25, 50, 250, 25);
-        aboveMeanStringPanel.setBounds(25, 75, 250, 25);
-        aboveMeanTablePanel.setBounds(25, 100, 250, 150);
-        belowMeanStringPanel.setBounds(25, 275, 250, 25);
-        belowMeanTablePanel.setBounds(25, 300, 250, 150);
-        buttonPanel.setBounds(100, 450, 100, 50);
+        maxPanel.setBounds(25, 50, 250, 25);
+        minPanel.setBounds(25, 75, 250, 25);
+        stdPanel.setBounds(25, 100, 250, 25);
+        aboveMeanStringPanel.setBounds(25, 125, 250, 25);
+        aboveMeanTablePanel.setBounds(25, 150, 250, 150);
+        belowMeanStringPanel.setBounds(25, 325, 250, 25);
+        belowMeanTablePanel.setBounds(25, 350, 250, 150);
+        buttonPanel.setBounds(100, 500, 100, 50);
 
         this.add(buttonPanel);
         this.add(belowMeanTablePanel);
@@ -124,12 +141,14 @@ public class Statistics extends JFrame implements ActionListener {
         this.add(aboveMeanTablePanel);
         this.add(aboveMeanStringPanel);
         this.add(stdPanel);
+        this.add(minPanel);
+        this.add(maxPanel);
         this.add(meanPanel);
         this.add(nullPanel);
 
         this.setTitle("Statistics");
 //        this.setLayout(new GridLayout(3, 1));
-        this.setSize(300, 525);
+        this.setSize(300, 575);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
