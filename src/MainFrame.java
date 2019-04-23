@@ -5,14 +5,12 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.tree.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
 import UI.*;
 import course.Course;
 import course.Criterion;
-import frame.AddCourse;
 import grade.Grade;
 import personal.Student;
 
@@ -52,8 +50,9 @@ public class MainFrame extends JFrame {
     /*** Data ***/
     private Map<String, Map<String, Course>> courseMap = new HashMap<>();
     private Course currentCourse = null;
-    private Class[] type = { String.class, String.class, String.class, String.class, String.class, String.class, String.class,
-            String.class, String.class, String.class, String.class, String.class, String.class, double.class};
+    //private Class[] type = { String.class, String.class, String.class, String.class, String.class, String.class, String.class,
+    //        String.class, String.class, String.class, String.class, String.class, String.class, double.class};
+    private Class[] type = {};
 
     public void initialization() {
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -68,11 +67,7 @@ public class MainFrame extends JFrame {
         fileMenu.setMnemonic('f');
         final JMenuItem saveChangesItem = new JMenuItem("Save changes");
         saveChangesItem.addActionListener(e-> {
-//            SortTableModel stm = (SortTableModel) gradeTable.getModel();
-//            Vector vector = stm.getDataVector();
-//            for (int i =0 ; i < vector.size() ; i++) {
-//                System.out.println(vector.get(i));
-//            }
+
         });
         final JMenuItem exitMenuItem = new JMenuItem("Exit");
         fileMenu.add(saveChangesItem);
@@ -96,16 +91,16 @@ public class MainFrame extends JFrame {
         });
         final JMenuItem newCourseMenuItem = new JMenuItem("New Course");
         newCourseMenuItem.addActionListener(e-> {
-            //Course course = new Course();
-            //addCourse(course, root);
-            try {
-                List<Criterion> criterionList = new ArrayList<>();
-                new AddCourse(criterionList);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException cnfe) {
-                cnfe.printStackTrace();
-            }
+            Course course = new Course();
+            addCourse(course, root);
+//            try {
+//                List<Criterion> criterionList = new ArrayList<>();
+//                new AddCourse(criterionList);
+//            } catch (IOException ioe) {
+//                ioe.printStackTrace();
+//            } catch (ClassNotFoundException cnfe) {
+//                cnfe.printStackTrace();
+//            }
         });
         final JMenuItem importCourseMenuItem = new JMenuItem("Import Course from File");
         importCourseMenuItem.addActionListener(e-> {
@@ -218,8 +213,17 @@ public class MainFrame extends JFrame {
         /*** Bottom Panel ***/
         bottomPanel = new JPanel();
         bottomPanel.setPreferredSize(new Dimension(windowWidth * (6 / 8), windowHeight / 8));
+
+//        JButton addRow = new JButton("Add new row");
+//        addRow.addActionListener(e-> {
+//            addRow(new Object[]{});
+//        });
+//        bottomPanel.add(addRow);
+
         container.add(bottomPanel, BorderLayout.SOUTH);
 
+
+        /*** Settings of MainFrame ***/
         setTitle("Grading System");
         setBounds((int)(screenSize.getWidth() - windowWidth)/ 2,
                 (int)(screenSize.getHeight() - windowHeight)/ 2,
@@ -295,7 +299,10 @@ public class MainFrame extends JFrame {
         Vector<String> headers = setUpTableHeader(criterion);
         Vector<Object> grades = loadData(grade);
 
+        setUpTypes(grade);
+
         SortTableModel dm = (SortTableModel) gradeTable.getModel();
+        dm.setClassList(Arrays.asList(type));
         dm.setDataVector(grades, headers);
 
         groupingHeaders(criterion);
@@ -358,6 +365,23 @@ public class MainFrame extends JFrame {
         return grades;
     }
 
+    private void setUpTypes(HashMap<Student, Grade> gradeMap) {
+        Vector<Class> classes = new Vector<>();
+        classes.add(String.class);
+        classes.add(String.class);
+        classes.add(String.class);
+        Student key = gradeMap.keySet().iterator().next();
+        Grade grade = gradeMap.get(key);
+        //Types for assignments, exams and projects
+        int items = grade.getaGrade().size() + grade.geteGrade().size() + grade.getpGrade().size();
+        for (int i = 0 ; i < items; i++) {
+            classes.add(String.class);
+        }
+        classes.add(String.class);
+        classes.add(double.class);
+        type = classes.toArray(new Class[]{});
+    }
+
     private void groupingHeaders(Criterion criterion) {
         int assignments = criterion.getNumberOfAssignments();
         int exams = criterion.getNumberOfExams();
@@ -393,7 +417,7 @@ public class MainFrame extends JFrame {
     }
 
     /*** Table Methods **/
-    private void saveTable(String id, String category, int index, String value) {
+    private void saveTableChanges(String id, String category, int index, String value) {
         Student student = currentCourse.getStudent(id);
         Grade grade = currentCourse.getsGrade(student);
 
@@ -427,6 +451,11 @@ public class MainFrame extends JFrame {
         currentCourse.writeToFile("b.txt");
     }
 
+//    private void addRow(Object[] data) {
+//        SortTableModel sortTableModel = (SortTableModel) gradeTable.getModel();
+//        sortTableModel.addRow(data);
+//    }
+
     /*** Table Listener ***/
     //Display weighting in the textfield
     private class GradeTableSelectionHandler implements ListSelectionListener {
@@ -458,7 +487,7 @@ public class MainFrame extends JFrame {
                     category = gradeTable.getColumnName(selectedColumn);
                 }
                 System.out.println("Changed!");
-                saveTable(id, category, index - 1, value);
+                saveTableChanges(id, category, index - 1, value);
             }
         }
     }
