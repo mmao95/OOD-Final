@@ -1,5 +1,3 @@
-package frame;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +23,11 @@ public class Login extends JFrame implements ActionListener {
         resetButton = new JButton("Reset");
         resetButton.addActionListener(this);
 
+        loginButton.addActionListener(e -> {
+            this.setVisible(false);
+            new MainFrame();
+        });
+
         brandPanel = new JPanel();
 //        ImageIcon img = new ImageIcon("LoginImg.jpg");
 //        brandPanel.setLayout(null);
@@ -36,7 +39,7 @@ public class Login extends JFrame implements ActionListener {
         pswPanel = new JPanel();
         buttonPanel = new JPanel();
 
-        loginLabel = new JLabel("Welcome!");
+        loginLabel = new JLabel("Login");
         loginLabel.setFont(new java.awt.Font("Dialog", 1, 20));
         userNameLabel = new JLabel("Username");
         pswLabel = new JLabel("Psssword");
@@ -75,30 +78,11 @@ public class Login extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="Login") {
-            boolean index = judgeInput();
-            if(index)
-                System.out.println("Come in!!!");
+            System.out.println("Come in!!!!!");
         }
         else if (e.getActionCommand()=="Reset") {
             userNameTextField.setText("");
             pswTextField.setText("");
         }
-    }
-
-    private boolean judgeInput() {
-        if(userNameTextField.getText().equals("") && pswTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please input your username and password!", "Info", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        else if((userNameTextField.getText().equals("") && !pswTextField.getText().equals(""))){
-            JOptionPane.showMessageDialog(null, "Please input your username!", "Info", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        else if(!userNameTextField.getText().equals("") && pswTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please input your password!", "Info", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        else
-            return true;
     }
 }

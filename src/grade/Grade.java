@@ -5,7 +5,11 @@ import course.Criterion;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @Auther:Maoxuan Zhu
+ * @Date:04-15-201921:20
+ * @Description: this class represent the grade consist of 4 component(assignment, exam, project and attendance)
+ **/
 public class Grade implements Serializable{
     private List<GradeComp> aGrade;
     private List<GradeComp> eGrade;
@@ -16,6 +20,7 @@ public class Grade implements Serializable{
     private double att = 0;
     private double ett = 0;
     private double ptt = 0;
+    //default constructor
     public Grade(){
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
@@ -36,14 +41,17 @@ public class Grade implements Serializable{
             pGrade.add(temp);
         }
     }
+    //get list of grade of assignment/exam/project
     public List<GradeComp> getaGrade(){
         return aGrade;
     }
     public List<GradeComp> geteGrade(){
         return eGrade;
-    }public List<GradeComp> getpGrade() {
+    }
+    public List<GradeComp> getpGrade() {
         return pGrade;
     }
+    //get particular assignment/exam/project
     public GradeComp getAssignment(int ind){
         return aGrade.get(ind);
     }
@@ -59,6 +67,7 @@ public class Grade implements Serializable{
     public GradeComp getExtra(){
         return extraCredit;
     }
+    //add new assignment/exam/project
     public void addAssignment(){
         GradeComp temp = new GradeComp("0");
         aGrade.add(temp);
@@ -71,6 +80,7 @@ public class Grade implements Serializable{
         GradeComp temp = new GradeComp("0");
         pGrade.add(temp);
     }
+    //setter
     public void setAssignment(String s, int ind){
         GradeComp temp = new GradeComp(s);
         aGrade.set(ind,temp);
@@ -95,7 +105,13 @@ public class Grade implements Serializable{
     public void setptt(double a){
         ptt = a;
     }
-
+    public void setAttendence(String s){
+        attendence = new GradeComp(s);
+    }
+    public void setExtra(String s){
+        extraCredit = new GradeComp(s);
+    }
+    //getter
     public double getTtscore(){
         return ttscore;
     }
@@ -107,12 +123,5 @@ public class Grade implements Serializable{
     }
     public double getPtt(){
         return ptt;
-    }
-
-    public void setAttendence(String s){
-        attendence = new GradeComp(s);
-    }
-    public void setExtra(String s){
-        extraCredit = new GradeComp(s);
     }
 }
