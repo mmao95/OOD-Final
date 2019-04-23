@@ -21,7 +21,6 @@ public class Criterion implements IO<Criterion>, Serializable {
     private int numberOfAssignments;
     private int numberOfExams;
     private int numberOfProjects;
-    private String name;
 
 
     /**
@@ -40,10 +39,8 @@ public class Criterion implements IO<Criterion>, Serializable {
             double weightsOfAttendance,
             int numberOfAssignments,
             int numberOfExams,
-            int numberOfProjects,
-            String name
+            int numberOfProjects
     ) {
-        this.name = name;
         this.weightsOfAssignments = weightsOfAssignments;
         this.weightsOfAttendance = weightsOfAttendance;
         this.weightsOfExams = weightsOfExams;
@@ -76,6 +73,27 @@ public class Criterion implements IO<Criterion>, Serializable {
         createDefaultCriterion();
     }
 
+    public String toString(){
+        return "total="+getWeightsOfAssignments()+"x"+"Assignment"+"+"+getWeightsOfExams()+"x"+"Exams"+"+"+getWeightsOfProjects()+"x"+"Projects"+"+"+getWeightsOfAttendance()+"x"+"Attendance";
+    }
+    public String toString(String type){
+        String res = "";
+        if(type=="a"){
+            for(int i=0;i<getAssignments().size();i++){
+                res+=getAssignments().get(i).getWeights()+"x"+"Assignment"+(i+1)+"+";
+            }
+        }else if(type=="e"){
+            for(int i=0;i<getExams().size();i++){
+                res+=getExams().get(i).getWeights()+"x"+"Exam"+(i+1)+"+";
+            }
+        }else{
+            for(int i=0;i<getProjects().size();i++){
+                res+=getProjects().get(i).getWeights()+"x"+"Project"+(i+1)+"+";
+            }
+        }
+        return res.substring(0,res.length()-1);
+    }
+
     @Override
     public Criterion readFromFile(String path) {
         Criterion criterion = null;
@@ -106,7 +124,7 @@ public class Criterion implements IO<Criterion>, Serializable {
             out.writeObject(this);
             out.close();
             file.close();
-            System.out.println("object has been serialized\n + Data before serialization.");
+//            System.out.println("object has been serialized\n + Data before serialization.");
 
         } catch (IOException io){
             io.printStackTrace();
@@ -153,10 +171,6 @@ public class Criterion implements IO<Criterion>, Serializable {
         return weightsOfAttendance;
     }
 
-    public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
-
     /**
      * @Description: create default criterion, for each category the default number is 2, and the weight is 0.25
      * @Param:
@@ -165,7 +179,6 @@ public class Criterion implements IO<Criterion>, Serializable {
      * @Date: 2019/4/12
      **/
     private void createDefaultCriterion() {
-        this.name = "DefaultCriterion";
         this.assignments = new ArrayList<CriComp>();
         this.projects = new ArrayList<CriComp>();
         this.exams = new ArrayList<CriComp>();
