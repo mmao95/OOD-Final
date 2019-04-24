@@ -1,6 +1,6 @@
 package frame;
 
-import course.Criterion;
+import course.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -199,7 +199,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                     case 1:
                         Criterion tempCriterion1 = new Criterion(0.25, 0.25, 0.25, 0.25,
                                 Integer.valueOf(assignmentNumberTextField.getText()), Integer.valueOf(examNumberTextField.getText()),
-                                Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
+                                Integer.valueOf(projectNumberTextField.getText()));
                         Course returnCourse1 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion1);
                         break;
@@ -211,7 +211,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                         Criterion tempCriterion3 = new Criterion(Double.valueOf(assignmentWeightTextField.getText()), Double.valueOf(examWeightTextField.getText()),
                                 Double.valueOf(projectWeightTextField.getText()), Double.valueOf(participationWeightTextField.getText()),
                                 Integer.valueOf(assignmentNumberTextField.getText()), Integer.valueOf(examNumberTextField.getText()),
-                                Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
+                                Integer.valueOf(projectNumberTextField.getText()));
                         Course returnCourse3 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion3);
                         break;
