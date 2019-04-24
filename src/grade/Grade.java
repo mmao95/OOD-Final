@@ -10,7 +10,8 @@ import java.util.List;
  * @Date:04-15-201921:20
  * @Description: this class represent the grade consist of 4 component(assignment, exam, project and attendance)
  **/
-public class Grade implements Serializable{
+public class Grade implements Serializable,Comparable{
+    private String uid;
     private List<GradeComp> aGrade;
     private List<GradeComp> eGrade;
     private List<GradeComp> pGrade;
@@ -26,7 +27,8 @@ public class Grade implements Serializable{
         eGrade = new ArrayList<GradeComp>();
         pGrade = new ArrayList<GradeComp>();
     }
-    public Grade(Criterion c){
+    public Grade(Criterion c,String id){
+        uid = id;
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
         pGrade = new ArrayList<GradeComp>();
@@ -52,6 +54,7 @@ public class Grade implements Serializable{
         return pGrade;
     }
     //get particular assignment/exam/project
+    public String getUid(){ return uid; }
     public GradeComp getAssignment(int ind){
         return aGrade.get(ind);
     }
@@ -96,6 +99,14 @@ public class Grade implements Serializable{
     public void setTtscore(double a){
         ttscore = a;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        Double a = this.getTtscore();
+        Double b = ((Grade) o).getTtscore();
+        return a.compareTo(b);
+    }
+
     public void setAtt(double a){
         att = a;
     }
