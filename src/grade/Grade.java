@@ -26,12 +26,14 @@ public class Grade implements Serializable,Comparable{
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
         pGrade = new ArrayList<GradeComp>();
+        attendence = new GradeComp();
     }
     public Grade(Criterion c,String id){
         uid = id;
         aGrade = new ArrayList<GradeComp>();
         eGrade = new ArrayList<GradeComp>();
         pGrade = new ArrayList<GradeComp>();
+        attendence = new GradeComp();
         GradeComp temp = new GradeComp();
         for(int i=0;i<c.getNumberOfAssignments();i++){
             aGrade.add(temp);
@@ -43,6 +45,33 @@ public class Grade implements Serializable,Comparable{
             pGrade.add(temp);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("grade of assignments: ");
+        for (GradeComp gradeComp : aGrade){
+            sb.append(gradeComp.getScore());
+            sb.append(" ");
+        }
+        sb.append("\n");
+        sb.append("grade of exams: ");
+        for (GradeComp gradeComp :  eGrade){
+            sb.append(gradeComp.getScore());
+            sb.append(" ");
+        }
+        sb.append("\n");
+        sb.append("grade of projects: ");
+        for (GradeComp gradeComp : pGrade){
+            sb.append(gradeComp.getScore());
+            sb.append(" ");
+        }
+        sb.append("\n");
+        sb.append("grade of attendance: ");
+        sb.append(attendence.getScore());
+        return sb.toString();
+    }
+
     //get list of grade of assignment/exam/project
     public List<GradeComp> getaGrade(){
         return aGrade;

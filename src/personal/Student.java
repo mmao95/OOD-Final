@@ -24,6 +24,11 @@ public class Student implements Serializable {
     **/
     public Student(){}
 
+    @Override
+    public String toString() {
+        return new String("name: " + name.toString() + " id: " + id + " email: " + email);
+    }
+
     /**
     * @Description: getters and setters of String id, String full_name and String email
     * @Author: Zhizhou Qiu

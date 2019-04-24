@@ -18,6 +18,11 @@ public class GradeComp implements Serializable{
     public String getScore(){
         return score;
     }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
     public Note getNote(){
         return gNote;
     }

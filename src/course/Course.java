@@ -278,4 +278,8 @@ public class Course implements Analysis,IO<Course>,Serializable{
             io.printStackTrace();
         }
     }
+
+    public HashMap<Student, Grade> getCgrade() {
+        return cgrade;
+    }
 }
