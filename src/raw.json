@@ -1,0 +1,32 @@
+[
+  {
+    "course" : {
+      "name" : "math",
+      "id" : "123",
+      "semester" : "fall",
+      "year" : "2019"
+    }
+  },
+
+  {
+    "criterion" : {
+      "name" : "math_criterion",
+      "weightsOfAssignments" : "0.3",
+      "weightsOfExams" : "0.4",
+      "weightsOfProjects" : "0.2",
+      "weightsOfAttendance" : "0.1",
+      "numberOfAssignments" : "4",
+      "numberOfExams" : "1",
+      "numberOfProjects" : "1"
+    }
+  },
+  {
+    "student" : [
+      {
+        "name" : "tom",
+        "id" : "123",
+        "email" : "tom@email.com"
+      }
+    ]
+  }
+]

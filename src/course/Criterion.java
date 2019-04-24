@@ -21,6 +21,7 @@ public class Criterion implements IO<Criterion>, Serializable {
     private int numberOfAssignments;
     private int numberOfExams;
     private int numberOfProjects;
+    private String name;
 
 
     /**
@@ -39,8 +40,10 @@ public class Criterion implements IO<Criterion>, Serializable {
             double weightsOfAttendance,
             int numberOfAssignments,
             int numberOfExams,
-            int numberOfProjects
+            int numberOfProjects,
+            String name
     ) {
+        this.name = name;
         this.weightsOfAssignments = weightsOfAssignments;
         this.weightsOfAttendance = weightsOfAttendance;
         this.weightsOfExams = weightsOfExams;
@@ -171,6 +174,14 @@ public class Criterion implements IO<Criterion>, Serializable {
         return weightsOfAttendance;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * @Description: create default criterion, for each category the default number is 2, and the weight is 0.25
      * @Param:
@@ -179,6 +190,7 @@ public class Criterion implements IO<Criterion>, Serializable {
      * @Date: 2019/4/12
      **/
     private void createDefaultCriterion() {
+        this.name = "Default_Criterion";
         this.assignments = new ArrayList<CriComp>();
         this.projects = new ArrayList<CriComp>();
         this.exams = new ArrayList<CriComp>();
