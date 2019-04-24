@@ -15,7 +15,7 @@
       "weightsOfExams" : "0.4",
       "weightsOfProjects" : "0.2",
       "weightsOfAttendance" : "0.1",
-      "numberOfAssignments" : "4",
+      "numberOfAssignments" : "2",
       "numberOfExams" : "1",
       "numberOfProjects" : "1"
     }
@@ -25,7 +25,32 @@
       {
         "name" : "tom",
         "id" : "123",
-        "email" : "tom@email.com"
+        "email" : "tom@email.com",
+        "gradeOfAssignment1" : "90",
+        "gradeOfAssignment2" : "70",
+        "gradeOfExam1" : "60",
+        "gradeOfProject1" : "75",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "jimmy",
+        "id" : "456",
+        "email" : "jimmy@email.com",
+        "gradeOfAssignment1" : "60",
+        "gradeOfAssignment2" : "70",
+        "gradeOfExam1" : "80",
+        "gradeOfProject1" : "75",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "zoey",
+        "id" : "789",
+        "email" : "zoey@email.com",
+        "gradeOfAssignment1" : "50",
+        "gradeOfAssignment2" : "60",
+        "gradeOfExam1" : "70",
+        "gradeOfProject1" : "85",
+        "gradeOfAttendance" : "100"
       }
     ]
   }
