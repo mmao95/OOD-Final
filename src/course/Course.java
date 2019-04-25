@@ -75,6 +75,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double maxd = 0;
         double mind = 100;
         double dd;
+        int mid;
         List<Grade> sortList = new ArrayList<>();
         for (Student key : cgrade.keySet()) {
             tt += cgrade.get(key).getTtscore();

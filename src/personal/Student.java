@@ -1,11 +1,14 @@
 package personal;
 
+import grade.Note;
+
 import java.io.Serializable;
 
 public class Student implements Serializable {
     private String id;
     private Name name;
     private String email;
+    private Note note;
 
     /**
     * @Description: Constructor of Student
@@ -16,7 +19,9 @@ public class Student implements Serializable {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.note = new Note();
     }
+
     /**
     * @Description: default constructor
     * @Author: Zhizhou Qiu

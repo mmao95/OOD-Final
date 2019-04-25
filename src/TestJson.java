@@ -91,16 +91,10 @@ public class TestJson {
                 System.out.println(g);
             }
 
-//            String[] res = course.getAnalysis();
-//            for (String s : res){
-//                System.out.println(s);
-//            }
-
-            for (Map.Entry<Student, Grade> entry : gradeMap.entrySet()){
-                Student student = entry.getKey();
-                Grade grade = entry.getValue();
-                System.out.println(student.toString());
-                System.out.println(grade.toString());
+            course.calculateAll();
+            String[] res = course.getAnalysis();
+            for (String s : res){
+                System.out.println(s);
             }
 
 
