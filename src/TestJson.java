@@ -55,7 +55,7 @@ public class TestJson {
                     criterion
             );
 
-            HashMap<Student, Grade> gradeMap = course.getCgrade();
+            HashMap<Student, Grade> gradeMap = course.getList();
 
             JSONObject jsonStudent = (JSONObject) jsonArray.get(2);
 
@@ -72,30 +72,23 @@ public class TestJson {
                         createName(jsonObject),
                         jsonObject.get("email").toString()
                 );
-                Grade grade = new Grade(criterion, jsonObject.get("id").toString());
-                List<GradeComp> assignments = grade.getaGrade();
-                List<GradeComp> projects = grade.getpGrade();
-                List<GradeComp> exams = grade.geteGrade();
-                for (int i = 0; i < assignments.size(); i++){
-                    GradeComp gradeComp = assignments.get(i);
-                    gradeComp.setScore(jsonObject.get(gradeOfAssignment+String.valueOf(i)).toString());
-                    System.out.println("assignment" + String.valueOf(i)+ ": " + assignments.get(i).getScore());
+                course.enrollStudent(student);
+                Grade g = course.getsGrade(student);
+                for (int i = 0; i < criterion.getNumberOfAssignments(); i++){
+                    g.setAssignment(jsonObject.get(gradeOfAssignment+String.valueOf(i)).toString(),i);
+                    System.out.println("assignment" + String.valueOf(i)+ ": " + g.getAssignment(i).getScore());
                 }
-                for (int i = 0; i < projects.size(); i++){
-                    GradeComp gradeComp = projects.get(i);
-                    gradeComp.setScore(jsonObject.get(gradeOfProject+String.valueOf(i)).toString());
-                    System.out.println("project" + String.valueOf(i)+": " + projects.get(i).getScore());
+                for (int i = 0; i < criterion.getNumberOfExams(); i++){
+                    g.setExam(jsonObject.get(gradeOfExam+String.valueOf(i)).toString(),i);
+                    System.out.println("exam" + String.valueOf(i)+ ": " + g.getExam(i).getScore());
                 }
-                for (int i = 0; i < exams.size(); i++){
-                    GradeComp gradeComp = exams.get(i);
-                    gradeComp.setScore(jsonObject.get(gradeOfExam+String.valueOf(i)).toString());
-                    System.out.println("exam" + String.valueOf(i) + ": " + exams.get(i).getScore());
+                for (int i = 0; i < criterion.getNumberOfProjects(); i++){
+                    g.setProject(jsonObject.get(gradeOfProject+String.valueOf(i)).toString(),i);
+                    System.out.println("project" + String.valueOf(i)+ ": " + g.getProject(i).getScore());
                 }
-                GradeComp attendance = grade.getAttendence();
-                attendance.setScore(jsonObject.get(gradeOfAttendance).toString());
+                g.setAttendence(jsonObject.get(gradeOfAttendance).toString());
 
-                System.out.println(grade);
-                gradeMap.put(student, grade);
+                System.out.println(g);
             }
 
 //            String[] res = course.getAnalysis();
