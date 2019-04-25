@@ -49,6 +49,86 @@
         "gradeOfExam0" : "70",
         "gradeOfProject0" : "85",
         "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "abc",
+        "id" : "82347",
+        "email" : "abc@email.com",
+        "gradeOfAssignment0" : "64",
+        "gradeOfAssignment1" : "80",
+        "gradeOfExam0" : "76",
+        "gradeOfProject0" : "35",
+        "gradeOfAttendance" : "96"
+      },
+      {
+        "name" : "thrus",
+        "id" : "23984",
+        "email" : "thrus@email.com",
+        "gradeOfAssignment0" : "95",
+        "gradeOfAssignment1" : "60",
+        "gradeOfExam0" : "90",
+        "gradeOfProject0" : "75",
+        "gradeOfAttendance" : "80"
+      },
+      {
+        "name" : "jack",
+        "id" : "38924",
+        "email" : "jack@email.com",
+        "gradeOfAssignment0" : "89",
+        "gradeOfAssignment1" : "80",
+        "gradeOfExam0" : "90",
+        "gradeOfProject0" : "65",
+        "gradeOfAttendance" : "96"
+      },
+      {
+        "name" : "hashmap",
+        "id" : "3452",
+        "email" : "hashmap@email.com",
+        "gradeOfAssignment0" : "75",
+        "gradeOfAssignment1" : "100",
+        "gradeOfExam0" : "96",
+        "gradeOfProject0" : "55",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "alfie",
+        "id" : "32409",
+        "email" : "alfie@email.com",
+        "gradeOfAssignment0" : "85",
+        "gradeOfAssignment1" : "90",
+        "gradeOfExam0" : "75",
+        "gradeOfProject0" : "95",
+        "gradeOfAttendance" : "80"
+      },
+      {
+        "name" : "bred",
+        "id" : "213",
+        "email" : "bred@email.com",
+        "gradeOfAssignment0" : "70",
+        "gradeOfAssignment1" : "80",
+        "gradeOfExam0" : "90",
+        "gradeOfProject0" : "95",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "haha",
+        "id" : "812",
+        "email" : "haha@email.com",
+        "gradeOfAssignment0" : "80",
+        "gradeOfAssignment1" : "90",
+        "gradeOfExam0" : "76",
+        "gradeOfProject0" : "55",
+        "gradeOfAttendance" : "80"
+      },
+      {
+        "name" : "ufo",
+        "id" : "1234",
+        "email" : "ufo@email.com",
+        "gradeOfAssignment0" : "80",
+        "gradeOfAssignment1" : "50",
+        "gradeOfExam0" : "75",
+        "gradeOfProject0" : "95",
+        "gradeOfAttendance" : "60"
       }
     ]
   }
