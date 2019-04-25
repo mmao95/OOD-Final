@@ -76,6 +76,11 @@ public class Criterion implements IO<Criterion>, Serializable {
         createDefaultCriterion();
     }
 
+    public void addExam(){
+        if (this.exams == null) exams = new ArrayList<CriComp>();
+        exams.add(new CriComp());
+    }
+
     public String toString(){
         return "total="+getWeightsOfAssignments()+"x"+"Assignment"+"+"+getWeightsOfExams()+"x"+"Exams"+"+"+getWeightsOfProjects()+"x"+"Projects"+"+"+getWeightsOfAttendance()+"x"+"Attendance";
     }

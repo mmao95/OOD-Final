@@ -68,11 +68,11 @@ public class Main {
          * @Param: String path
          */
 
-        Course course = ReadRawData.readRawData(args[0]);
-        course.calculateAll();
-        String[] arr = course.getAnalysis("a",0);
-        for (String s : arr){
-            System.out.println(s);
-        }
+//        Course course = ReadRawData.readRawData(args[0]);
+//        course.calculateAll();
+//        String[] arr = course.getAnalysis("a",0);
+//        for (String s : arr){
+//            System.out.println(s);
+//        }
     }
 }
