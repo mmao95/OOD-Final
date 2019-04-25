@@ -55,13 +55,13 @@ public class Criterion implements IO<Criterion>, Serializable {
         exams = new ArrayList<>();
         projects = new ArrayList<>();
         for(int i=0;i<numberOfAssignments;i++){
-            assignments.add(new CriComp(weightsOfAssignments/numberOfAssignments,100));
+            assignments.add(new CriComp(1.0/numberOfAssignments,100));
         }
         for(int i=0;i<numberOfExams;i++){
-            exams.add(new CriComp(weightsOfExams/numberOfExams,100));
+            exams.add(new CriComp(1.0/numberOfExams,100));
         }
         for(int i=0;i<numberOfProjects;i++){
-            projects.add(new CriComp(weightsOfProjects/numberOfProjects,100));
+            projects.add(new CriComp(1.0/numberOfProjects,100));
         }
     }
 
