@@ -1,6 +1,7 @@
 package frame;
 
 import course.*;
+//import MainFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,9 +38,12 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
     protected JComboBox<String> yearComboBox, previousCourseComboBox;
     private int radioButtonIndex;
     private List<Criterion> savedCriterion;
+    private MainFrame mainFrame;
 
-    public AddCourse(List<Criterion> sampleList) throws IOException, ClassNotFoundException{
+    public AddCourse(List<Criterion> sampleList, MainFrame inputMainFrame) throws IOException, ClassNotFoundException{
         // TODO Auto-generated constructor stub
+
+        this.mainFrame = inputMainFrame;
 
         savedCriterion = deepCopy(sampleList);
 
@@ -202,10 +206,12 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                                 Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
                         Course returnCourse1 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion1);
+                        mainFrame.setCurrentCourse(returnCourse1);
                         break;
                     case 2:
                         Course returnCourse2 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
+                        mainFrame.setCurrentCourse(returnCourse2);
                         break;
                     case 3:
                         Criterion tempCriterion3 = new Criterion(Double.valueOf(assignmentWeightTextField.getText()), Double.valueOf(examWeightTextField.getText()),
@@ -214,6 +220,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                                 Integer.valueOf(projectNumberTextField.getText()), courseNameTextField.getText());
                         Course returnCourse3 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion3);
+                        mainFrame.setCurrentCourse(returnCourse3);
                         break;
                 }
         }
