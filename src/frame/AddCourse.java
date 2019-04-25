@@ -207,11 +207,13 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                         Course returnCourse1 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion1);
                         mainFrame.setCurrentCourse(returnCourse1);
+                        mainFrame.refresh(returnCourse1);
                         break;
                     case 2:
                         Course returnCourse2 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
                         mainFrame.setCurrentCourse(returnCourse2);
+                        mainFrame.refresh(returnCourse2);
                         break;
                     case 3:
                         Criterion tempCriterion3 = new Criterion(Double.valueOf(assignmentWeightTextField.getText()), Double.valueOf(examWeightTextField.getText()),
@@ -221,6 +223,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                         Course returnCourse3 = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                 tempCriterion3);
                         mainFrame.setCurrentCourse(returnCourse3);
+                        mainFrame.refresh(returnCourse3);
                         break;
                 }
         }
