@@ -57,7 +57,7 @@ public class Main {
         c1.writeToFile("a.txt");
 
         Course c = new Course();
-        Course c1 = c.readFromFile("a.txt");
+        c1 = c.readFromFile("a.txt");
         System.out.println(c1.getInfo()[1]);
         c1.calculateAll();
         System.out.println(c1.getAnalysis()[0]);
