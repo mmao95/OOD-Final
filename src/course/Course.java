@@ -69,7 +69,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
     }
     //get analysis data of total score
     public String[] getAnalysis(){
-        String[] res = new String[4];
+        String[] res = new String[5];
         double tt = 0;
         int count = 0;
         double maxd = 0;
@@ -89,17 +89,24 @@ public class Course implements Analysis,IO<Course>,Serializable{
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
         if(sortList.size()%2==0){
-            dd = sortList.get(sortList.size()/2).getTtscore()+sortList.get(sortList.size()/2+1).getTtscore();
+            dd = sortList.get(sortList.size()/2).getTtscore()+sortList.get(sortList.size()/2-1).getTtscore();
             dd /= 2;
         }else{
             dd = sortList.get(sortList.size()/2).getTtscore();
         }
         res[3] = Double.toString(dd);
+        double sum = 0;
+        double ave = tt/(double)count;
+        for(int i=0;i<sortList.size();i++){
+            sum+= Math.pow(ave-sortList.get(i).getTtscore(),2);
+        }
+        sum = Math.sqrt(sum/(double)count);
+        res[4] = Double.toString(sum);
         return res;
     }
     //get analysis data of one chosen field("a" for assignment. "e" for exam, "p" for project)
     public String[] getAnalysis(String type,int index){
-        String[] res = new String[4];
+        String[] res = new String[5];
         double tt = 0;
         int count = 0;
         double maxd = 0;
@@ -166,12 +173,19 @@ public class Course implements Analysis,IO<Course>,Serializable{
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
         if(sg.size()%2==0){
-            dd = sg.get(sg.size()/2).getValue()+sg.get(sg.size()/2+1).getValue();
+            dd = sg.get(sg.size()/2).getValue()+sg.get(sg.size()/2-1).getValue();
             dd /= 2;
         }else{
             dd = sg.get(sg.size()/2).getValue();
         }
         res[3] = Double.toString(dd);
+        double sum = 0;
+        double ave = tt/(double)count;
+        for(int i=0;i<sg.size();i++){
+            sum+= Math.pow(ave-sg.get(i).getValue(),2);
+        }
+        sum = Math.sqrt(sum/(double)count);
+        res[4] = Double.toString(sum);
         return res;
     }
     //calculate the total score of a given grade object
