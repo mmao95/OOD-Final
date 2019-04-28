@@ -55,13 +55,13 @@ public class Criterion implements IO<Criterion>, Serializable {
         exams = new ArrayList<>();
         projects = new ArrayList<>();
         for(int i=0;i<numberOfAssignments;i++){
-            assignments.add(new CriComp(1.0/numberOfAssignments,100));
+            assignments.add(new CriComp(1.0/numberOfAssignments,100.0));
         }
         for(int i=0;i<numberOfExams;i++){
-            exams.add(new CriComp(1.0/numberOfExams,100));
+            exams.add(new CriComp(1.0/numberOfExams,100.0));
         }
         for(int i=0;i<numberOfProjects;i++){
-            projects.add(new CriComp(1.0/numberOfProjects,100));
+            projects.add(new CriComp(1.0/numberOfProjects,100.0));
         }
     }
 
@@ -76,9 +76,22 @@ public class Criterion implements IO<Criterion>, Serializable {
         createDefaultCriterion();
     }
 
+    /**
+     *
+     */
     public void addExam(){
         if (this.exams == null) exams = new ArrayList<CriComp>();
-        exams.add(new CriComp());
+        this.exams.add(new CriComp(0,100.0));
+    }
+
+    public void addAssignment(){
+        if (this.assignments == null) assignments = new ArrayList<CriComp>();
+        this.assignments.add(new CriComp(0, 100.0));
+    }
+
+    public void addProject(){
+        if (this.projects == null) projects = new ArrayList<CriComp>();
+        this.projects.add(new CriComp(0, 100.0));
     }
 
     public String toString(){
