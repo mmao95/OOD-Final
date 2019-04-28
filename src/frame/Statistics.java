@@ -30,8 +30,8 @@ public class Statistics extends JFrame implements ActionListener {
         String initMeanString = "Mean: " + pointScore[0];
         String initMaxString = "Max Score: " + pointScore[1];
         String initMinString = "Min Score: " + pointScore[2];
-        String initStdString = "Std: " + pointScore[3];
-        String initMedianString = "Median: " + pointScore[4];
+        String initStdString = "Std: " + pointScore[4];
+        String initMedianString = "Median: " + pointScore[3];
 
         meanString = new JLabel(initMeanString);
         maxString = new JLabel(initMaxString);
