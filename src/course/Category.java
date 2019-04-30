@@ -41,6 +41,11 @@ public class Category implements Serializable {
         }
     }
 
+    public int getNumberOfTasks(){
+        if (criComps == null) return  -1;
+        return criComps.size();
+    }
+
     public String getName() {
         return name;
     }

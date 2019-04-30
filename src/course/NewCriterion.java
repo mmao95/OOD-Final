@@ -33,10 +33,20 @@ public class NewCriterion implements IO<NewCriterion>, Serializable {
         name = "";
     }
 
+    public boolean addTask(int indexOfCategory){
+        if (indexOfCategory >= categories.size() || indexOfCategory < 0) return false;
+        Category category = categories.get(indexOfCategory);
+        List<CriComp> criComps = category.getCriComps();
+        if (criComps == null) criComps = new ArrayList<CriComp>();
+        criComps.add(new CriComp(0, 100.0));
+        double newWeight = 1.0 / criComps.size();
+
+    }
+
     /**
-    * @Description: serialize a NewCriterion
-    * @Param:
-    * @Return:
+    * @Description: read the serialized object
+    * @Param: String path
+    * @Return: a NewCriterion object
     * @Author: Zhizhou Qiu
     * @Date: 2019/4/30
     **/
@@ -60,6 +70,13 @@ public class NewCriterion implements IO<NewCriterion>, Serializable {
         return newCriterion;
     }
 
+    /**
+    * @Description: serialize a NewCriterion object and write to file
+    * @Param: String path
+    * @Return: void
+    * @Author: Zhizhou Qiu
+    * @Date: 2019/4/30
+    **/
     @Override
     public void writeToFile(String path) {
         try{
