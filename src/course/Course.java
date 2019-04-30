@@ -67,6 +67,26 @@ public class Course implements Analysis,IO<Course>,Serializable{
     public Criterion getCcriterion(){
         return ccriterion;
     }
+    //update grade #assignment exam project
+    public void updateGrade(){
+        for(Student k: cgrade.keySet()){
+            if(getsGrade(k).getaGrade().size()<ccriterion.getNumberOfAssignments()){
+                for(int i=0;i<ccriterion.getNumberOfAssignments()-getsGrade(k).getaGrade().size();i++){
+                    getsGrade(k).addAssignment();
+                }
+            }
+            if(getsGrade(k).geteGrade().size()<ccriterion.getNumberOfExams()){
+                for(int i=0;i<ccriterion.getNumberOfExams()-getsGrade(k).geteGrade().size();i++){
+                    getsGrade(k).addExam();
+                }
+            }
+            if(getsGrade(k).getpGrade().size()<ccriterion.getNumberOfProjects()){
+                for(int i=0;i<ccriterion.getNumberOfProjects()-getsGrade(k).getpGrade().size();i++){
+                    getsGrade(k).addProject();
+                }
+            }
+        }
+    }
     //get analysis data of total score
     public String[] getAnalysis(){
         String[] res = new String[5];
@@ -298,3 +318,4 @@ public class Course implements Analysis,IO<Course>,Serializable{
         return cgrade;
     }
 }
+
