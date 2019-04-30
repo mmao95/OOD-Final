@@ -15,19 +15,16 @@ import java.util.List;
 public class Grade implements Serializable,Comparable{
     private String uid;
     private List<List<GradeComp>> grade;
-    private GradeComp attendence;
     private GradeComp extraCredit;
     private double ttscore = 0;
     //default constructor
     public Grade(){
         grade = new ArrayList<>();
-        attendence = new GradeComp();
         extraCredit = new GradeComp();
     }
     public Grade(NewCriterion c, String id){
         uid = id;
         grade = new ArrayList<>();
-        attendence = new GradeComp();
         extraCredit = new GradeComp();
         for(int i=0;i<c.getCategories().size();i++){
             List<GradeComp> temp = new ArrayList<>();
@@ -48,9 +45,6 @@ public class Grade implements Serializable,Comparable{
     }
     public String getUid(){ return uid; }
 
-    public GradeComp getAttendence(){
-        return attendence;
-    }
     public GradeComp getExtra(){
         return extraCredit;
     }
@@ -71,9 +65,6 @@ public class Grade implements Serializable,Comparable{
         Double a = this.getTtscore();
         Double b = ((Grade) o).getTtscore();
         return a.compareTo(b);
-    }
-    public void setAttendence(String s){
-        attendence = new GradeComp(s);
     }
     public void setExtra(String s){
         extraCredit = new GradeComp(s);
