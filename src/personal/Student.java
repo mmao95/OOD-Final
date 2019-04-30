@@ -1,44 +1,34 @@
 package personal;
 
-import grade.Note;
-
 import java.io.Serializable;
 
 public class Student implements Serializable {
     private String id;
     private Name name;
     private String email;
-    private Note note;
 
     /**
-    * @Description: Constructor of Student
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/12
-    **/
+     * @Description: Constructor of Student
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/12
+     **/
     public Student(String id, Name name, String email){
         this.id = id;
         this.name = name;
         this.email = email;
-        this.note = new Note();
     }
-
     /**
-    * @Description: default constructor
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/12
-    **/
+     * @Description: default constructor
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/12
+     **/
     public Student(){}
 
-    @Override
-    public String toString() {
-        return new String("name: " + name.toString() + " id: " + id + " email: " + email);
-    }
-
     /**
-    * @Description: getters and setters of String id, String full_name and String email
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/12
-    **/
+     * @Description: getters and setters of String id, String full_name and String email
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/12
+     **/
     public void setId(String id) {
         this.id = id;
     }
@@ -59,7 +49,7 @@ public class Student implements Serializable {
         this.name = new Name(first, middle, last);
     }
 
-    public String getName() {
-        return name.toString();
+    public Name getName() {
+        return name;
     }
 }
