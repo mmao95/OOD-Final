@@ -14,17 +14,32 @@ public class NewCriterion implements IO<NewCriterion>, Serializable {
     private String name;
 
 
+    /**
+    * @Description: this is to create a NewCriterion object consisting a list of Categories
+    * @Param: list of Category, String name
+    * @Return: a NewCriterion object
+    * @Author: Zhizhou Qiu
+    * @Date: 2019/4/30
+    **/
     public NewCriterion(List<Category> list, String name){
         if (list == null) categories = new ArrayList<Category>();
         else categories = list;
         this.name = name;
     }
 
+    // default constructor
     public NewCriterion(){
         categories = new ArrayList<Category>();
         name = "";
     }
 
+    /**
+    * @Description: serialize a NewCriterion
+    * @Param:
+    * @Return:
+    * @Author: Zhizhou Qiu
+    * @Date: 2019/4/30
+    **/
     @Override
     public NewCriterion readFromFile(String path) {
         NewCriterion newCriterion = null;
@@ -60,5 +75,21 @@ public class NewCriterion implements IO<NewCriterion>, Serializable {
         } catch (IOException io){
             io.printStackTrace();
         }
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
