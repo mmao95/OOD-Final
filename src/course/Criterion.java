@@ -87,6 +87,7 @@ public class Criterion implements IO<Criterion>, Serializable {
         for (CriComp criComp : exams){
             criComp.setWeights(newWeight);
         }
+        this.numberOfExams++;
     }
 
 
@@ -101,6 +102,7 @@ public class Criterion implements IO<Criterion>, Serializable {
         for (CriComp criComp : assignments){
             criComp.setWeights(newWeight);
         }
+        this.numberOfAssignments++;
     }
 
     /**
@@ -114,6 +116,7 @@ public class Criterion implements IO<Criterion>, Serializable {
         for (CriComp criComp : projects){
             criComp.setWeights(newWeight);
         }
+        this.numberOfProjects++;
     }
 
     public String toString(){
@@ -175,17 +178,20 @@ public class Criterion implements IO<Criterion>, Serializable {
     }
 
     public int getNumberOfAssignments() {
-        return numberOfAssignments;
+        if (this.assignments == null) return -1;
+        return this.assignments.size();
     }
 
     public int getNumberOfExams() {
-        return numberOfExams;
+        if (this.exams == null) return -1;
+        return this.exams.size();
     }
 
     public int getNumberOfProjects() {
-        return numberOfProjects;
+        if (this.projects == null) return -1;
+        return this.projects.size();
     }
-
+    
     public List<CriComp> getAssignments() {
         return assignments;
     }
