@@ -28,6 +28,13 @@ public class CriComp implements Serializable {
         this.toatalScore = DEFAULT_TOTALSCORE;
     }
 
+    @Override
+    public String toString() {
+        return "{ weight: " + weights +
+                ", toatalScore=" + toatalScore +
+                "}\n";
+    }
+
     /**
     * @Description: getters and setters for current weight and totalscore
     * @Author: Zhizhou Qiu

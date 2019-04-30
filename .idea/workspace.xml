@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c2c7e5a-f004-49f4-9737-e70b31cb28a5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/course/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/course/CriComp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/CriComp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/course/NewCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/NewCriterion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/course/ReadRawData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/ReadRawData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frame/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/AddCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frame/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/CommentFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +36,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="109" />
+          <entry key="JAVA" value="114" />
           <entry key="JSON" value="5" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="UML" value="5" />
@@ -38,7 +44,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10045" />
+          <entry key="JAVA" value="11428" />
           <entry key="JSON" value="895" />
           <entry key="PLAIN_TEXT" value="14" />
           <entry key="VTL" value="117" />
@@ -51,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/CriComp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11">
-              <caret line="5" column="83" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="83" />
+            <state relative-caret-position="286">
+              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
               <folding>
                 <element signature="e#1181#1182#0" expanded="true" />
                 <element signature="e#1219#1220#0" expanded="true" />
@@ -64,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/Category.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+            <state relative-caret-position="418">
+              <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1181#1182#0" expanded="true" />
@@ -85,21 +91,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/NewCriterion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+            <state relative-caret-position="609">
+              <caret line="83" column="29" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2196#2197#0" expanded="true" />
-                <element signature="e#2229#2230#0" expanded="true" />
-                <element signature="e#2289#2290#0" expanded="true" />
-                <element signature="e#2333#2334#0" expanded="true" />
-                <element signature="e#2364#2365#0" expanded="true" />
-                <element signature="e#2391#2392#0" expanded="true" />
-                <element signature="e#2431#2432#0" expanded="true" />
-                <element signature="e#2463#2464#0" expanded="true" />
+                <element signature="e#2909#2910#0" expanded="true" />
+                <element signature="e#2942#2943#0" expanded="true" />
+                <element signature="e#3002#3003#0" expanded="true" />
+                <element signature="e#3046#3047#0" expanded="true" />
+                <element signature="e#3077#3078#0" expanded="true" />
+                <element signature="e#3104#3105#0" expanded="true" />
+                <element signature="e#3144#3145#0" expanded="true" />
+                <element signature="e#3176#3177#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,7 +114,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/Criterion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2355">
+            <state relative-caret-position="1332">
               <caret line="176" column="9" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="176" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -117,45 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/personal/GraduateStudent.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/grade/Grade.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-              <folding>
-                <element signature="e#3744#3745#0" expanded="true" />
-                <element signature="e#3771#3772#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/course/ReadRawData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2128">
-              <caret line="115" selection-start-line="115" selection-end-line="115" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/raw.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+            <state relative-caret-position="509">
+              <caret line="93" column="50" selection-start-line="93" selection-start-column="50" selection-end-line="93" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -188,29 +160,30 @@
       <list>
         <option value="$PROJECT_DIR$/src/personal/Name.java" />
         <option value="$PROJECT_DIR$/src/course/Analysis.java" />
-        <option value="$PROJECT_DIR$/src/course/CriComp.java" />
         <option value="$PROJECT_DIR$/src/SerializationTest.java" />
         <option value="$PROJECT_DIR$/src/raw.txt" />
         <option value="$PROJECT_DIR$/src/raw.json" />
         <option value="$PROJECT_DIR$/src/grade/GradeComp.java" />
         <option value="$PROJECT_DIR$/src/grade/Grade.java" />
-        <option value="$PROJECT_DIR$/src/TestJson.java" />
         <option value="$PROJECT_DIR$/src/course/Course.java" />
-        <option value="$PROJECT_DIR$/src/course/ReadRawData.java" />
         <option value="$PROJECT_DIR$/raw.json" />
         <option value="$PROJECT_DIR$/src/entrance.java" />
-        <option value="$PROJECT_DIR$/src/frame/AddCourse.java" />
         <option value="$PROJECT_DIR$/src/Login.java" />
         <option value="$PROJECT_DIR$/src/frame/TestMain.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/course/IO.java" />
         <option value="$PROJECT_DIR$/src/course/Criterion.java" />
         <option value="$PROJECT_DIR$/src/personal/Student.java" />
         <option value="$PROJECT_DIR$/src/personal/UndergradStudent.java" />
         <option value="$PROJECT_DIR$/src/personal/GraduateStudent.java" />
         <option value="$PROJECT_DIR$/src/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/frame/AddCourse.java" />
+        <option value="$PROJECT_DIR$/src/frame/CommentFrame.java" />
+        <option value="$PROJECT_DIR$/src/course/ReadRawData.java" />
+        <option value="$PROJECT_DIR$/src/TestJson.java" />
+        <option value="$PROJECT_DIR$/src/course/CriComp.java" />
         <option value="$PROJECT_DIR$/src/course/Category.java" />
         <option value="$PROJECT_DIR$/src/course/NewCriterion.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -250,18 +223,6 @@
               <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="course" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="grade" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -271,7 +232,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556664324643" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556668415033" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -336,12 +297,12 @@
       <workItem from="1556590925380" duration="748000" />
       <workItem from="1556635851681" duration="64000" />
       <workItem from="1556638066894" duration="63000" />
-      <workItem from="1556638929125" duration="9409000" />
+      <workItem from="1556638929125" duration="12940000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62046000" />
+    <option name="totallyTimeSpent" value="65577000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -352,14 +313,14 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.16117217" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.16117217" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.23265307" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.2877551" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
@@ -436,13 +397,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/frame/AddCourse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="50" column="43" selection-end-line="438" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Login.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
@@ -494,16 +448,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2442">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/grade/GradeComp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -511,13 +455,6 @@
           <folding>
             <element signature="e#433#434#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -598,12 +535,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/grade/Grade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-          <folding>
-            <element signature="e#3744#3745#0" expanded="true" />
-            <element signature="e#3771#3772#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-101">
+          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -638,16 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/course/ReadRawData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2128">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://JAVA/">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -678,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/raw.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8770">
@@ -692,10 +608,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/SerializationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frame/AddCourse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frame/CommentFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/course/ReadRawData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="89" column="19" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TestJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/course/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="34" column="22" lean-forward="true" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+        <state relative-caret-position="418">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1181#1182#0" expanded="true" />
@@ -714,17 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SerializationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/course/CriComp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="5" column="83" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="83" />
+        <state relative-caret-position="286">
+          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
           <folding>
             <element signature="e#1181#1182#0" expanded="true" />
             <element signature="e#1219#1220#0" expanded="true" />
@@ -734,7 +685,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/course/Criterion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
+        <state relative-caret-position="1332">
           <caret line="176" column="9" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="176" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -744,19 +695,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/course/NewCriterion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        <state relative-caret-position="609">
+          <caret line="83" column="29" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2196#2197#0" expanded="true" />
-            <element signature="e#2229#2230#0" expanded="true" />
-            <element signature="e#2289#2290#0" expanded="true" />
-            <element signature="e#2333#2334#0" expanded="true" />
-            <element signature="e#2364#2365#0" expanded="true" />
-            <element signature="e#2391#2392#0" expanded="true" />
-            <element signature="e#2431#2432#0" expanded="true" />
-            <element signature="e#2463#2464#0" expanded="true" />
+            <element signature="e#2909#2910#0" expanded="true" />
+            <element signature="e#2942#2943#0" expanded="true" />
+            <element signature="e#3002#3003#0" expanded="true" />
+            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#3077#3078#0" expanded="true" />
+            <element signature="e#3104#3105#0" expanded="true" />
+            <element signature="e#3144#3145#0" expanded="true" />
+            <element signature="e#3176#3177#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="93" column="50" selection-start-line="93" selection-start-column="50" selection-end-line="93" selection-end-column="50" />
         </state>
       </provider>
     </entry>

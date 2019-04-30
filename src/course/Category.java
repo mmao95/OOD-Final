@@ -41,6 +41,13 @@ public class Category implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "name: " + name +
+                ", weight: " + weight +
+                ", tasks: " + criComps + "\n";
+    }
+
     public int getNumberOfTasks(){
         if (criComps == null) return  -1;
         return criComps.size();
