@@ -2,6 +2,7 @@ package course;
 
 import java.io.*;
 import grade.Grade;
+import grade.GradeComp;
 import javafx.util.Pair;
 import personal.Student;
 import java.util.*;
@@ -16,7 +17,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
     private String cid;
     private String semester;
     private String cyear;
-    private Criterion ccriterion;
+    private NewCriterion ccriterion;
     private HashMap<Student, Grade> cgrade;
     private static final long serialVersionUID = -4689572748727448978L;
     // Default constructor
@@ -25,10 +26,10 @@ public class Course implements Analysis,IO<Course>,Serializable{
         cid = "000";
         semester = "Fall";
         cyear = "2019";
-        ccriterion = new Criterion();
+        ccriterion = new NewCriterion();
         cgrade = new HashMap<>();
     }
-    public Course(String name, String id, String s, String y, Criterion c){
+    public Course(String name, String id, String s, String y, NewCriterion c){
         cname = name;
         cid = id;
         semester = s;
@@ -64,25 +65,18 @@ public class Course implements Analysis,IO<Course>,Serializable{
         return res;
     }
     //get grading criterion
-    public Criterion getCcriterion(){
+    public NewCriterion getCcriterion(){
         return ccriterion;
     }
     //update grade #assignment exam project
     public void updateGrade(){
         for(Student k: cgrade.keySet()){
-            if(getsGrade(k).getaGrade().size()<ccriterion.getNumberOfAssignments()){
-                for(int i=0;i<ccriterion.getNumberOfAssignments()-getsGrade(k).getaGrade().size();i++){
-                    getsGrade(k).addAssignment();
-                }
-            }
-            if(getsGrade(k).geteGrade().size()<ccriterion.getNumberOfExams()){
-                for(int i=0;i<ccriterion.getNumberOfExams()-getsGrade(k).geteGrade().size();i++){
-                    getsGrade(k).addExam();
-                }
-            }
-            if(getsGrade(k).getpGrade().size()<ccriterion.getNumberOfProjects()){
-                for(int i=0;i<ccriterion.getNumberOfProjects()-getsGrade(k).getpGrade().size();i++){
-                    getsGrade(k).addProject();
+            for(int i=0;i<ccriterion.getCategories().size();i++){
+                if(getsGrade(k).getCategory(i).size()<ccriterion.getCategories().get(i).getCriComps().size()){
+                    int addnum = ccriterion.getCategories().get(i).getCriComps().size()-getsGrade(k).getCategory(i).size();
+                    for(int j=0;j<addnum;j++){
+                        getsGrade(k).getCategory(i).add(new GradeComp());
+                    }
                 }
             }
         }
@@ -95,7 +89,6 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double maxd = 0;
         double mind = 100;
         double dd;
-        int mid;
         List<Grade> sortList = new ArrayList<>();
         for (Student key : cgrade.keySet()) {
             tt += cgrade.get(key).getTtscore();
@@ -125,7 +118,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         return res;
     }
     //get analysis data of one chosen field("a" for assignment. "e" for exam, "p" for project)
-    public String[] getAnalysis(String type,int index){
+    public String[] getAnalysis(int cat,int index){
         String[] res = new String[5];
         double tt = 0;
         int count = 0;
@@ -133,60 +126,22 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double mind = 100;
         double dd;
         List<Pair<String,Double>> sg = new ArrayList<>();
-        if(type.equals("a")) {
-            double fs = ccriterion.getAssignments().get(index).getToatalScore();
-            double sc;
-            for (Student key : cgrade.keySet()) {
-                String rawsc = cgrade.get(key).getAssignment(index).getScore();
-                if (rawsc.charAt(rawsc.length() - 1) == '%') {
-                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
-                } else if (rawsc.charAt(0) == '-') {
-                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
-                } else {
-                    sc = Double.valueOf(rawsc) / fs;
-                }
-                sg.add(new Pair<>(key.getId(),sc * fs));
-                maxd = Math.max(maxd,sc * fs);
-                mind = Math.min(mind,sc * fs);
-                tt += sc * fs;
-                count += 1;
+        double fs = ccriterion.getCategories().get(cat).getCriComps().get(index).getToatalScore();
+        double sc;
+        for (Student key : cgrade.keySet()) {
+            String rawsc = cgrade.get(key).getOne(cat,index).getScore();
+            if (rawsc.charAt(rawsc.length() - 1) == '%') {
+                sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
+            } else if (rawsc.charAt(0) == '-') {
+                sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
+            } else {
+                sc = Double.valueOf(rawsc) / fs;
             }
-        }else if(type.equals("e")) {
-            double fs = ccriterion.getExams().get(index).getToatalScore();
-            double sc;
-            for (Student key : cgrade.keySet()) {
-                String rawsc = cgrade.get(key).getExam(index).getScore();
-                if (rawsc.charAt(rawsc.length() - 1) == '%') {
-                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
-                } else if (rawsc.charAt(0) == '-') {
-                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
-                } else {
-                    sc = Double.valueOf(rawsc) / fs;
-                }
-                sg.add(new Pair<>(key.getId(),sc * fs));
-                maxd = Math.max(maxd,sc * fs);
-                mind = Math.min(mind,sc * fs);
-                tt += sc * fs;
-                count += 1;
-            }
-        }else if(type.equals("p")){
-            double fs = ccriterion.getProjects().get(index).getToatalScore();
-            double sc;
-            for (Student key : cgrade.keySet()) {
-                String rawsc = cgrade.get(key).getProject(index).getScore();
-                if (rawsc.charAt(rawsc.length() - 1) == '%') {
-                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
-                } else if (rawsc.charAt(0) == '-') {
-                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
-                } else {
-                    sc = Double.valueOf(rawsc) / fs;
-                }
-                sg.add(new Pair<>(key.getId(),sc * fs));
-                maxd = Math.max(maxd,sc * fs);
-                mind = Math.min(mind,sc * fs);
-                tt += sc * fs;
-                count += 1;
-            }
+            sg.add(new Pair<>(key.getId(),sc * fs));
+            maxd = Math.max(maxd,sc * fs);
+            mind = Math.min(mind,sc * fs);
+            tt += sc * fs;
+            count += 1;
         }
         Collections.sort(sg, Comparator.comparing(p -> p.getValue()));
         res[0] = Double.toString(tt / (double) count);
@@ -210,66 +165,27 @@ public class Course implements Analysis,IO<Course>,Serializable{
     }
     //calculate the total score of a given grade object
     public void calculateTotal(Grade g){
-        double total = 0,at = 0,et = 0,pt = 0;
-        for(int i=0;i<ccriterion.getNumberOfAssignments();i++){
-            String oc = g.getAssignment(i).getScore();
-            CriComp temp = ccriterion.getAssignments().get(i);
-            double fs = temp.getToatalScore();
-            double sc;
-            if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
-            } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
-            } else {
-                sc = Double.valueOf(oc)/fs;
+        double total = 0;
+        for(int i=0;i<ccriterion.getCategories().size();i++) {
+            double csc;
+            double cw = ccriterion.getCategories().get(i).getWeight();
+            for (int j = 0; j < ccriterion.getCategories().get(i).getCriComps().size(); j++) {
+                double fs = ccriterion.getCategories().get(i).getCriComps().get(j).getToatalScore();
+                double we = ccriterion.getCategories().get(i).getCriComps().get(j).getWeights();
+                String sc = g.getCategory(i).get(j).getScore();
+                double stdsc;
+                if(sc.charAt(sc.length()-1)=='%'){
+                    stdsc = Double.valueOf(sc.substring(0,sc.length()-1))/100;
+                }else if(sc.charAt(0)=='-'){
+                    stdsc = (100-Double.valueOf(sc.substring(1)))/fs;
+                }else{
+                    stdsc = Double.valueOf(sc)/fs;
+                }
+                total += stdsc*we*cw*100;
             }
-            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfAssignments();
-            at+=sc*temp.getWeights()*100;
         }
-        for(int i=0;i<ccriterion.getNumberOfExams();i++){
-            String oc = g.getExam(i).getScore();
-            CriComp temp = ccriterion.getExams().get(i);
-            double fs = temp.getToatalScore();
-            double sc;
-            if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
-            } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
-            } else {
-                sc = Double.valueOf(oc)/fs;
-            }
-            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfExams();
-            et+=sc*temp.getWeights()*100;
-        }
-        for(int i=0;i<ccriterion.getNumberOfProjects();i++){
-            String oc = g.getProject(i).getScore();
-            CriComp temp = ccriterion.getProjects().get(i);
-            double fs = temp.getToatalScore();
-            double sc;
-            if(oc.charAt(oc.length()-1)=='%'){
-                sc = Double.valueOf(oc.substring(0,oc.length()-1))/100;
-            } else if(oc.charAt(0)=='-'){
-                sc = (fs-Double.valueOf(oc.substring(1)))/fs;
-            } else {
-                sc = Double.valueOf(oc)/fs;
-            }
-            total+=sc*temp.getWeights()*100*ccriterion.getWeightsOfProjects();
-            pt+=sc*temp.getWeights()*100;
-        }
-        String att = g.getAttendence().getScore();
-        double attsc;
-        if(att.charAt(att.length()-1)=='%'){
-            attsc = Double.valueOf(att.substring(0,att.length()-1))/100;
-        }else if(att.charAt(0)=='-'){
-            attsc = (100-Double.valueOf(att.substring(1)))/100;
-        }else{
-            attsc = Double.valueOf(att)/100;
-        }
-        total+=attsc*ccriterion.getWeightsOfAttendance()*100;
         g.setTtscore(total);
-        g.setAtt(at);
-        g.setEtt(et);
-        g.setptt(pt);
+        
     }
     //calculate total score of all students
     public void calculateAll(){
@@ -318,4 +234,3 @@ public class Course implements Analysis,IO<Course>,Serializable{
         return cgrade;
     }
 }
-
