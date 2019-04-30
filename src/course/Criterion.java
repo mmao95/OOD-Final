@@ -77,21 +77,43 @@ public class Criterion implements IO<Criterion>, Serializable {
     }
 
     /**
-     *
+     * add an exam, weights would be auto balanced according to size
      */
     public void addExam(){
         if (this.exams == null) exams = new ArrayList<CriComp>();
         this.exams.add(new CriComp(0,100.0));
+        int size = exams.size();
+        double newWeight = 1.0 / size;
+        for (CriComp criComp : exams){
+            criComp.setWeights(newWeight);
+        }
     }
 
+
+    /**
+     * add an assignment, weights would be auto balanced according to size
+     */
     public void addAssignment(){
         if (this.assignments == null) assignments = new ArrayList<CriComp>();
         this.assignments.add(new CriComp(0, 100.0));
+        int size = assignments.size();
+        double newWeight = 1.0 / size;
+        for (CriComp criComp : assignments){
+            criComp.setWeights(newWeight);
+        }
     }
 
+    /**
+     * add a project, weights would be auto balanced according to size
+     */
     public void addProject(){
         if (this.projects == null) projects = new ArrayList<CriComp>();
         this.projects.add(new CriComp(0, 100.0));
+        int size = projects.size();
+        double newWeight = 1.0 / size;
+        for (CriComp criComp : projects){
+            criComp.setWeights(newWeight);
+        }
     }
 
     public String toString(){

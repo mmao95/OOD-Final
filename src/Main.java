@@ -31,14 +31,6 @@ public class Main {
         g.setProject("80",0);
         g.setProject("70",1);
 
-        g.setAttendence("200%");
-        g.setAssignment("80%",0);
-        g.setAssignment("70%",1);
-        g.setExam("80%",0);
-        g.setExam("70%",1);
-        g.setProject("70%",0);
-        g.setProject("80%",1);
-
         Grade g2 = c1.getsGrade(s2);
         //set grade of student s1 for each component
         g2.setAttendence("90");
@@ -53,14 +45,27 @@ public class Main {
         System.out.println(c1.getsGrade(s1).getAtt());//get assignment total score
         System.out.println(c1.getsGrade(s2).getEtt());//get exam total score
         System.out.println(c1.getsGrade(s2).getPtt());//get project total score
-        System.out.println(c1.getAnalysis("e",0)[0]);//print analysis [0] is ave [1] is max [2] is min
-        c1.writeToFile("a.txt");
+        System.out.println(c1.getAnalysis()[0]);//print analysis [0] is ave [1] is max [2] is min
 
-        Course c = new Course();
-        c1 = c.readFromFile("a.txt");
-        System.out.println(c1.getInfo()[1]);
+        // test add an assignment:
+        cc.addAssignment();
+        for (Student student : c1.getList().keySet()){
+            Grade grade = c1.getsGrade(student);
+            grade.addAssignment();
+        }
         c1.calculateAll();
-        System.out.println(c1.getAnalysis()[0]);
+        System.out.println("new mean score after add new assignment: " + c1.getAnalysis("a",2)[0]);
+
+
+//        c1.writeToFile("a.txt");
+
+//        Course c = new Course();
+//        c1 = c.readFromFile("a.txt");
+//        System.out.println(c1.getInfo()[1]);
+//        c1.calculateAll();
+//        System.out.println(c1.getAnalysis()[0]);
+
+
 
 
         /**
@@ -68,11 +73,11 @@ public class Main {
          * @Param: String path
          */
 
-        Course course = ReadRawData.readRawData(args[0]);
-        course.calculateAll();
-        String[] arr = course.getAnalysis("a",0);
-        for (String s : arr){
-            System.out.println(s);
-        }
+//        Course course = ReadRawData.readRawData(args[0]);
+//        course.calculateAll();
+//        String[] arr = course.getAnalysis("a",0);
+//        for (String s : arr){
+//            System.out.println(s);
+//        }
     }
 }
