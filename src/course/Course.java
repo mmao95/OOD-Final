@@ -113,7 +113,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double mind = 100;
         double dd;
         List<Pair<String,Double>> sg = new ArrayList<>();
-        if(type=="a") {
+        if(type.equals("a")) {
             double fs = ccriterion.getAssignments().get(index).getToatalScore();
             double sc;
             for (Student key : cgrade.keySet()) {
@@ -131,7 +131,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 tt += sc * fs;
                 count += 1;
             }
-        }else if(type=="e") {
+        }else if(type.equals("e")) {
             double fs = ccriterion.getExams().get(index).getToatalScore();
             double sc;
             for (Student key : cgrade.keySet()) {
@@ -149,7 +149,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 tt += sc * fs;
                 count += 1;
             }
-        }else if(type=="p"){
+        }else if(type.equals("p")){
             double fs = ccriterion.getProjects().get(index).getToatalScore();
             double sc;
             for (Student key : cgrade.keySet()) {
