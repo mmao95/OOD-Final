@@ -8,6 +8,8 @@ public class GraduateStudent extends Student{
         super();
     }
 
+    public GraduateStudent() {super();}
+
     // return the type of current student
     public String getTYPE(){
         return TYPE;
