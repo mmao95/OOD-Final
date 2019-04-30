@@ -9,6 +9,12 @@ public class Name implements Serializable {
     private String mname;
     private String lname;
 
+    public Name(){
+        this.fname = "";
+        this.mname = "";
+        this.lname = "";
+    }
+
     public Name(String f, String m, String l){
         this.fname = f;
         this.mname = m;
@@ -21,10 +27,10 @@ public class Name implements Serializable {
     }
 
     /**
-    * @Description: getters and setters
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/12
-    **/
+     * @Description: getters and setters
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/12
+     **/
     public String getFname() {
         return fname;
     }
