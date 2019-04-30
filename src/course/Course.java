@@ -167,7 +167,6 @@ public class Course implements Analysis,IO<Course>,Serializable{
     public void calculateTotal(Grade g){
         double total = 0;
         for(int i=0;i<ccriterion.getCategories().size();i++) {
-            double csc;
             double cw = ccriterion.getCategories().get(i).getWeight();
             for (int j = 0; j < ccriterion.getCategories().get(i).getCriComps().size(); j++) {
                 double fs = ccriterion.getCategories().get(i).getCriComps().get(j).getToatalScore();
@@ -178,14 +177,14 @@ public class Course implements Analysis,IO<Course>,Serializable{
                     stdsc = Double.valueOf(sc.substring(0,sc.length()-1))/100;
                 }else if(sc.charAt(0)=='-'){
                     stdsc = (100-Double.valueOf(sc.substring(1)))/fs;
-                }else{
-                    stdsc = Double.valueOf(sc)/fs;
+                }else {
+                    stdsc = Double.valueOf(sc) / fs;
                 }
                 total += stdsc*we*cw*100;
             }
         }
         g.setTtscore(total);
-        
+
     }
     //calculate total score of all students
     public void calculateAll(){
