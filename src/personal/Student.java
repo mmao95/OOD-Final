@@ -22,7 +22,11 @@ public class Student implements Serializable {
      * @Author: Zhizhou Qiu
      * @Date: 2019/4/12
      **/
-    public Student(){}
+    public Student(){
+        id = "";
+        email = "";
+        name = new Name();
+    }
 
     /**
      * @Description: getters and setters of String id, String full_name and String email

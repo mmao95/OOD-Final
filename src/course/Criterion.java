@@ -177,6 +177,9 @@ public class Criterion implements IO<Criterion>, Serializable {
         }
     }
 
+    /**
+     * @return the number of current assigments, exams, projects
+     */
     public int getNumberOfAssignments() {
         if (this.assignments == null) return -1;
         return this.assignments.size();
@@ -191,7 +194,7 @@ public class Criterion implements IO<Criterion>, Serializable {
         if (this.projects == null) return -1;
         return this.projects.size();
     }
-    
+
     public List<CriComp> getAssignments() {
         return assignments;
     }
