@@ -230,6 +230,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
     }
 
     public void deleteOne(int cat, int index){
+        getCcriterion().getCategories().get(cat).deleteOne(index);
         for(Student k: cgrade.keySet()){
             getsGrade(k).getCategory(cat).remove(index);
         }
