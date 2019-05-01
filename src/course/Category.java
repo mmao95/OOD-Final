@@ -43,9 +43,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "name: " + name +
-                ", weight: " + weight +
-                ", tasks: " + criComps + "\n";
+        return weight + "x" + name;
     }
 
     public int getNumberOfTasks(){
