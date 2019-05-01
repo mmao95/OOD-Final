@@ -15,12 +15,12 @@ import java.awt.event.ActionListener;
 public class CommentFrame extends JFrame implements ActionListener {
     protected JButton okButton, deleteButton;
     protected JTextArea commentTextArea;
-//    private MainFrame mainFrame;
+    private MainFrame mainFrame;
 
     public CommentFrame(MainFrame inputMainFrame, String inputCommentString) {
         // TODO Auto-generated constructor stub
 
-//        mainFrame = inputMainFrame;
+        mainFrame = inputMainFrame;
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
@@ -45,12 +45,17 @@ public class CommentFrame extends JFrame implements ActionListener {
 
         this.setVisible(true);
         this.setResizable(false);
+
+        this.mainFrame.setEnabled(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="OK") {
-//           mainFrame.updateComment(commentTextField.getText());
+           mainFrame.updateComment(commentTextArea.getText());
+           this.mainFrame.setEnabled(true);
+           this.dispose();
+
         }
         else if (e.getActionCommand()=="Delete") {
             commentTextArea.setText("");
