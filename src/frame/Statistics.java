@@ -16,17 +16,27 @@ import course.*;
  * @Description:
  */
 public class Statistics extends JFrame implements ActionListener {
-    protected JButton closeButton;
-    protected JLabel meanString, maxString, minString, stdString, medianString;
-    protected JPanel meanPanel, maxPanel, minPanel, stdPanel, medianPanel, buttonPanel, nullPanel;
+    private JButton closeButton;
+    private JLabel meanString, maxString, minString, stdString, medianString;
+    private JPanel meanPanel, maxPanel, minPanel, stdPanel, medianPanel, buttonPanel, nullPanel;
+    private String[] pointScore;
 
     public Statistics(Course inputCourse) {
         // TODO Auto-generated constructor stub
+        pointScore = inputCourse.getAnalysis();
+        initialization();
+    }
 
+    public Statistics(Course inputCourse, int cateIndex, int index) {
+        pointScore = inputCourse.getAnalysis(cateIndex, index);
+        initialization();
+    }
+
+
+    private void initialization() {
         closeButton = new JButton("Close");
         closeButton.addActionListener(this);
 
-        String [] pointScore = inputCourse.getAnalysis();
         String initMeanString = "Mean: " + pointScore[0];
         String initMaxString = "Max Score: " + pointScore[1];
         String initMinString = "Min Score: " + pointScore[2];
