@@ -37,6 +37,11 @@ public class SortTableModel extends DefaultTableModel {
         return this.classList.get(columnIndex);
     }
 
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return true;
+    }
+
     /*** Setter and Getter ***/
     public List<Class> getClassList() {
         return classList;

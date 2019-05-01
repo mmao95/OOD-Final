@@ -30,12 +30,17 @@ public class CommentPanel extends JPanel {
         valueLabel.setText(value);
     }
 
+    public String getValue() {
+        return valueLabel.getText();
+    }
+
     public void setBackground() {
         if (hasComment())
             this.setBackground(Color.RED);
         else
             this.setBackground(Color.WHITE);
     }
+
 
     /*** Setter and Getter ***/
     public void setComment(String comment) {

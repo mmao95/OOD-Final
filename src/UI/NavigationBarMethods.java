@@ -15,4 +15,8 @@ public class NavigationBarMethods {
         return c;
     }
 
+    public static void addNewStudent() {
+
+    }
+
 }
