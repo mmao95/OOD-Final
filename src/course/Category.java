@@ -16,12 +16,12 @@ public class Category implements Serializable {
     private  static final int DEFAULT_NUMBER = 2;
 
     /**
-    * @Description: this is the constructor to create a Category according to name, weight and number of tasks
-    * @Param: String name, double weight, int number
-    * @Return: a Category object
-    * @Author: Zhizhou Qiu
-    * @Date: 2019/4/30
-    **/
+     * @Description: this is the constructor to create a Category according to name, weight and number of tasks
+     * @Param: String name, double weight, int number
+     * @Return: a Category object
+     * @Author: Zhizhou Qiu
+     * @Date: 2019/4/30
+     **/
     public Category(String name, double weight, int number){
         this.name = name;
         this.weight = weight;
@@ -75,6 +75,10 @@ public class Category implements Serializable {
 
     public List<CriComp> getCriComps() {
         return criComps;
+    }
+
+    public void deleteOne(int index){
+        criComps.remove(index);
     }
 
     public void setCriComps(List<CriComp> criComps) {
