@@ -49,7 +49,7 @@ public class AddingPanel extends JPanel {
     }
 
     private void initialization() {
-        this.setLayout(new BorderLayout(4, 8));
+        this.setLayout(new FlowLayout());
 
         /*** Left Part ***/
         addStudent = new JButton("Add student");
@@ -57,6 +57,7 @@ public class AddingPanel extends JPanel {
             course.enrollStudent(new Student());
             mainFrame.update(course);
         });
+        addStudent.setPreferredSize(new Dimension(128, 54));
 
         /*** Right Part ***/
         JPanel rightPanel = new JPanel(new BorderLayout());
@@ -75,10 +76,11 @@ public class AddingPanel extends JPanel {
         categoryBox = new JComboBox<>(categories);
         rightPanel.add(categoryBox, BorderLayout.NORTH);
         rightPanel.add(addSubCategory, BorderLayout.SOUTH);
+        rightPanel.setPreferredSize(new Dimension(128, 54));
 
         /*** Add components to main panel ***/
         this.add(addStudent, BorderLayout.WEST);
-        this.add(rightPanel, BorderLayout.EAST);
+        this.add(rightPanel, BorderLayout.CENTER);
 
     }
 
@@ -86,7 +88,7 @@ public class AddingPanel extends JPanel {
         this.course = course;
     }
 
-    public void refeshPanel(Course newCourse) {
+    public void refreshPanel(Course newCourse) {
         setCourse(newCourse);
         setCategories(newCourse.getCcriterion().getCategories());
         categoryBox.removeAllItems();

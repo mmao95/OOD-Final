@@ -35,22 +35,21 @@ public class RemovePanel extends JPanel {
     }
 
     private void initialization() {
-        this.setLayout(new BorderLayout(4, 8));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         /*** Left Part ***/
-        removeStudent = new JButton("Remove student");
+        removeStudent = new JButton("Remove");
         removeStudent.addActionListener(e -> {
-
             mainFrame.update(course);
         });
-
-//        removeSubCategory = new JButton("Remove column");
-//        removeSubCategory.addActionListener(e-> {
-//            mainFrame.update(course);
-//        });
+        removeStudent.setPreferredSize(new Dimension(128, 54));
 
         /*** Add components to main panel ***/
 
-        this.add(removeStudent, BorderLayout.CENTER);
+        this.add(removeStudent);
+    }
+
+    public void refreshPanel(Course newCourse) {
+        this.course = course;
     }
 }

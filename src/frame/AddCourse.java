@@ -216,20 +216,19 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        weightElement = new String[categoryElement.length];
                        for (int i = 0; i < categoryElement.length; i++)
                            weightElement[i] = String.valueOf(1.0 / categoryElement.length);
-                       weightElement = weightTextArea.getText().split("\n");
                        for (int i = 0; i < categoryElement.length; i++)
                            returnCategoryList.add(new Category(categoryElement[i], Double.parseDouble(weightElement[i]), Integer.parseInt(numberElement[i])));
                        tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
-                       mainFrame.update(returnCourse);
+                       mainFrame.addCourse(returnCourse);
                        this.dispose();
                        break;
                    case 2:
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                savedNewCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
                        //mainFrame.setCurrentCourse(returnCourse2);
-                       mainFrame.update(returnCourse);
+                       mainFrame.addCourse(returnCourse);
                        this.dispose();
                        break;
                    case 3:
@@ -241,7 +240,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
-                       mainFrame.update(returnCourse);
+                       mainFrame.addCourse(returnCourse);
                        this.dispose();
                        break;
                }

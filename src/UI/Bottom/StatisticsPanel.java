@@ -6,6 +6,7 @@ import course.Course;
 import frame.Statistics;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,10 +52,11 @@ public class StatisticsPanel extends JPanel {
     }
 
     private void initialization() {
-        this.setLayout(new BorderLayout(4, 8));
+        this.setLayout(new FlowLayout());
 
         /*** Left part ***/
         statBy = new JButton("Show statistics of");
+        statBy.setPreferredSize(new Dimension(128, 54));
         statBy.addActionListener(e-> {
             if (categoryBox.getSelectedIndex() == 0) {
                 new Statistics(course);
@@ -63,16 +65,20 @@ public class StatisticsPanel extends JPanel {
             }
         });
 
-
         /*** Right part ***/
         JPanel rightPanel = new JPanel(new BorderLayout(4, 8));
         categoryBox = new JComboBox<>(categories);
+        categoryBox.setPrototypeDisplayValue("Assignment ");
+
         subCategoryBox = new JComboBox();
+        subCategoryBox.setPrototypeDisplayValue("Assignment ");
+
         rightPanel.add(categoryBox, BorderLayout.NORTH);
         rightPanel.add(subCategoryBox, BorderLayout.SOUTH);
+        rightPanel.setPreferredSize(new Dimension(128, 54));
 
-        this.add(statBy, BorderLayout.WEST);
-        this.add(rightPanel, BorderLayout.EAST);
+        this.add(statBy);
+        this.add(rightPanel);
 
         /*** Listener for ComboBox ***/
         categoryBox.addActionListener(new ComboBoxListener());
@@ -87,7 +93,7 @@ public class StatisticsPanel extends JPanel {
         return course;
     }
 
-    public void refeshPanel(Course newCourse) {
+    public void refreshPanel(Course newCourse) {
         setCourse(newCourse);
         setCategories(newCourse.getCcriterion().getCategories());
 

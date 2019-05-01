@@ -14,12 +14,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import UI.Bottom.AddingPanel;
-import UI.Bottom.RemovePanel;
-import UI.Bottom.StatisticsPanel;
+import UI.Bottom.SwitchPanel;
 import course.Category;
 import course.Course;
-//import frame.AddCourse;
+import frame.AddCourse;
 import course.NewCriterion;
 import frame.CommentFrame;
 import frame.SubCategory;
@@ -47,10 +45,7 @@ public class MainFrame extends JFrame {
     private JMenuBar menuBar;
     private JTable gradeTable;
     private JTextField weightingField;
-    //Right panel components
-//    private JLabel rowIndicator;
-//    private JLabel columnIndicator;
-//    private JTextArea commentArea = new JTextArea(5, 10);
+
     //Left panel components
     //JTree
     private JTree jTree;
@@ -59,9 +54,10 @@ public class MainFrame extends JFrame {
     private DefaultTreeModel jMode = new DefaultTreeModel(root);
 
     //Bottom panel components
-    private StatisticsPanel statisticsPanel;
-    private RemovePanel removePanel;
-    private AddingPanel addingPanel;
+    //private StatisticsPanel statisticsPanel;
+    //private RemovePanel removePanel;
+    //private AddingPanel addingPanel;
+    private SwitchPanel switchPanel;
 
     private int windowWidth = 1280;
     private int windowHeight = 720;
@@ -121,14 +117,14 @@ public class MainFrame extends JFrame {
 
         final JMenuItem newCourseMenuItem = new JMenuItem("New Course");
         newCourseMenuItem.addActionListener(e-> {
-//            try {
-//                List<Criterion> criterionList = new ArrayList<>();
-//                new AddCourse(criterionList, this);
-//            } catch (IOException ioe) {
-//                ioe.printStackTrace();
-//            } catch (ClassNotFoundException cnfe) {
-//                cnfe.printStackTrace();
-//            }
+            try {
+                List<NewCriterion> criterionList = new ArrayList<>();
+                new AddCourse(criterionList, this);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (ClassNotFoundException cnfe) {
+                cnfe.printStackTrace();
+            }
         });
 
         final JMenuItem importCourseMenuItem = new JMenuItem("Import Course from File");
@@ -235,27 +231,13 @@ public class MainFrame extends JFrame {
         middlePanel.setPreferredSize(new Dimension(windowWidth * (6 / 8), windowHeight));
         container.add(middlePanel, BorderLayout.CENTER);
 
-        /*** Right Panel ***/
-//        rightPanel = new JPanel(new BorderLayout(4, 4));
-//        rightPanel.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
-//
-//        rowIndicator = new JLabel("Row: ");
-//        columnIndicator = new JLabel("Column: ");
-//        JPanel rightNorth = new JPanel(new BorderLayout());
-//        rightNorth.add(rowIndicator, BorderLayout.NORTH);
-//        rightNorth.add(columnIndicator, BorderLayout.SOUTH);
-//
-//        commentArea.setLineWrap(true);
-//        JScrollPane rightScrollPane = new JScrollPane(commentArea);
-//
-//        rightPanel.add(rightNorth, BorderLayout.NORTH);
-//        rightPanel.add(rightScrollPane, BorderLayout.CENTER);
-//        container.add(rightPanel, BorderLayout.EAST);
 
         /*** Bottom Panel ***/
-        //bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel = new JPanel(new BorderLayout(8, 8));
-        bottomPanel.setBorder(new EmptyBorder(16, 16, 16, 16));
+        //bottomPanel = new JPanel(new BorderLayout(8, 8));
+        bottomPanel = new JPanel();
+        //bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.setBorder(new EmptyBorder(8, 16, 0, 16));
         bottomPanel.setPreferredSize(new Dimension(windowWidth, windowHeight / 8));
 
         //Bottom Left Panel
@@ -270,32 +252,26 @@ public class MainFrame extends JFrame {
         bottomLeft.setPreferredSize(new Dimension(windowWidth / 10, windowHeight / 8));
 
         //Bottom Center Panel
-        JPanel bottomCenter = new JPanel(new BorderLayout(8, 0));
-        bottomCenter.setBorder(new EmptyBorder(0, 8, 0, 8));
-        bottomCenter.setPreferredSize(new Dimension(windowWidth * (8 / 10), windowHeight / 8));
+        JPanel bottomCenter = new JPanel();
+        bottomCenter.setLayout(new BoxLayout(bottomCenter, BoxLayout.X_AXIS));
+        bottomCenter.setBorder(new EmptyBorder(0, 8, 24, 8));
 
-        statisticsPanel = new StatisticsPanel(currentCourse);
-        removePanel = new RemovePanel(this, currentCourse);
-        //removePanel.setSize(new Dimension(windowWidth * (8 / 30), windowHeight / 8));
-        addingPanel = new AddingPanel(this, currentCourse);
+        switchPanel = new SwitchPanel(this, currentCourse);
 
-        bottomCenter.add(statisticsPanel, BorderLayout.WEST);
-        bottomCenter.add(removePanel, BorderLayout.CENTER);
-        bottomCenter.add(addingPanel, BorderLayout.EAST);
+//        statisticsPanel = new StatisticsPanel(currentCourse);
+//        removePanel = new RemovePanel(this, currentCourse);
+//        addingPanel = new AddingPanel(this, currentCourse);
+//
+//        bottomCenter.add(statisticsPanel);
+//        bottomCenter.add(Box.createRigidArea(new Dimension(16, 0)));
+//        bottomCenter.add(removePanel);
+//        bottomCenter.add(addingPanel);
+        bottomCenter.add(switchPanel);
 
-        bottomPanel.add(bottomLeft, BorderLayout.WEST);
-        bottomPanel.add(bottomCenter, BorderLayout.CENTER);
+        bottomPanel.add(bottomLeft);
+        bottomPanel.add(bottomCenter);
 
         container.add(bottomPanel, BorderLayout.SOUTH);
-
-        //bottomRight
-        JPanel bottomRight = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("");
-
-        bottomRight.setPreferredSize(new Dimension(windowWidth * (8 / 10), windowHeight / 8));
-        bottomRight.setSize(new Dimension(windowWidth * (8 / 10), windowHeight / 8));
-        bottomRight.setBackground(Color.RED);
-        bottomPanel.add(bottomRight, BorderLayout.EAST);
 
         /*** Settings of UI.MainFrame ***/
         setTitle("Grading System");
@@ -344,8 +320,7 @@ public class MainFrame extends JFrame {
 
         /*** Update Components ***/
         currentCourse = course;
-        statisticsPanel.refeshPanel(currentCourse);
-        addingPanel.refeshPanel(currentCourse);
+        switchPanel.refreshPanel(currentCourse);
     }
 
     //Interface for outside calling
@@ -355,10 +330,6 @@ public class MainFrame extends JFrame {
         gradeTable.getSelectionModel().clearSelection();
         weightingField.setText("");
         addCourse(course, root);
-    }
-
-    public void updateComment(String comment) {
-
     }
 
     private void addCourse(Course course, DefaultMutableTreeNode root) {
@@ -399,14 +370,17 @@ public class MainFrame extends JFrame {
         }
 
         currentCourse = course;
-        statisticsPanel.refeshPanel(currentCourse);
-        addingPanel.refeshPanel(currentCourse);
+        switchPanel.refreshPanel(currentCourse);
 
         jTree.setModel(new DefaultTreeModel(root));
         //Expand the newest node
         semesterPath = find(root, courseSemester);
         jTree.setSelectionPath(semesterPath);
         jTree.scrollPathToVisible(semesterPath);
+    }
+
+    public void updateComment(String comment) {
+
     }
 
     private void setWeighting() {
