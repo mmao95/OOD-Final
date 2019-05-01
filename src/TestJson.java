@@ -85,7 +85,7 @@ public class TestJson {
                 Grade g = course.getsGrade(student);
 
                 for (Category category : categories){
-                    
+
                 }
 
             }
