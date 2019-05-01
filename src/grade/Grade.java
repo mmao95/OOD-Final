@@ -73,4 +73,7 @@ public class Grade implements Serializable,Comparable{
     public double getTtscore(){
         return ttscore;
     }
+    public int getCatelength(int cat){
+        return grade.get(cat).size();
+    }
 }
