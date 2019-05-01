@@ -1,7 +1,4 @@
-import course.Category;
-import course.Course;
-import course.Criterion;
-import course.NewCriterion;
+import course.*;
 import grade.Grade;
 import grade.GradeComp;
 import org.json.simple.JSONArray;
@@ -72,6 +69,7 @@ public class TestJson {
 
 //            System.out.println(studentArray.toString());
 
+            // set grade of every student
             for (Object o : studentArray){
                 JSONObject jsonObject = (JSONObject) o;
 
@@ -82,11 +80,24 @@ public class TestJson {
                         jsonObject.get("email").toString()
                 );
                 course.enrollStudent(student);
+                // get the mapping Grade object
                 Grade g = course.getsGrade(student);
 
-                for (Category category : categories){
+                // for each student, set score of each category
+                for (int i = 0; i < categories.size(); i++){
+                    Category category = categories.get(i);
+                    String name = category.getName();
 
+                    // set score for each grade component in each category
+                    List<GradeComp> gradeComps = g.getCategory(i);
+                    for (int j = 0; j < gradeComps.size(); j++){
+                        GradeComp gradeComp = gradeComps.get(j);
+                        String score = jsonObject.get(prefix+name+(i+1)).toString();
+                        gradeComp.setScore(score);
+                    }
                 }
+
+                gradeMap.put(student,g);
 
             }
 
@@ -119,8 +130,6 @@ public class TestJson {
         else return new Name(name, null,null);
     }
 
-    private static String gradeOfAssignment = "gradeOfAssignment";
-    private static String gradeOfExam = "gradeOfExam";
-    private static String gradeOfProject = "gradeOfProject";
-    private static String gradeOfAttendance = "gradeOfAttendance";
+
+    private static final String prefix = "gradeOf";
 }
