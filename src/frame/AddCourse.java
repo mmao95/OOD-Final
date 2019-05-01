@@ -178,6 +178,14 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        this.setVisible(true);
        this.setResizable(false);
        this.mainFrame.setEnabled(false);
+      
+      this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                mainFrame.setEnabled(true);
+                dispose();
+            }
+        });
    }
 
    public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
