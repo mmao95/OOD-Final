@@ -8,7 +8,7 @@
   },
 
   {
-    "criterion" : "this is the criterion firld",
+    "criterion" : "this is the criterion field",
     "name" : "math_criterion",
     "weightsOfAssignments" : "0.3",
     "weightsOfExams" : "0.4",
