@@ -92,10 +92,14 @@ public class TestJson {
                     List<GradeComp> gradeComps = g.getCategory(i);
                     for (int j = 0; j < gradeComps.size(); j++){
                         GradeComp gradeComp = gradeComps.get(j);
-                        String score = jsonObject.get(prefix+name+(i+1)).toString();
+                        String key = prefix+name+(j+1);
+                        System.out.println(key);
+                        String score = jsonObject.get(key).toString();
+                        System.out.println("score: " + score);
                         gradeComp.setScore(score);
                     }
                 }
+                System.out.println("===================");
 
                 gradeMap.put(student,g);
 
