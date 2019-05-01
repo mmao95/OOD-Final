@@ -47,6 +47,14 @@ public class CommentFrame extends JFrame implements ActionListener {
         this.setResizable(false);
 
         this.mainFrame.setEnabled(false);
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                mainFrame.setEnabled(true);
+                dispose();
+            }
+        });
     }
 
     @Override
