@@ -118,7 +118,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
     private boolean judgeWeightNumber(){
         boolean returnValue = true;
-        for (int i = 1; i < itemNumber; i++){
+        for (int i = 1; i <= itemNumber; i++){
             if(!isDouble(table.getValueAt(i, 1).toString()))
                 returnValue = false;
         }
@@ -127,7 +127,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
     private boolean judgeWeightSum(){
         double sum = 0.0;
-        for (int i = 1; i < itemNumber; i++)
+        for (int i = 1; i <= itemNumber; i++)
             sum += Double.parseDouble(table.getValueAt(i, 1).toString());
         if(sum == 1.0)
             return true;
