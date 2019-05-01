@@ -258,14 +258,6 @@ public class MainFrame extends JFrame {
 
         switchPanel = new SwitchPanel(this, currentCourse);
 
-//        statisticsPanel = new StatisticsPanel(currentCourse);
-//        removePanel = new RemovePanel(this, currentCourse);
-//        addingPanel = new AddingPanel(this, currentCourse);
-//
-//        bottomCenter.add(statisticsPanel);
-//        bottomCenter.add(Box.createRigidArea(new Dimension(16, 0)));
-//        bottomCenter.add(removePanel);
-//        bottomCenter.add(addingPanel);
         bottomCenter.add(switchPanel);
 
         bottomPanel.add(bottomLeft);
@@ -380,13 +372,11 @@ public class MainFrame extends JFrame {
     }
 
     public void updateComment(String comment) {
-
+        updateCellComment(comment);
     }
 
     private void setWeighting() {
         int selectedColumn = gradeTable.getSelectedColumn();
-
-        String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
 
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
 
@@ -405,6 +395,35 @@ public class MainFrame extends JFrame {
             }
         }
     }
+
+    private void updateCellComment(String comment) {
+        //int selectedRow = gradeTable.getSelectedRow();
+        int selectedColumn = gradeTable.getSelectedColumn();
+        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+        if (columnGroups.size() == 0)
+            System.out.println("Cannot add a comment to non-grade items");
+        else {
+            String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
+
+            String category = getCategory(selectedColumn, columnGroups, true);
+            int subCategoryId = getSubCategory(selectedColumn, true);
+
+            Student student = currentCourse.getStudent(stuId);
+            Grade grade = currentCourse.getsGrade(student);
+
+            grade.getCategory(header.findIndexOfGroup(category)).get(subCategoryId - 1).getNote().setNote(comment);
+
+            currentCourse.getList().put(student, grade);
+            currentCourse.writeToFile("c.txt");
+        }
+    }
+
+    public void updateCriterion(NewCriterion newCriterion) {
+
+    }
+
 
     private void setUpGradeTable(NewCriterion criterion, HashMap<Student, Grade> grade) {
         Vector<String> headers = setUpTableHeader(criterion);
