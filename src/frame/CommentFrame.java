@@ -1,8 +1,5 @@
-package frame;
-
-import UI.MainFrame;
-
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,13 +10,13 @@ import java.awt.event.ActionListener;
  */
 public class CommentFrame extends JFrame implements ActionListener {
     protected JButton okButton, deleteButton;
-    protected JTextField commentTextField;
-    private MainFrame mainFrame;
+    protected JTextArea commentTextArea;
+//    private MainFrame mainFrame;
 
-    public CommentFrame(MainFrame inputMainFrame, String inputCommentString) {
+    public CommentFrame(String inputCommentString) {
         // TODO Auto-generated constructor stub
 
-        mainFrame = inputMainFrame;
+//        mainFrame = inputMainFrame;
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
@@ -28,12 +25,13 @@ public class CommentFrame extends JFrame implements ActionListener {
         deleteButton.addActionListener(this);
         deleteButton.setBounds(200, 150, 75, 25);
 
-        commentTextField = new JTextField(inputCommentString);
-        commentTextField.setBounds(25, 25, 250, 100);
+        commentTextArea = new JTextArea(inputCommentString);
+        commentTextArea.setBounds(25, 25, 250, 100);
 
-        this.add(commentTextField);
+        this.add(commentTextArea);
         this.add(okButton);
         this.add(deleteButton);
+        this.add(new Panel((new GridLayout(1,1))));
 
         this.setTitle("Comment");
 //        this.setLayout(new GridLayout(3, 1));
@@ -48,10 +46,10 @@ public class CommentFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="OK") {
-           mainFrame.updateComment(commentTextField.getText());
+//           mainFrame.updateComment(commentTextField.getText());
         }
         else if (e.getActionCommand()=="Delete") {
-            commentTextField.setText("");
+            commentTextArea.setText("");
         }
     }
 }
