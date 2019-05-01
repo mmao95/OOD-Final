@@ -43,7 +43,13 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return weight + "x" + name;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Total=");
+        for (int i = 0; i < criComps.size(); i++){
+            sb.append(criComps.get(i).getWeights() + "x" + name + (i+1) + "+");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
     }
 
     public int getNumberOfTasks(){
