@@ -177,6 +177,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
 
        this.setVisible(true);
        this.setResizable(false);
+       this.mainFrame.setEnabled(false);
    }
 
    public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
@@ -222,6 +223,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
                        mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
                        this.dispose();
                        break;
                    case 2:
@@ -229,6 +231,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                                savedNewCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
                        //mainFrame.setCurrentCourse(returnCourse2);
                        mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
                        this.dispose();
                        break;
                    case 3:
@@ -241,6 +244,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
                        mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
                        this.dispose();
                        break;
                }
