@@ -46,7 +46,7 @@ public class Category implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("Total=");
         for (int i = 0; i < criComps.size(); i++){
-            sb.append(criComps.get(i).getWeights() + "x" + name + (i+1) + "+");
+            sb.append(String.format("%.2f",criComps.get(i).getWeights()) + "x" + name + (i+1) + "+");
         }
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();
