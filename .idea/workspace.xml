@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c2c7e5a-f004-49f4-9737-e70b31cb28a5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/newRawData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw.json" beforeDir="false" afterPath="$PROJECT_DIR$/raw.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TestJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/course/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/course/CriComp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/CriComp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/course/NewCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/NewCriterion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/course/ReadRawData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/ReadRawData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/AddCourse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame/CommentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frame/CommentFrame.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,16 +32,16 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="114" />
-          <entry key="JSON" value="5" />
+          <entry key="JAVA" value="118" />
+          <entry key="JSON" value="7" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="UML" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="11428" />
-          <entry key="JSON" value="895" />
+          <entry key="JAVA" value="11479" />
+          <entry key="JSON" value="1190" />
           <entry key="PLAIN_TEXT" value="14" />
           <entry key="VTL" value="117" />
         </counts>
@@ -55,37 +51,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/course/CriComp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-              <folding>
-                <element signature="e#1181#1182#0" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/Category.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
+            <state relative-caret-position="893">
               <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1181#1182#0" expanded="true" />
-                <element signature="e#1208#1209#0" expanded="true" />
-                <element signature="e#1248#1249#0" expanded="true" />
-                <element signature="e#1280#1281#0" expanded="true" />
-                <element signature="e#1313#1314#0" expanded="true" />
-                <element signature="e#1342#1343#0" expanded="true" />
-                <element signature="e#1386#1387#0" expanded="true" />
-                <element signature="e#1422#1423#0" expanded="true" />
-                <element signature="e#1464#1465#0" expanded="true" />
-                <element signature="e#1495#1496#0" expanded="true" />
-                <element signature="e#1550#1551#0" expanded="true" />
-                <element signature="e#1590#1591#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,40 +65,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/course/NewCriterion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="83" column="29" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="29" />
+            <state relative-caret-position="1342">
+              <caret line="61" column="41" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2909#2910#0" expanded="true" />
-                <element signature="e#2942#2943#0" expanded="true" />
-                <element signature="e#3002#3003#0" expanded="true" />
-                <element signature="e#3046#3047#0" expanded="true" />
-                <element signature="e#3077#3078#0" expanded="true" />
-                <element signature="e#3104#3105#0" expanded="true" />
-                <element signature="e#3144#3145#0" expanded="true" />
-                <element signature="e#3176#3177#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/course/Criterion.java">
+        <entry file="file://$PROJECT_DIR$/raw.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1332">
-              <caret line="176" column="9" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="176" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-343">
+              <caret line="28" column="30" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="28" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newRawData.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="968">
+              <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/TestJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="93" column="50" selection-start-line="93" selection-start-column="50" selection-end-line="93" selection-end-column="50" />
+            <state relative-caret-position="151">
+              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -166,7 +135,6 @@
         <option value="$PROJECT_DIR$/src/grade/GradeComp.java" />
         <option value="$PROJECT_DIR$/src/grade/Grade.java" />
         <option value="$PROJECT_DIR$/src/course/Course.java" />
-        <option value="$PROJECT_DIR$/raw.json" />
         <option value="$PROJECT_DIR$/src/entrance.java" />
         <option value="$PROJECT_DIR$/src/Login.java" />
         <option value="$PROJECT_DIR$/src/frame/TestMain.java" />
@@ -179,11 +147,13 @@
         <option value="$PROJECT_DIR$/src/frame/AddCourse.java" />
         <option value="$PROJECT_DIR$/src/frame/CommentFrame.java" />
         <option value="$PROJECT_DIR$/src/course/ReadRawData.java" />
-        <option value="$PROJECT_DIR$/src/TestJson.java" />
         <option value="$PROJECT_DIR$/src/course/CriComp.java" />
         <option value="$PROJECT_DIR$/src/course/Category.java" />
         <option value="$PROJECT_DIR$/src/course/NewCriterion.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/raw.json" />
+        <option value="$PROJECT_DIR$/src/newRawData.json" />
+        <option value="$PROJECT_DIR$/src/TestJson.java" />
       </list>
     </option>
   </component>
@@ -223,6 +193,12 @@
               <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="course" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -232,7 +208,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556668415033" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556670428831" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -297,12 +273,12 @@
       <workItem from="1556590925380" duration="748000" />
       <workItem from="1556635851681" duration="64000" />
       <workItem from="1556638066894" duration="63000" />
-      <workItem from="1556638929125" duration="12940000" />
+      <workItem from="1556638929125" duration="14287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65577000" />
+    <option name="totallyTimeSpent" value="66924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -313,14 +289,14 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.16117217" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.16117217" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.2877551" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.2877551" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
@@ -636,45 +612,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/raw.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/course/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1181#1182#0" expanded="true" />
-            <element signature="e#1208#1209#0" expanded="true" />
-            <element signature="e#1248#1249#0" expanded="true" />
-            <element signature="e#1280#1281#0" expanded="true" />
-            <element signature="e#1313#1314#0" expanded="true" />
-            <element signature="e#1342#1343#0" expanded="true" />
-            <element signature="e#1386#1387#0" expanded="true" />
-            <element signature="e#1422#1423#0" expanded="true" />
-            <element signature="e#1464#1465#0" expanded="true" />
-            <element signature="e#1495#1496#0" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1590#1591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/course/CriComp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
+        <state relative-caret-position="480">
           <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
           <folding>
             <element signature="e#1181#1182#0" expanded="true" />
@@ -683,10 +623,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1826">
+          <caret line="93" column="52" lean-forward="true" selection-start-line="93" selection-start-column="52" selection-end-line="93" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/course/Criterion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1332">
-          <caret line="176" column="9" lean-forward="true" selection-start-line="164" selection-start-column="8" selection-end-line="176" selection-end-column="9" />
+        <state relative-caret-position="3024">
+          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -695,26 +642,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/course/NewCriterion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="83" column="29" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="29" />
+        <state relative-caret-position="1342">
+          <caret line="61" column="41" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2909#2910#0" expanded="true" />
-            <element signature="e#2942#2943#0" expanded="true" />
-            <element signature="e#3002#3003#0" expanded="true" />
-            <element signature="e#3046#3047#0" expanded="true" />
-            <element signature="e#3077#3078#0" expanded="true" />
-            <element signature="e#3104#3105#0" expanded="true" />
-            <element signature="e#3144#3145#0" expanded="true" />
-            <element signature="e#3176#3177#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/course/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="93" column="50" selection-start-line="93" selection-start-column="50" selection-end-line="93" selection-end-column="50" />
+        <state relative-caret-position="893">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-343">
+          <caret line="28" column="30" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="28" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newRawData.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TestJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
         </state>
       </provider>
     </entry>
