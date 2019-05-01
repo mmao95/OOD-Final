@@ -13,7 +13,7 @@ public class CommentFrame extends JFrame implements ActionListener {
     protected JTextArea commentTextArea;
 //    private MainFrame mainFrame;
 
-    public CommentFrame(String inputCommentString) {
+    public CommentFrame(MainFrame inputMainFrame, String inputCommentString) {
         // TODO Auto-generated constructor stub
 
 //        mainFrame = inputMainFrame;
