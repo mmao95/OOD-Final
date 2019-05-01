@@ -17,14 +17,14 @@ import java.util.List;
 import UI.Bottom.AddingPanel;
 import UI.Bottom.RemovePanel;
 import UI.Bottom.StatisticsPanel;
-import UI.Comment.CommentEditor;
-import UI.Comment.CommentRenderer;
+import course.Category;
 import course.Course;
-import course.Criterion;
-import frame.AddCourse;
+//import frame.AddCourse;
+import course.NewCriterion;
+import frame.CommentFrame;
 import frame.SubCategory;
 import grade.Grade;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import grade.GradeComp;
 import personal.Student;
 
 /**
@@ -48,9 +48,9 @@ public class MainFrame extends JFrame {
     private JTable gradeTable;
     private JTextField weightingField;
     //Right panel components
-    private JLabel rowIndicator;
-    private JLabel columnIndicator;
-    private JTextArea commentArea = new JTextArea(5, 10);
+//    private JLabel rowIndicator;
+//    private JLabel columnIndicator;
+//    private JTextArea commentArea = new JTextArea(5, 10);
     //Left panel components
     //JTree
     private JTree jTree;
@@ -121,14 +121,14 @@ public class MainFrame extends JFrame {
 
         final JMenuItem newCourseMenuItem = new JMenuItem("New Course");
         newCourseMenuItem.addActionListener(e-> {
-            try {
-                List<Criterion> criterionList = new ArrayList<>();
-                new AddCourse(criterionList, this);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (ClassNotFoundException cnfe) {
-                cnfe.printStackTrace();
-            }
+//            try {
+//                List<Criterion> criterionList = new ArrayList<>();
+//                new AddCourse(criterionList, this);
+//            } catch (IOException ioe) {
+//                ioe.printStackTrace();
+//            } catch (ClassNotFoundException cnfe) {
+//                cnfe.printStackTrace();
+//            }
         });
 
         final JMenuItem importCourseMenuItem = new JMenuItem("Import Course from File");
@@ -202,11 +202,11 @@ public class MainFrame extends JFrame {
         //Set up selection model
         ListSelectionModel lsm = gradeTable.getSelectionModel();
         lsm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        lsm.addListSelectionListener(new GradeTableSelectionHandler());
+        lsm.addListSelectionListener(new SelectionChangedListener());
 
         //Set up column model
         TableColumnModel tcm = gradeTable.getColumnModel();
-        tcm.getSelectionModel().addListSelectionListener(new GradeTableSelectionHandler());
+        tcm.getSelectionModel().addListSelectionListener(new SelectionChangedListener());
 
         //Add models to table and set up mouse listener
         gradeTable.setModel(sortTableModel);
@@ -236,21 +236,21 @@ public class MainFrame extends JFrame {
         container.add(middlePanel, BorderLayout.CENTER);
 
         /*** Right Panel ***/
-        rightPanel = new JPanel(new BorderLayout(4, 4));
-        rightPanel.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
-
-        rowIndicator = new JLabel("Row: ");
-        columnIndicator = new JLabel("Column: ");
-        JPanel rightNorth = new JPanel(new BorderLayout());
-        rightNorth.add(rowIndicator, BorderLayout.NORTH);
-        rightNorth.add(columnIndicator, BorderLayout.SOUTH);
-
-        commentArea.setLineWrap(true);
-        JScrollPane rightScrollPane = new JScrollPane(commentArea);
-
-        rightPanel.add(rightNorth, BorderLayout.NORTH);
-        rightPanel.add(rightScrollPane, BorderLayout.CENTER);
-        container.add(rightPanel, BorderLayout.EAST);
+//        rightPanel = new JPanel(new BorderLayout(4, 4));
+//        rightPanel.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
+//
+//        rowIndicator = new JLabel("Row: ");
+//        columnIndicator = new JLabel("Column: ");
+//        JPanel rightNorth = new JPanel(new BorderLayout());
+//        rightNorth.add(rowIndicator, BorderLayout.NORTH);
+//        rightNorth.add(columnIndicator, BorderLayout.SOUTH);
+//
+//        commentArea.setLineWrap(true);
+//        JScrollPane rightScrollPane = new JScrollPane(commentArea);
+//
+//        rightPanel.add(rightNorth, BorderLayout.NORTH);
+//        rightPanel.add(rightScrollPane, BorderLayout.CENTER);
+//        container.add(rightPanel, BorderLayout.EAST);
 
         /*** Bottom Panel ***/
         //bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -283,58 +283,19 @@ public class MainFrame extends JFrame {
         bottomCenter.add(removePanel, BorderLayout.CENTER);
         bottomCenter.add(addingPanel, BorderLayout.EAST);
 
-        //Bottom Right Panel
-        JPanel bottomRight = new JPanel(new BorderLayout());
-        bottomRight.setPreferredSize(new Dimension(windowWidth / 10, windowHeight / 8));
-
-        JPanel commentPanel = new JPanel(new BorderLayout(4, 4));
-
-        JButton addCommentButton = new JButton("Add comment");
-        addCommentButton.addActionListener(e-> {
-            int selectedRow = gradeTable.getSelectedRow();
-            int selectedColumn = gradeTable.getSelectedColumn();
-            GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-            TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-            List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
-            if (columnGroups.size() == 0)
-                System.out.println("Cannot add a comment to non-grade items");
-            else {
-                String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
-
-                String category = getCategory(selectedColumn, columnGroups, true);
-                int subCategoryId  = getSubCategory(selectedColumn, true);
-
-                Student student = currentCourse.getStudent(stuId);
-                Grade grade = currentCourse.getsGrade(student);
-
-                if (category.equals("Assignments")) {
-                    grade.getaGrade().get(subCategoryId - 1).getNote().setNote(commentArea.getText());
-                } else if (category.equals("Exams")) {
-                    grade.geteGrade().get(subCategoryId - 1).getNote().setNote(commentArea.getText());
-                } else {
-                    grade.getpGrade().get(subCategoryId - 1).getNote().setNote(commentArea.getText());
-                }
-
-                currentCourse.getList().put(student, grade);
-                currentCourse.writeToFile("c.txt");
-            }
-        });
-
-        JButton deleteComment = new JButton("Delete comment");
-        deleteComment.addActionListener(e-> {
-
-        });
-
-        commentPanel.add(addCommentButton, BorderLayout.NORTH);
-        commentPanel.add(deleteComment, BorderLayout.SOUTH);
-
-        bottomRight.add(commentPanel, BorderLayout.CENTER);
-
         bottomPanel.add(bottomLeft, BorderLayout.WEST);
         bottomPanel.add(bottomCenter, BorderLayout.CENTER);
-        bottomPanel.add(bottomRight, BorderLayout.EAST);
 
         container.add(bottomPanel, BorderLayout.SOUTH);
+
+        //bottomRight
+        JPanel bottomRight = new JPanel(new FlowLayout());
+        JLabel label = new JLabel("");
+
+        bottomRight.setPreferredSize(new Dimension(windowWidth * (8 / 10), windowHeight / 8));
+        bottomRight.setSize(new Dimension(windowWidth * (8 / 10), windowHeight / 8));
+        bottomRight.setBackground(Color.RED);
+        bottomPanel.add(bottomRight, BorderLayout.EAST);
 
         /*** Settings of UI.MainFrame ***/
         setTitle("Grading System");
@@ -383,8 +344,8 @@ public class MainFrame extends JFrame {
 
         /*** Update Components ***/
         currentCourse = course;
-        statisticsPanel.setCourse(currentCourse);
-        addingPanel.setCourse(currentCourse);
+        statisticsPanel.refeshPanel(currentCourse);
+        addingPanel.refeshPanel(currentCourse);
     }
 
     //Interface for outside calling
@@ -394,6 +355,10 @@ public class MainFrame extends JFrame {
         gradeTable.getSelectionModel().clearSelection();
         weightingField.setText("");
         addCourse(course, root);
+    }
+
+    public void updateComment(String comment) {
+
     }
 
     private void addCourse(Course course, DefaultMutableTreeNode root) {
@@ -434,14 +399,8 @@ public class MainFrame extends JFrame {
         }
 
         currentCourse = course;
-        statisticsPanel.setCourse(currentCourse);
-        addingPanel.setCourse(currentCourse);
-
-//        //Remove old listener
-//        gradeTable.removeMouseListener(tableMouseListener);
-//        //Add new listener
-//        tableMouseListener = new TableMouseListener();
-//        gradeTable.addMouseListener(tableMouseListener);
+        statisticsPanel.refeshPanel(currentCourse);
+        addingPanel.refeshPanel(currentCourse);
 
         jTree.setModel(new DefaultTreeModel(root));
         //Expand the newest node
@@ -450,9 +409,32 @@ public class MainFrame extends JFrame {
         jTree.scrollPathToVisible(semesterPath);
     }
 
-    private void setUpGradeTable(Criterion criterion, HashMap<Student, Grade> grade) {
+    private void setWeighting() {
+        int selectedColumn = gradeTable.getSelectedColumn();
+
+        String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
+
+        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+
+        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+
+        if (columnGroups.size() != 0) {
+            String category = columnGroups.get(0).getHeaderValue();
+            weightingField.setText(currentCourse.getCcriterion().
+                    getCategories().get(header.findIndexOfGroup(category)).toString());
+        } else {
+            if (selectedColumn == gradeTable.getColumnCount() - 1) {
+                weightingField.setText(currentCourse.getCcriterion().toString());
+            } else {
+                weightingField.setText("");
+            }
+        }
+    }
+
+    private void setUpGradeTable(NewCriterion criterion, HashMap<Student, Grade> grade) {
         Vector<String> headers = setUpTableHeader(criterion);
-        Vector<Object> grades = loadData(grade);
+        Vector<Object> grades = loadData(criterion.getCategories().size(), grade);
 
         setUpTypes(criterion);
 
@@ -465,37 +447,25 @@ public class MainFrame extends JFrame {
         dm.addTableModelListener(new TableChangedListener());
     }
 
-    private Vector<String> setUpTableHeader(Criterion criterion) {
-
-        //String[] basic = new String[]{"First Name", "Middle Name", "Last Name", "Id", "Email"};
+    private Vector<String> setUpTableHeader(NewCriterion criterion) {
         String[] basic = new String[]{"Name", "Id", "Email"};
-
-        int assignments = criterion.getNumberOfAssignments();
-        int exams = criterion.getNumberOfExams();
-        int projects = criterion.getNumberOfProjects();
 
         Vector<String> vector = new Vector<>();
         vector.addAll(Arrays.asList(basic));
 
-        //Assignment Headers
-        for (int i = 0 ; i < assignments ; i++) {
-            vector.add(String.valueOf(i + 1));
-        }
-        //Exam headers
-        for (int i = 0 ; i < exams ; i++) {
-            vector.add(String.valueOf(i + 1));
-        }
-        //Project headers
-        for (int i = 0 ; i < projects ; i++) {
-            vector.add(String.valueOf(i + 1));
+        for (int i = 0 ; i < criterion.getCategories().size() ; i++) {
+            Category currentCategory = criterion.getCategories().get(i);
+            for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
+                vector.add(String.valueOf(j + 1));
+            }
         }
 
-        vector.add("Attendance");
+        vector.add("Extra");
         vector.add("Total");
         return vector;
     }
 
-    private Vector<Object> loadData(HashMap<Student, Grade> gradeMap) {
+    private Vector<Object> loadData(int categoryNum, HashMap<Student, Grade> gradeMap) {
         Vector<Object> grades = new Vector<>();
         System.out.println(gradeMap.size());
         for (Student key : gradeMap.keySet()) {
@@ -504,16 +474,14 @@ public class MainFrame extends JFrame {
             temp.add(key.getId());
             temp.add(key.getEmail());
             Grade grade = gradeMap.get(key);
-            for (int i = 0 ; i < grade.getaGrade().size() ; i++) {
-                temp.add(grade.getAssignment(i).getScore());
+            for (int i = 0 ; i < categoryNum ; i++) {
+                List<GradeComp> gradeComps = grade.getCategory(i);
+                for (int j = 0 ; j < gradeComps.size() ; j++) {
+                    temp.add(gradeComps.get(j).getScore());
+                }
             }
-            for (int i = 0 ; i < grade.geteGrade().size() ; i++) {
-                temp.add(grade.getExam(i).getScore());
-            }
-            for (int i = 0 ; i < grade.getpGrade().size() ; i++) {
-                temp.add(grade.getProject(i).getScore());
-            }
-            temp.add(grade.getAttendence().getScore());
+
+            temp.add(grade.getExtra().getScore());
             temp.add(String.valueOf(grade.getTtscore()));
             grades.add(temp);
         }
@@ -521,58 +489,56 @@ public class MainFrame extends JFrame {
     }
 
     //Types are for sorting
-    private void setUpTypes(Criterion criterion) {
+    private void setUpTypes(NewCriterion criterion) {
         Vector<Class> classes = new Vector<>();
         classes.add(String.class);
         classes.add(String.class);
         classes.add(String.class);
-        int items = criterion.getNumberOfAssignments() + criterion.getNumberOfProjects() + criterion.getNumberOfExams();
-        for (int i = 0 ; i < items; i++) {
-            classes.add(String.class);
+
+        for (int i = 0 ; i < criterion.getCategories().size() ; i++) {
+            Category currentCategory = criterion.getCategories().get(i);
+            for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
+                classes.add(String.class);
+            }
         }
-        classes.add(String.class);
-        classes.add(double.class);
+
+        classes.add(double.class);  //Extra Credit
+        classes.add(double.class);  //Total
         type = classes.toArray(new Class[]{});
     }
 
-    private void groupingHeaders(Criterion criterion) {
-        int assignments = criterion.getNumberOfAssignments();
-        int exams = criterion.getNumberOfExams();
-        int projects = criterion.getNumberOfProjects();
-
+    private void groupingHeaders(NewCriterion criterion) {
         TableColumnModel cm = gradeTable.getColumnModel();
-        ColumnGroup g_assignment = new ColumnGroup("Assignments");
-        ColumnGroup g_exam = new ColumnGroup("Exams");
-        ColumnGroup g_project = new ColumnGroup("Projects");
 
         //Assignment Headers
         int startIndex = 3;
-        for (int i = 0 ; i < assignments ; i++) {
-            g_assignment.add(cm.getColumn(startIndex));
-            startIndex++;
-        }
-        //Exam headers
-        for (int i = 0 ; i < exams ; i++) {
-            g_exam.add(cm.getColumn(startIndex));
-            startIndex++;
-        }
-        //Project headers
-        for (int i = 0 ; i < projects ; i++) {
-            g_project.add(cm.getColumn(startIndex));
-            startIndex++;
-        }
-
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-        header.addColumnGroup(g_assignment);
-        header.addColumnGroup(g_exam);
-        header.addColumnGroup(g_project);
+        for (int i = 0 ; i < criterion.getCategories().size() ; i++) {
+            Category currentCategory = criterion.getCategories().get(i);
+            ColumnGroup categoryGroup = new ColumnGroup(currentCategory.getName());
+            for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
+                categoryGroup.add(cm.getColumn(startIndex));
+                startIndex++;
+            }
+            header.addColumnGroup(categoryGroup);
+        }
         gradeTable.setTableHeader(header);
     }
 
     /*** Table Methods **/
-    private void saveTableChanges(String id, String category, int index, String value) {
+
+    /**
+     * Save changes of gradeTable to file.
+     * @param id Id of the student whose information is changed.
+     * @param category Which category is changed.
+     * @param itemIndex Index of the changed item in the category. Already subtracted 1 when inputting.
+     * @param value New value
+     */
+    private void saveTableChanges(String id, String category, int itemIndex, String value) {
         String courseName = currentCourse.getInfo()[0];
         String courseSemester = currentCourse.getInfo()[2] + currentCourse.getInfo()[3];
+
+        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
 
         Student student = currentCourse.getStudent(id);
         Grade grade = currentCourse.getsGrade(student);
@@ -592,19 +558,30 @@ public class MainFrame extends JFrame {
             case "Email":
                 student.setEmail(value);
                 break;
-            case "Assignments":
-                grade.setAssignment(value, index);
-                break;
-            case "Exams":
-                grade.setExam(value, index);
-                break;
-            case "Projects":
-                grade.setProject(value, index);
-                break;
-            case "Attendance":
-                grade.setAttendence(value);
-                break;
+//            case "Assignments":
+//                grade.setAssignment(value, index);
+//                break;
+//            case "Exams":
+//                grade.setExam(value, index);
+//                break;
+//            case "Projects":
+//                grade.setProject(value, index);
+//                break;
+//            case "Attendance":
+//                grade.setAttendence(value);
+//                break;
             default:
+                for (int i = 0 ; i < currentCourse.getCcriterion().getCategories().size() ; i++) {
+                    if (currentCourse.getCcriterion().getCategories().get(i).getName().equals(category)) {
+                        int categoryIndex = header.findIndexOfGroup(category);
+                        if (categoryIndex == -1) {
+                            System.out.println("Category not found!");
+                            break;
+                        } else {
+                            grade.getOne(categoryIndex, itemIndex).setScore(value);
+                        }
+                    }
+                }
                 break;
         }
 
@@ -634,55 +611,31 @@ public class MainFrame extends JFrame {
             return -1;
     }
 
-    public void setCommentAndWeighting() {
-        commentArea.setText("");
+    private String getCommentOfSelectedCell(int selectedRow, int selectedColumn) {
         //Get note
-        int selectedColumn = gradeTable.getSelectedColumn();
-
-        String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
+        String stuId = gradeTable.getValueAt(selectedRow, 1).toString();
 
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
 
         TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
         List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
-        String comment = "";
 
         if (columnGroups.size() != 0) {
             String category = columnGroups.get(0).getHeaderValue();
             int subCategory = Integer.parseInt(gradeTable.getColumnName(selectedColumn));
             Student student = currentCourse.getStudent(stuId);
-            if (category.equals("Assignments")) {
-                comment = currentCourse.getsGrade(student).
-                        getAssignment(subCategory - 1).getNote().getNote();
-                weightingField.setText(currentCourse.getCcriterion().toString("a"));
-            } else if (category.equals("Exams")) {
-                comment = currentCourse.getsGrade(student).
-                        getExam(subCategory - 1).getNote().getNote();
-                weightingField.setText(currentCourse.getCcriterion().toString("e"));
-            } else {
-                comment = currentCourse.getsGrade(student).
-                        getProject(subCategory - 1).getNote().getNote();
-                weightingField.setText(currentCourse.getCcriterion().toString("p"));
-            }
-            commentArea.setText(comment);
-        } else {
-            if (selectedColumn == gradeTable.getColumnCount() - 1)
-                weightingField.setText(currentCourse.getCcriterion().toString());
-            else
-                weightingField.setText("");
-            commentArea.setText("No comment");
+            return currentCourse.getsGrade(student).
+                    getCategory(header.findIndexOfGroup(category)).get(subCategory - 1).getNote().getNote();
         }
+        return "";
     }
 
     /*** Table Listener ***/
     //Display weighting in the textfield
-    private class GradeTableSelectionHandler implements ListSelectionListener {
+    private class SelectionChangedListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            //System.out.println("Assignments: " + currentCourse.getCcriterion().getNumberOfAssignments());
-            rowIndicator.setText("Row: " + String.valueOf(gradeTable.getSelectedRow()));
-            columnIndicator.setText("Column: " + String.valueOf(gradeTable.getSelectedColumn()));
             if (gradeTable.getSelectedRow() != -1)
-                setCommentAndWeighting();
+                setWeighting();
         }
     }
 
@@ -711,16 +664,31 @@ public class MainFrame extends JFrame {
         }
     }
 
+    private void createCommentFrame(int selectedRow, int selectedColumn) {
+        new CommentFrame(this, getCommentOfSelectedCell(selectedRow, selectedColumn));
+    }
+
     //Listen to mouse clicks
     private class TableMouseListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent event) {
-            // selects the row at which point the mouse is clicked
-            if (event.getClickCount() == 2) {
-                weightingField.setText("Double Clicked!");
-                new SubCategory();
-            } else if (event.getClickCount() == 1) {
-                setCommentAndWeighting();
+            if (SwingUtilities.isRightMouseButton(event)) {
+                System.out.println("Right clicked!");
+
+                int selectedColumn = gradeTable.columnAtPoint(event.getPoint());
+                int selectedRow = gradeTable.rowAtPoint(event.getPoint());
+                gradeTable.changeSelection(selectedRow, selectedColumn, false, false);
+
+                GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+                List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+
+                if (columnGroups.size() != 0 ) {
+                    createCommentFrame(selectedRow, selectedColumn);
+                }
+
+            } else {
+                setWeighting();
             }
         }
     }
@@ -729,8 +697,21 @@ public class MainFrame extends JFrame {
     private class TableHeaderListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent event) {
-            System.out.println("Header Cicked");
-            int col = gradeTable.columnAtPoint(event.getPoint());
+            if (event.getClickCount() == 2) {
+                int selectedColumn = gradeTable.columnAtPoint(event.getPoint());
+                int selectedRow = gradeTable.rowAtPoint(event.getPoint());
+                System.out.println(selectedRow);
+
+                GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+                List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+
+                if (columnGroups.size() != 0 ) {
+                    String category = getCategory(selectedColumn, columnGroups,
+                            (columnGroups.size() != 0));
+                    new SubCategory(header.findIndexOfGroup(category));
+                }
+            }
         }
     }
 }

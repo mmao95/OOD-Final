@@ -1,11 +1,17 @@
 package UI.Bottom;
 
+import UI.GroupableTableHeader;
+import course.Category;
 import course.Course;
 import frame.Statistics;
-import javafx.scene.control.Separator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Auther: Di Zhu
@@ -18,7 +24,9 @@ public class StatisticsPanel extends JPanel {
     private JButton statBy;
     private JComboBox categoryBox;
     private JComboBox subCategoryBox;
-    String[] Category = new String[]{"Total", "Assignment", "Exam", "Project"};
+    //private String[] categories = new String[]{"Total", "Assignment", "Exam", "Project"};
+    private String[] categories = new String[]{};
+
 
     public StatisticsPanel() {
         super();
@@ -28,29 +36,37 @@ public class StatisticsPanel extends JPanel {
     public StatisticsPanel(Course course) {
         super();
         this.course = course;
+        if (course != null)
+            setCategories(course.getCcriterion().getCategories());
         initialization();
+    }
+
+    public void setCategories(List<Category> categoryList) {
+        List<String> temp = new ArrayList<>();
+        temp.add("Total");
+        for (Category category : categoryList) {
+            temp.add(category.getName());
+        }
+        categories = temp.toArray(categories);
     }
 
     private void initialization() {
         this.setLayout(new BorderLayout(4, 8));
 
         /*** Left part ***/
-        JPanel westPanel = new JPanel(new BorderLayout());
-
         statBy = new JButton("Show statistics of");
         statBy.addActionListener(e-> {
             if (categoryBox.getSelectedIndex() == 0) {
                 new Statistics(course);
             } else {
-                String cate = Category[categoryBox.getSelectedIndex()].substring(0, 1).toLowerCase();
-                new Statistics(course, cate, subCategoryBox.getSelectedIndex());
+                new Statistics(course, categoryBox.getSelectedIndex() - 1, subCategoryBox.getSelectedIndex());
             }
         });
 
 
         /*** Right part ***/
         JPanel rightPanel = new JPanel(new BorderLayout(4, 8));
-        categoryBox = new JComboBox<>(Category);
+        categoryBox = new JComboBox<>(categories);
         subCategoryBox = new JComboBox();
         rightPanel.add(categoryBox, BorderLayout.NORTH);
         rightPanel.add(subCategoryBox, BorderLayout.SOUTH);
@@ -59,27 +75,7 @@ public class StatisticsPanel extends JPanel {
         this.add(rightPanel, BorderLayout.EAST);
 
         /*** Listener for ComboBox ***/
-        categoryBox.addActionListener(e-> {
-            subCategoryBox.removeAllItems();
-            if (categoryBox.getSelectedIndex() == 0) {
-                subCategoryBox.setEnabled(false);
-            } else {
-                subCategoryBox.setEnabled(true);
-                String categotyAbb = Category[categoryBox.getSelectedIndex()].substring(0, 1).toLowerCase();
-                int numSubCategory;
-
-                if (categotyAbb.equals("a"))
-                    numSubCategory = course.getCcriterion().getNumberOfAssignments();
-                else if (categotyAbb.equals("e"))
-                    numSubCategory = course.getCcriterion().getNumberOfExams();
-                else
-                    numSubCategory = course.getCcriterion().getNumberOfProjects();
-
-                for (int i = 0 ; i < numSubCategory ; i++) {
-                    subCategoryBox.addItem(String.valueOf(i + 1));
-                }
-            }
-        });
+        categoryBox.addActionListener(new ComboBoxListener());
     }
 
     /*** Getter and Setter ***/
@@ -89,5 +85,36 @@ public class StatisticsPanel extends JPanel {
 
     public Course getCourse() {
         return course;
+    }
+
+    public void refeshPanel(Course newCourse) {
+        setCourse(newCourse);
+        setCategories(newCourse.getCcriterion().getCategories());
+
+        categoryBox.removeAllItems();
+
+        for (String str : categories) {
+            categoryBox.addItem(str);
+        }
+    }
+
+    private class ComboBoxListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            subCategoryBox.removeAllItems();
+            if (categoryBox.getSelectedIndex() == -1) {
+
+            } else if (categoryBox.getSelectedIndex() == 0) {
+                subCategoryBox.setEnabled(false);
+            } else {
+                subCategoryBox.setEnabled(true);
+                int categoryIndex = categoryBox.getSelectedIndex();
+                int numSubCategory = course.getCcriterion().getCategories().get(categoryIndex - 1).getNumberOfTasks();
+
+                for (int i = 0 ; i < numSubCategory ; i++) {
+                    subCategoryBox.addItem(String.valueOf(i + 1));
+                }
+            }
+        }
     }
 }

@@ -1,14 +1,14 @@
 package UI.Bottom;
 
 import UI.MainFrame;
+import course.Category;
 import course.Course;
-import course.Criterion;
 import personal.Student;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: Di Zhu
@@ -22,7 +22,7 @@ public class AddingPanel extends JPanel {
     private JComboBox categoryBox;
     private JButton addStudent;
     private JButton addSubCategory;
-    String[] Category = new String[]{"Assignment", "Exam", "Project"};
+    String[] categories = new String[]{};
 
     public AddingPanel() {
         super();
@@ -33,7 +33,19 @@ public class AddingPanel extends JPanel {
         super();
         this.mainFrame = mainFrame;
         this.course = course;
+        if (course != null) {
+            System.out.println("Course!");
+            setCategories(course.getCcriterion().getCategories());
+        }
         initialization();
+    }
+
+    public void setCategories(List<Category> categoryList) {
+        List<String> temp = new ArrayList<>();
+        for (Category category : categoryList) {
+            temp.add(category.getName());
+        }
+        categories = temp.toArray(categories);
     }
 
     private void initialization() {
@@ -50,36 +62,36 @@ public class AddingPanel extends JPanel {
         JPanel rightPanel = new JPanel(new BorderLayout());
         addSubCategory = new JButton("Add column");
         addSubCategory.addActionListener(e-> {
-            String cate = Category[categoryBox.getSelectedIndex()].substring(0, 1).toLowerCase();
-            if (cate.equals("a")) {
-                course.getCcriterion().addAssignment();
-            } else if (cate.equals("e")) {
-                course.getCcriterion().addExam();
-            } else if (cate.equals("p")) {
-                course.getCcriterion().addProject();
-            } else {
-
+            String cate = categories[categoryBox.getSelectedIndex()];
+            for (int i = 0 ; i < course.getCcriterion().getCategories().size() ; i++) {
+                Category temp = course.getCcriterion().getCategories().get(i);
+                if (temp.getName().equals(cate)) {
+                    course.getCcriterion().addTask(i);
+                }
             }
             course.updateGrade();
-            //System.out.println("APA: " + course.getCcriterion().getNumberOfAssignments());
             mainFrame.update(course);
         });
-        categoryBox = new JComboBox<>(Category);
+        categoryBox = new JComboBox<>(categories);
         rightPanel.add(categoryBox, BorderLayout.NORTH);
         rightPanel.add(addSubCategory, BorderLayout.SOUTH);
 
         /*** Add components to main panel ***/
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(addStudent, BorderLayout.WEST);
-        panel.add(rightPanel, BorderLayout.EAST);
-
-        this.add(panel, BorderLayout.WEST);
-        this.add(Box.createHorizontalStrut(8));
-        this.add(new JSeparator(SwingConstants.VERTICAL), BorderLayout.EAST);
+        this.add(addStudent, BorderLayout.WEST);
+        this.add(rightPanel, BorderLayout.EAST);
 
     }
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public void refeshPanel(Course newCourse) {
+        setCourse(newCourse);
+        setCategories(newCourse.getCcriterion().getCategories());
+        categoryBox.removeAllItems();
+        for (String str : categories) {
+            categoryBox.addItem(str);
+        }
     }
 }

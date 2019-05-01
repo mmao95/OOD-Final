@@ -48,6 +48,19 @@ public class GroupableTableHeader extends JTableHeader {
         return Collections.emptyList();
     }
 
+    public List<ColumnGroup> getColumnGroups() {
+        return columnGroups;
+    }
+
+    public int findIndexOfGroup(String groupName) {
+        for (int i = 0 ; i < columnGroups.size() ; i++) {
+            if (columnGroups.get(i).getHeaderValue().equals(groupName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void setColumnMargin() {
         int columnMargin = getColumnModel().getColumnMargin();
         for (ColumnGroup group : columnGroups) {
