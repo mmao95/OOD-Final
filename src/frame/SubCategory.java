@@ -1,8 +1,13 @@
 package frame;
 
+import UI.MainFrame;
+import course.NewCriterion;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
@@ -21,21 +26,36 @@ public class SubCategory extends JFrame implements ActionListener {
     protected JScrollPane tableScrollPane;
     protected JPanel weightPanel, tablePanel, buttonPanel;
     protected TableColumn column;
-    private int itemNumber = 0;
+    private NewCriterion newCriterion;
+    private MainFrame mainFrame;
+    private int itemNumber;
 
-    public SubCategory(int num){
-        this.itemNumber = num;
+    public SubCategory(MainFrame inputMainFrame, NewCriterion inputNewCriterion, int index){
+        this.mainFrame = inputMainFrame;
+        this.newCriterion = inputNewCriterion;
+        this.itemNumber = newCriterion.getCategories().get(index).getNumberOfTasks();
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
-        String[] tableHead = {"Assignment", "Weight"};
-        Object[][] data = {
-                {"Assignment", "Weight"},
-                {"Assignment 1", new Double(0.6)},
-                {"Assignment 2", new Double(0.2)},
-                {"Assignment 3", new Double(0.2)}
-        };
-        table = new JTable(data, tableHead);
+        String[] tableHead = {"Category", "Weight"};
+
+        List<List<String>> data = new ArrayList<>();
+        for (int i = 0; i < itemNumber; i++){
+            List<String> tempList = new ArrayList<>();
+            tempList.add(newCriterion.getCategories().get(index).getName() + " " + String.valueOf(i + 1));
+            tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i).getWeights()));
+            data.add(tempList);
+        }
+
+        Object[][] finalData = new Object[data.size() + 1][2];
+        finalData[0][0] = newCriterion.getCategories().get(index).getName();
+        finalData[0][1] = "Weight";
+        for (int i = 1; i < itemNumber; i++){
+            finalData[i][0] = data.get(i).get(0);
+            finalData[i][1] = data.get(i).get(1);
+        }
+
+        table = new JTable(finalData, tableHead);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         table.setShowGrid(true);
@@ -50,7 +70,7 @@ public class SubCategory extends JFrame implements ActionListener {
         center.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, center);
 
-        weightString = new JLabel("Total = 0.6*a1 + 0.2*a2 + 0.2*a3");
+        weightString = new JLabel("");
         tableScrollPane = new JScrollPane(table);
 //        add(tableScrollPane);
 //        table.setFillsViewportHeight(true);
@@ -79,6 +99,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
         this.setVisible(true);
         this.setResizable(false);
+        this.mainFrame.setEnabled(false);
     }
 
     private boolean isDouble(String str) {
@@ -118,7 +139,11 @@ public class SubCategory extends JFrame implements ActionListener {
         if (e.getActionCommand()=="OK") {
             if(judgeWeightNumber()) {
                 if(judgeWeightSum())
-                    System.out.println("233");
+                {
+                    this.mainFrame.updateCriterion(newCriterion);
+                    this.mainFrame.setEnabled(true);
+                    this.dispose();
+                }
                 else
                     JOptionPane.showMessageDialog(null, "The sum of item weight must be 1.0!", "Info", JOptionPane.WARNING_MESSAGE);
             }
@@ -126,5 +151,6 @@ public class SubCategory extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Item weight must be float ranging from 0 to 1!", "Info", JOptionPane.WARNING_MESSAGE);
             }
         }
+
     }
 }
