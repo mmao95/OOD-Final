@@ -229,7 +229,11 @@ public class Course implements Analysis,IO<Course>,Serializable{
         }
     }
 
-    public HashMap<Student, Grade> getCgrade() {
-        return cgrade;
+    public void deleteOne(int cat, int index){
+        for(Student k: cgrade.keySet()){
+            getsGrade(k).getCategory(cat).remove(index);
+        }
     }
+
+
 }
