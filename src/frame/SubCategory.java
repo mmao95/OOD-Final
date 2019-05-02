@@ -28,11 +28,12 @@ public class SubCategory extends JFrame implements ActionListener {
     protected TableColumn column;
     private NewCriterion newCriterion;
     private MainFrame mainFrame;
-    private int itemNumber;
+    private int itemNumber, savedIndex;
 
     public SubCategory(MainFrame inputMainFrame, NewCriterion inputNewCriterion, int index){
         this.mainFrame = inputMainFrame;
         this.newCriterion = inputNewCriterion;
+        this.savedIndex = index;
         this.itemNumber = newCriterion.getCategories().get(index).getNumberOfTasks();
 
         okButton = new JButton("OK");
@@ -46,7 +47,7 @@ public class SubCategory extends JFrame implements ActionListener {
         data.add(tempFirstList);
         for (int i = 1; i <= itemNumber; i++){
             List<String> tempList = new ArrayList<>();
-            tempList.add(newCriterion.getCategories().get(index).getName() + " " + String.valueOf(i));
+            tempList.add(String.valueOf(i));
             tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
             data.add(tempList);
         }
@@ -57,11 +58,17 @@ public class SubCategory extends JFrame implements ActionListener {
             finalData[i][1] = data.get(i).get(1);
         }
 
-        table = new JTable(finalData, tableHead);
+        table = new JTable(finalData, tableHead){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column);
+            }
+        };
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         table.setShowGrid(true);
         table.setGridColor(Color.gray);
+//        inputNewCriterion.getCategories().get(index).setName();
         table.setRowHeight(50);// Setting the width of rol
         table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);// Setting the width of column
         for (int i = 0; i < 2; i++) {
@@ -86,8 +93,8 @@ public class SubCategory extends JFrame implements ActionListener {
         buttonPanel.add(okButton);
 
         weightPanel.setBounds(0, 20, 400, 50);
-        tablePanel.setBounds(0, 50, 400, 250);
-        buttonPanel.setBounds(150, 270, 100, 350);
+        tablePanel.setBounds(0, 50, 400, 50 * itemNumber + 50);
+        buttonPanel.setBounds(150, 50 * itemNumber + 100, 100, 50 * itemNumber + 200);
 
         this.add(buttonPanel);
         this.add(tablePanel);
@@ -95,7 +102,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
         this.setTitle("Sub-category");
 //        this.setLayout(new GridLayout(3, 1));
-        this.setSize(400, 350);
+        this.setSize(400, 50 * itemNumber + 340);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -139,7 +146,8 @@ public class SubCategory extends JFrame implements ActionListener {
         double sum = 0.0;
         for (int i = 1; i <= itemNumber; i++)
             sum += Double.parseDouble(table.getValueAt(i, 1).toString());
-        if(sum == 1.0)
+        System.out.println(sum);
+        if(Math.abs(sum - 1.0) <= 0.001)
             return true;
         else
             return false;
@@ -150,6 +158,7 @@ public class SubCategory extends JFrame implements ActionListener {
             if(judgeWeightNumber()) {
                 if(judgeWeightSum())
                 {
+                    this.newCriterion.getCategories().get(this.savedIndex).setName(table.getValueAt(0, 0).toString());
                     this.mainFrame.updateCriterion(newCriterion);
                     this.mainFrame.setEnabled(true);
                     this.dispose();
