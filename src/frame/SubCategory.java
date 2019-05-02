@@ -137,7 +137,7 @@ public class SubCategory extends JFrame implements ActionListener {
     }
 
     private boolean isNumeric(String str){
-        Pattern pattern = Pattern.compile("[0-9]*");
+        Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
         return pattern.matcher(str).matches();
     }
 
