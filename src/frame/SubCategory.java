@@ -40,7 +40,10 @@ public class SubCategory extends JFrame implements ActionListener {
         String[] tableHead = {"Category", "Weight"};
 
         List<List<String>> data = new ArrayList<>();
-        for (int i = 0; i < itemNumber; i++){
+        List<String> tempFirstList = new ArrayList<>();
+        tempFirstList.add(newCriterion.getCategories().get(index).getName());
+        tempFirstList.add("Weight");
+        for (int i = 1; i <= itemNumber; i++){
             List<String> tempList = new ArrayList<>();
             tempList.add(newCriterion.getCategories().get(index).getName() + " " + String.valueOf(i + 1));
             tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i).getWeights()));
@@ -48,9 +51,7 @@ public class SubCategory extends JFrame implements ActionListener {
         }
 
         Object[][] finalData = new Object[data.size() + 1][2];
-        finalData[0][0] = newCriterion.getCategories().get(index).getName();
-        finalData[0][1] = "Weight";
-        for (int i = 1; i < itemNumber; i++){
+        for (int i = 1; i <= itemNumber; i++){
             finalData[i][0] = data.get(i).get(0);
             finalData[i][1] = data.get(i).get(1);
         }
@@ -126,7 +127,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
     private boolean judgeWeightNumber(){
         boolean returnValue = true;
-        for (int i = 0; i < itemNumber; i++){
+        for (int i = 1; i <= itemNumber; i++){
             if(!isDouble(table.getValueAt(i, 1).toString()))
                 returnValue = false;
         }
@@ -135,7 +136,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
     private boolean judgeWeightSum(){
         double sum = 0.0;
-        for (int i = 0; i < itemNumber; i++)
+        for (int i = 1; i <= itemNumber; i++)
             sum += Double.parseDouble(table.getValueAt(i, 1).toString());
         if(sum == 1.0)
             return true;
