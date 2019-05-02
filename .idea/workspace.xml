@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c2c7e5a-f004-49f4-9737-e70b31cb28a5" name="Default Changelist" comment="" />
+    <list default="true" id="2c2c7e5a-f004-49f4-9737-e70b31cb28a5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SerializationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SerializationTest.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,30 +15,30 @@
     <session id="490688095">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="29" />
+          <entry key="project.closed" value="30" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.2" value="6" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.4" value="4" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.4" value="5" />
           <entry key="project.open.time.5" value="4" />
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="29" />
+          <entry key="project.opened" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="158" />
+          <entry key="JAVA" value="165" />
           <entry key="JSON" value="8" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
           <entry key="UML" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="13261" />
+          <entry key="JAVA" value="13331" />
           <entry key="JSON" value="1199" />
           <entry key="PLAIN_TEXT" value="14" />
           <entry key="VTL" value="117" />
@@ -44,7 +47,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -80,7 +83,6 @@
         <option value="$PROJECT_DIR$/src/frame/TestMain.java" />
         <option value="$PROJECT_DIR$/src/course/IO.java" />
         <option value="$PROJECT_DIR$/src/course/Criterion.java" />
-        <option value="$PROJECT_DIR$/src/personal/Student.java" />
         <option value="$PROJECT_DIR$/src/personal/UndergradStudent.java" />
         <option value="$PROJECT_DIR$/src/personal/GraduateStudent.java" />
         <option value="$PROJECT_DIR$/src/MainFrame.java" />
@@ -100,8 +102,9 @@
         <option value="$PROJECT_DIR$/src/entrance.java" />
         <option value="$PROJECT_DIR$/src/UI/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/Entrance.java" />
-        <option value="$PROJECT_DIR$/src/SerializationTest.java" />
         <option value="$PROJECT_DIR$/src/course/Course.java" />
+        <option value="$PROJECT_DIR$/src/personal/Student.java" />
+        <option value="$PROJECT_DIR$/src/SerializationTest.java" />
       </list>
     </option>
   </component>
@@ -127,19 +130,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
               <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -150,7 +148,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556818406641" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556824266791" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -173,7 +171,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Entrance" />
+      <option name="MAIN_CLASS_NAME" value="test.TestJson" />
       <module name="OOD-Final" />
       <option name="PROGRAM_PARAMETERS" value="newRawData.json" />
       <method v="2">
@@ -220,11 +218,13 @@
       <workItem from="1556736168450" duration="192000" />
       <workItem from="1556808593440" duration="505000" />
       <workItem from="1556810495693" duration="2617000" />
+      <workItem from="1556819557243" duration="317000" />
+      <workItem from="1556823508430" duration="531000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76657000" />
+    <option name="totallyTimeSpent" value="77505000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -234,14 +234,14 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.16849817" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.17216118" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.47857141" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.3642857" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
@@ -329,13 +329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/personal/GraduateStudent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/course/IO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -415,13 +408,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/personal/Name.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -531,16 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3014">
           <caret line="141" selection-start-line="141" selection-end-line="141" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/course/ReadRawData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
         </state>
       </provider>
     </entry>
@@ -555,9 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -568,54 +541,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/personal/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entrance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="704">
           <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#0#669#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/course/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="244" column="54" selection-start-line="244" selection-start-column="54" selection-end-line="244" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SerializationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="31" column="50" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2432">
-          <caret line="246" selection-start-line="246" selection-end-line="246" />
-          <folding>
-            <element signature="e#6836#7000#0" expanded="true" />
-            <element signature="e#6999#7000#0" expanded="true" />
-            <element signature="e#10454#10455#0" expanded="true" />
-            <element signature="e#10486#10487#0" expanded="true" />
-            <element signature="e#11060#11061#0" expanded="true" />
-            <element signature="e#11096#11097#0" expanded="true" />
-            <element signature="e#14195#14196#0" expanded="true" />
-            <element signature="e#14237#14238#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -623,9 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -640,11 +566,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3058">
           <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/personal/Name.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/personal/GraduateStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/personal/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mycourse.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/course/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4491">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4574#4575#0" expanded="true" />
-            <element signature="e#4618#4619#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5918">
+          <caret line="300" lean-forward="true" selection-start-line="300" selection-end-line="300" />
+          <folding>
+            <element signature="e#12505#12506#0" expanded="true" />
+            <element signature="e#12537#12538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/course/ReadRawData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1140">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SerializationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>

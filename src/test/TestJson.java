@@ -1,3 +1,5 @@
+package test;
+
 import course.*;
 import grade.Grade;
 import grade.GradeComp;

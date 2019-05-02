@@ -9,7 +9,7 @@ import course.*;
 import java.util.*;
 
 
-public class Main {
+public class TestCourse {
     public static void main(String[] args) {
 
         Name name1 = new Name("1","2","3");//initialize name
