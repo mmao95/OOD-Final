@@ -1,7 +1,5 @@
 package grade;
 
-
-import course.Criterion;
 import course.NewCriterion;
 
 import java.io.*;
@@ -73,7 +71,16 @@ public class Grade implements Serializable,Comparable{
     public double getTtscore(){
         return ttscore;
     }
+
     public int getCatelength(int cat){
         return grade.get(cat).size();
+    }
+    
+    public void addList(){
+        List<GradeComp> temp = new ArrayList<>();
+        for(int j=0;j<2;j++){
+            temp.add(new GradeComp());
+        }
+        grade.add(temp);
     }
 }
