@@ -49,7 +49,7 @@ public class SubCategory extends JFrame implements ActionListener {
         for (int i = 1; i <= itemNumber; i++){
             List<String> tempList = new ArrayList<>();
             tempList.add(String.valueOf(i));
-            tempList.add(String.format("%.2f", newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
+            tempList.add(String.format("%.8f", newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
             tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i - 1).getToatalScore()));
             data.add(tempList);
         }
