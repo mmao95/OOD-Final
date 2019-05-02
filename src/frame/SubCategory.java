@@ -38,24 +38,27 @@ public class SubCategory extends JFrame implements ActionListener {
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
-        String[] tableHead = {"Category", "Weight"};
+        String[] tableHead = {"Category", "Weight", "Full Marks"};
 
         List<List<String>> data = new ArrayList<>();
         List<String> tempFirstList = new ArrayList<>();
         tempFirstList.add(newCriterion.getCategories().get(index).getName());
         tempFirstList.add("Weight");
+        tempFirstList.add("Full Marks");
         data.add(tempFirstList);
         for (int i = 1; i <= itemNumber; i++){
             List<String> tempList = new ArrayList<>();
             tempList.add(String.valueOf(i));
-            tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
+            tempList.add(String.format("%.2f", newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
+            tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i - 1).getToatalScore()));
             data.add(tempList);
         }
 
-        Object[][] finalData = new Object[data.size()][2];
+        Object[][] finalData = new Object[data.size()][3];
         for (int i = 0; i <= itemNumber; i++){
             finalData[i][0] = data.get(i).get(0);
             finalData[i][1] = data.get(i).get(1);
+            finalData[i][2] = data.get(i).get(2);
         }
 
         table = new JTable(finalData, tableHead){
@@ -71,9 +74,9 @@ public class SubCategory extends JFrame implements ActionListener {
 //        inputNewCriterion.getCategories().get(index).setName();
         table.setRowHeight(50);// Setting the width of rol
         table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);// Setting the width of column
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             column = table.getColumnModel().getColumn(i);
-            column.setPreferredWidth(200);
+            column.setPreferredWidth(134);
         }
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
@@ -92,9 +95,9 @@ public class SubCategory extends JFrame implements ActionListener {
         tablePanel.add(table);
         buttonPanel.add(okButton);
 
-        weightPanel.setBounds(0, 20, 400, 50);
-        tablePanel.setBounds(0, 50, 400, 50 * itemNumber + 50);
-        buttonPanel.setBounds(150, 50 * itemNumber + 100, 100, 50 * itemNumber + 200);
+        weightPanel.setBounds(0, 20, 402, 50);
+        tablePanel.setBounds(0, 50, 402, 50 * itemNumber + 50);
+        buttonPanel.setBounds(151, 50 * itemNumber + 140, 100, 50 * itemNumber + 200);
 
         this.add(buttonPanel);
         this.add(tablePanel);
@@ -102,7 +105,7 @@ public class SubCategory extends JFrame implements ActionListener {
 
         this.setTitle("Sub-category");
 //        this.setLayout(new GridLayout(3, 1));
-        this.setSize(400, 50 * itemNumber + 340);
+        this.setSize(402, 50 * itemNumber + 220);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -133,10 +136,24 @@ public class SubCategory extends JFrame implements ActionListener {
         return false;
     }
 
+    private boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(str).matches();
+    }
+
     private boolean judgeWeightNumber(){
         boolean returnValue = true;
         for (int i = 1; i <= itemNumber; i++){
             if(!isDouble(table.getValueAt(i, 1).toString()))
+                returnValue = false;
+        }
+        return returnValue;
+    }
+
+    private boolean judgeFullMarksNumber(){
+        boolean returnValue = true;
+        for (int i = 1; i <= itemNumber; i++){
+            if(!isNumeric(table.getValueAt(i, 2).toString()))
                 returnValue = false;
         }
         return returnValue;
@@ -156,15 +173,22 @@ public class SubCategory extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="OK") {
             if(judgeWeightNumber()) {
-                if(judgeWeightSum())
+                if(judgeFullMarksNumber())
                 {
-                    this.newCriterion.getCategories().get(this.savedIndex).setName(table.getValueAt(0, 0).toString());
-                    this.mainFrame.updateCriterion(newCriterion);
-                    this.mainFrame.setEnabled(true);
-                    this.dispose();
+                    if(judgeWeightSum())
+                    {
+                        this.newCriterion.getCategories().get(this.savedIndex).setName(table.getValueAt(0, 0).toString());
+                        this.mainFrame.updateCriterion(newCriterion);
+//                    this.mainFrame.repaint();
+                        this.mainFrame.setEnabled(true);
+                        this.dispose();
+                    }
+                    else
+                        JOptionPane.showMessageDialog(null, "The sum of item weight must be 1.0!", "Info", JOptionPane.WARNING_MESSAGE);
                 }
-                else
-                    JOptionPane.showMessageDialog(null, "The sum of item weight must be 1.0!", "Info", JOptionPane.WARNING_MESSAGE);
+                else{
+                    JOptionPane.showMessageDialog(null, "Full marks of each item must be legal number!", "Info", JOptionPane.WARNING_MESSAGE);
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Item weight must be float ranging from 0 to 1!", "Info", JOptionPane.WARNING_MESSAGE);
