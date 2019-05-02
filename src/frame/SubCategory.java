@@ -43,15 +43,16 @@ public class SubCategory extends JFrame implements ActionListener {
         List<String> tempFirstList = new ArrayList<>();
         tempFirstList.add(newCriterion.getCategories().get(index).getName());
         tempFirstList.add("Weight");
+        data.add(tempFirstList);
         for (int i = 1; i <= itemNumber; i++){
             List<String> tempList = new ArrayList<>();
-            tempList.add(newCriterion.getCategories().get(index).getName() + " " + String.valueOf(i + 1));
-            tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i).getWeights()));
+            tempList.add(newCriterion.getCategories().get(index).getName() + " " + String.valueOf(i));
+            tempList.add(String.valueOf(newCriterion.getCategories().get(index).getCriComps().get(i - 1).getWeights()));
             data.add(tempList);
         }
 
-        Object[][] finalData = new Object[data.size() + 1][2];
-        for (int i = 1; i <= itemNumber; i++){
+        Object[][] finalData = new Object[data.size()][2];
+        for (int i = 0; i <= itemNumber; i++){
             finalData[i][0] = data.get(i).get(0);
             finalData[i][1] = data.get(i).get(1);
         }
