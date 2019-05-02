@@ -45,7 +45,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
     //get student object
     public Student getStudent(String id){
         for(Student key: cgrade.keySet()){
-            if(key.getId()==id){
+            if(key.getId().equals(id)){
                 return key;
             }
         }
@@ -91,11 +91,13 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double dd;
         List<Grade> sortList = new ArrayList<>();
         for (Student key : cgrade.keySet()) {
-            tt += cgrade.get(key).getTtscore();
-            maxd = Math.max(maxd,cgrade.get(key).getTtscore());
-            mind = Math.min(mind,cgrade.get(key).getTtscore());
-            count += 1;
-            sortList.add(cgrade.get(key));
+            if(!key.ifWithdraw()){
+                tt += cgrade.get(key).getTtscore();
+                maxd = Math.max(maxd,cgrade.get(key).getTtscore());
+                mind = Math.min(mind,cgrade.get(key).getTtscore());
+                count += 1;
+                sortList.add(cgrade.get(key));
+            }
         }
         Collections.sort(sortList);
         res[0] = Double.toString(tt/(double)count);
@@ -129,19 +131,21 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double fs = ccriterion.getCategories().get(cat).getCriComps().get(index).getToatalScore();
         double sc;
         for (Student key : cgrade.keySet()) {
-            String rawsc = cgrade.get(key).getOne(cat,index).getScore();
-            if (rawsc.charAt(rawsc.length() - 1) == '%') {
-                sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
-            } else if (rawsc.charAt(0) == '-') {
-                sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
-            } else {
-                sc = Double.valueOf(rawsc) / fs;
+            if(!key.ifWithdraw()){
+                String rawsc = cgrade.get(key).getOne(cat,index).getScore();
+                if (rawsc.charAt(rawsc.length() - 1) == '%') {
+                    sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
+                } else if (rawsc.charAt(0) == '-') {
+                    sc = (fs - Double.valueOf(rawsc.substring(1))) / fs;
+                } else {
+                    sc = Double.valueOf(rawsc) / fs;
+                }
+                sg.add(new Pair<>(key.getId(),sc * fs));
+                maxd = Math.max(maxd,sc * fs);
+                mind = Math.min(mind,sc * fs);
+                tt += sc * fs;
+                count += 1;
             }
-            sg.add(new Pair<>(key.getId(),sc * fs));
-            maxd = Math.max(maxd,sc * fs);
-            mind = Math.min(mind,sc * fs);
-            tt += sc * fs;
-            count += 1;
         }
         Collections.sort(sg, Comparator.comparing(p -> p.getValue()));
         res[0] = Double.toString(tt / (double) count);
@@ -176,7 +180,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
                 if(sc.charAt(sc.length()-1)=='%'){
                     stdsc = Double.valueOf(sc.substring(0,sc.length()-1))/100;
                 }else if(sc.charAt(0)=='-'){
-                    stdsc = (100-Double.valueOf(sc.substring(1)))/fs;
+                    stdsc = (fs-Double.valueOf(sc.substring(1)))/fs;
                 }else {
                     stdsc = Double.valueOf(sc) / fs;
                 }
@@ -191,6 +195,10 @@ public class Course implements Analysis,IO<Course>,Serializable{
         for (Student key : cgrade.keySet()) {
             calculateTotal(cgrade.get(key));
         }
+    }
+
+    public void withDraw(Student s){
+        s.withDraw();
     }
 
     @Override
