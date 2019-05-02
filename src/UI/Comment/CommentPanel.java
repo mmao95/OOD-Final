@@ -10,44 +10,40 @@ import java.awt.*;
  */
 public class CommentPanel extends JPanel {
 
-    private JLabel valueLabel;
-    private String comment = null;
+    private JTextField valueField;
+    private boolean hasComment = false;
 
     public CommentPanel() {
         super();
-        valueLabel = new JLabel();
+        valueField = new JTextField();
+        valueField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout());
-        this.add(valueLabel, BorderLayout.CENTER);
-
+        this.add(valueField, BorderLayout.CENTER);
     }
 
-    public boolean hasComment() {
-        return comment.isEmpty();
+    public CommentPanel(boolean hasComment) {
+        super();
+        valueField = new JTextField();
+        valueField.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        this.hasComment = hasComment;
+        setBackground();
+        this.setLayout(new BorderLayout());
+        this.add(valueField, BorderLayout.CENTER);
     }
 
     public void setValue(String value) {
-        valueLabel.setText(value);
+        valueField.setText(value);
     }
 
     public String getValue() {
-        return valueLabel.getText();
+        return valueField.getText();
     }
 
     public void setBackground() {
-        if (hasComment())
+        if (hasComment)
             this.setBackground(Color.RED);
         else
             this.setBackground(Color.WHITE);
-    }
-
-
-    /*** Setter and Getter ***/
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getComment() {
-        return comment;
     }
 }

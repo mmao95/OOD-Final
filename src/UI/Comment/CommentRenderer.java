@@ -15,9 +15,23 @@ public class CommentRenderer extends CommentPanel implements TableCellRenderer {
         super();
     }
 
+    public CommentRenderer(boolean hasComment) {
+        super(hasComment);
+    }
+
     @Override public Component getTableCellRendererComponent(
             JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        setValue((String) value);
+        setValue(String.valueOf(value));
         return this;
+    }
+
+    @Override
+    public boolean isFocusable() {
+        return true;
+    }
+
+    @Override
+    public void setForeground(Color fg) {
+        super.setForeground(fg);
     }
 }

@@ -13,6 +13,14 @@ import java.util.EventObject;
  */
 public class CommentEditor extends CommentPanel implements TableCellEditor {
 
+    public CommentEditor() {
+        super();
+    }
+
+    public CommentEditor(boolean hasComment) {
+        super(hasComment);
+    }
+
     @Override
     public boolean shouldSelectCell(EventObject anEvent) {
         return false;
@@ -25,7 +33,7 @@ public class CommentEditor extends CommentPanel implements TableCellEditor {
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        setValue((String) value);
+        setValue(String.valueOf(value));
         return this;
     }
 

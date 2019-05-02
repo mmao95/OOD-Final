@@ -34,7 +34,6 @@ public class AddingPanel extends JPanel {
         this.mainFrame = mainFrame;
         this.course = course;
         if (course != null) {
-            System.out.println("Course!");
             setCategories(course.getCcriterion().getCategories());
         }
         initialization();

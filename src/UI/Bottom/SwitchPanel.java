@@ -40,9 +40,9 @@ public class SwitchPanel extends JPanel {
 
     private void initialization() {
         this.setLayout(new FlowLayout());
-        this.add(Box.createHorizontalStrut(5));
-        this.add(new JSeparator(SwingConstants.VERTICAL));
-        this.add(Box.createHorizontalStrut(5));
+//        this.add(Box.createHorizontalStrut(5));
+//        this.add(new JSeparator(SwingConstants.VERTICAL));
+//        this.add(Box.createHorizontalStrut(5));
 
         instruction = new JLabel("Select operations:");
 
@@ -82,6 +82,7 @@ public class SwitchPanel extends JPanel {
         cards.add(new AddingPanel(mainFrame, course), adding);
         cards.add(new RemovePanel(mainFrame, course), removing);
         cards.add(new StatisticsPanel(course), statistics);
+        categoryBox.setSelectedIndex(0);
     }
 
 }

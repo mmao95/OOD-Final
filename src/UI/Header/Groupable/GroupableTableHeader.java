@@ -1,4 +1,4 @@
-package UI;
+package UI.Header.Groupable;
 
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;

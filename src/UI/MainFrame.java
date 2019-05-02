@@ -7,6 +7,7 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 import javax.swing.tree.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -15,6 +16,11 @@ import java.util.*;
 import java.util.List;
 
 import UI.Bottom.SwitchPanel;
+import UI.Comment.CommentEditor;
+import UI.Comment.CommentRenderer;
+import UI.Header.CheckBox.CheckBoxTableModel;
+import UI.Header.Groupable.ColumnGroup;
+import UI.Header.Groupable.GroupableTableHeader;
 import course.Category;
 import course.Course;
 import frame.AddCourse;
@@ -44,6 +50,7 @@ public class MainFrame extends JFrame {
     /*** Components ***/
     private JMenuBar menuBar;
     private JTable gradeTable;
+    private JTable fixedTable;
     private JTextField weightingField;
 
     //Left panel components
@@ -54,9 +61,6 @@ public class MainFrame extends JFrame {
     private DefaultTreeModel jMode = new DefaultTreeModel(root);
 
     //Bottom panel components
-    //private StatisticsPanel statisticsPanel;
-    //private RemovePanel removePanel;
-    //private AddingPanel addingPanel;
     private SwitchPanel switchPanel;
 
     private int windowWidth = 1280;
@@ -79,10 +83,9 @@ public class MainFrame extends JFrame {
         //Setting up navigation bar
         menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File (F)");
-        fileMenu.setMnemonic('f');
+        fileMenu.setMnemonic(KeyEvent.VK_F);
         final JMenuItem saveChangesItem = new JMenuItem("Save changes");
         saveChangesItem.addActionListener(e-> {
-            String sb = "TEST CONTENT";
             JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
             int retrival = chooser.showSaveDialog(null);
             if (retrival == JFileChooser.APPROVE_OPTION) {
@@ -182,8 +185,11 @@ public class MainFrame extends JFrame {
         treeScrollPane.setPreferredSize(new Dimension(windowWidth / 8, windowHeight));
         container.add(treeScrollPane, BorderLayout.WEST);
 
-        /*** Middle Panel ***/
+        /*** Center Panel ***/
+        //North
         weightingField = new JTextField();
+
+        //Center
         //Set up grade table
         gradeTable = new JTable() {
             protected JTableHeader createDefaultTableHeader() {
@@ -203,6 +209,42 @@ public class MainFrame extends JFrame {
         //Set up column model
         TableColumnModel tcm = gradeTable.getColumnModel();
         tcm.getSelectionModel().addListSelectionListener(new SelectionChangedListener());
+        tcm.addColumnModelListener(new TableColumnModelListener() {
+            @Override
+            public void columnAdded(TableColumnModelEvent e) {
+
+            }
+
+            @Override
+            public void columnRemoved(TableColumnModelEvent e) {
+
+            }
+
+            @Override
+            public void columnMoved(TableColumnModelEvent e) {
+
+            }
+
+            @Override
+            public void columnMarginChanged(ChangeEvent e) {
+                final TableColumnModel tableColumnModel = gradeTable.getColumnModel();
+                TableColumnModel footerColumnModel = fixedTable.getColumnModel();
+                for (int i = 0; i < tableColumnModel.getColumnCount(); i++) {
+                    int w = tableColumnModel.getColumn(i).getWidth();
+                    footerColumnModel.getColumn(i).setMinWidth(w);
+                    footerColumnModel.getColumn(i).setMaxWidth(w);
+                    // footerColumnModel.getColumn(i).setPreferredWidth(w);
+                }
+                fixedTable.doLayout();
+                fixedTable.repaint();
+                repaint();
+            }
+
+            @Override
+            public void columnSelectionChanged(ListSelectionEvent e) {
+
+            }
+        });
 
         //Add models to table and set up mouse listener
         gradeTable.setModel(sortTableModel);
@@ -220,24 +262,41 @@ public class MainFrame extends JFrame {
         gradeTable.setRowSelectionAllowed(true);
         gradeTable.setColumnSelectionAllowed(true);
 
+        //South
+        //Object[][] data = new Object[][] { {"a", "b", "c", "d", "e", "f"} };
+        //Object[] header = new Object[]{};
+        fixedTable = new JTable();
+
+        CheckBoxTableModel defaultTableModel = new CheckBoxTableModel(1, gradeTable.getColumnCount());
+        fixedTable.setModel(defaultTableModel);
+        fixedTable.getTableHeader().setUI(null);
+
+        fixedTable.setFillsViewportHeight(true);
+        fixedTable.setRowSelectionAllowed(true);
+        fixedTable.setColumnSelectionAllowed(true);
+
+        JScrollPane fixedScrollPane = new JScrollPane(fixedTable);
+        fixedScrollPane.setPreferredSize(new Dimension(windowWidth * (7 / 8), 20));
+
         JPanel middleSubPanel = new JPanel(new BorderLayout());
         middleSubPanel.add(weightingField, BorderLayout.NORTH);
 
         JScrollPane tableScrollPane = new JScrollPane(gradeTable);
         middleSubPanel.add(tableScrollPane, BorderLayout.CENTER);
 
+        middleSubPanel.add(fixedScrollPane, BorderLayout.SOUTH);
+
         middlePanel = new JPanel(new BorderLayout());
         middlePanel.add(middleSubPanel, BorderLayout.CENTER);
         middlePanel.setPreferredSize(new Dimension(windowWidth * (6 / 8), windowHeight));
-        container.add(middlePanel, BorderLayout.CENTER);
 
+        container.add(middlePanel, BorderLayout.CENTER);
 
         /*** Bottom Panel ***/
         //bottomPanel = new JPanel(new BorderLayout(8, 8));
         bottomPanel = new JPanel();
-        //bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
         bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bottomPanel.setBorder(new EmptyBorder(8, 16, 0, 16));
+        bottomPanel.setBorder(new EmptyBorder(4, 16, 0, 16));
         bottomPanel.setPreferredSize(new Dimension(windowWidth, windowHeight / 8));
 
         //Bottom Left Panel
@@ -375,27 +434,6 @@ public class MainFrame extends JFrame {
         updateCellComment(comment);
     }
 
-    private void setWeighting() {
-        int selectedColumn = gradeTable.getSelectedColumn();
-
-        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-
-        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
-
-        if (columnGroups.size() != 0) {
-            String category = columnGroups.get(0).getHeaderValue();
-            weightingField.setText(currentCourse.getCcriterion().
-                    getCategories().get(header.findIndexOfGroup(category)).toString());
-        } else {
-            if (selectedColumn == gradeTable.getColumnCount() - 1) {
-                weightingField.setText(currentCourse.getCcriterion().toString());
-            } else {
-                weightingField.setText("");
-            }
-        }
-    }
-
     private void updateCellComment(String comment) {
         //int selectedRow = gradeTable.getSelectedRow();
         int selectedColumn = gradeTable.getSelectedColumn();
@@ -420,10 +458,28 @@ public class MainFrame extends JFrame {
         }
     }
 
-    public void updateCriterion(NewCriterion newCriterion) {
+    private void setWeighting(int selectedColumn) {
+        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
 
+        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+
+        if (columnGroups.size() != 0) {
+            String category = columnGroups.get(0).getHeaderValue();
+            weightingField.setText(currentCourse.getCcriterion().
+                    getCategories().get(header.findIndexOfGroup(category)).toString());
+        } else {
+            if (selectedColumn == gradeTable.getColumnCount() - 1) {
+                weightingField.setText(currentCourse.getCcriterion().toString());
+            } else {
+                weightingField.setText("");
+            }
+        }
     }
 
+    public void updateCriterion(NewCriterion newCriterion) {
+        currentCourse.writeToFile("c.txt");
+    }
 
     private void setUpGradeTable(NewCriterion criterion, HashMap<Student, Grade> grade) {
         Vector<String> headers = setUpTableHeader(criterion);
@@ -438,6 +494,10 @@ public class MainFrame extends JFrame {
         groupingHeaders(criterion);
 
         dm.addTableModelListener(new TableChangedListener());
+
+        CheckBoxTableModel fixedTableModel = (CheckBoxTableModel) fixedTable.getModel();
+        fixedTableModel.setColumnCount(gradeTable.getColumnCount());
+        fixedTable.setTableHeader(null);
     }
 
     private Vector<String> setUpTableHeader(NewCriterion criterion) {
@@ -491,7 +551,8 @@ public class MainFrame extends JFrame {
         for (int i = 0 ; i < criterion.getCategories().size() ; i++) {
             Category currentCategory = criterion.getCategories().get(i);
             for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
-                classes.add(String.class);
+                //classes.add(String.class);
+                classes.add(GradeComp.class);
             }
         }
 
@@ -518,7 +579,19 @@ public class MainFrame extends JFrame {
         gradeTable.setTableHeader(header);
     }
 
-    /*** Table Methods **/
+    /*** Fixed Table Methods ***/
+    public List<Object> getCheckBoxSelections() {
+        List<Object> selections = new ArrayList<>();
+        for (int i = 0 ; i < fixedTable.getColumnCount() ; i++) {
+            selections.add(fixedTable.getValueAt(0, i));
+        }
+        return selections;
+    }
+
+    /*** Grade Table Methods ***/
+    public JTable getGradeTable() {
+        return gradeTable;
+    }
 
     /**
      * Save changes of gradeTable to file.
@@ -551,18 +624,6 @@ public class MainFrame extends JFrame {
             case "Email":
                 student.setEmail(value);
                 break;
-//            case "Assignments":
-//                grade.setAssignment(value, index);
-//                break;
-//            case "Exams":
-//                grade.setExam(value, index);
-//                break;
-//            case "Projects":
-//                grade.setProject(value, index);
-//                break;
-//            case "Attendance":
-//                grade.setAttendence(value);
-//                break;
             default:
                 for (int i = 0 ; i < currentCourse.getCcriterion().getCategories().size() ; i++) {
                     if (currentCourse.getCcriterion().getCategories().get(i).getName().equals(category)) {
@@ -628,7 +689,7 @@ public class MainFrame extends JFrame {
     private class SelectionChangedListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             if (gradeTable.getSelectedRow() != -1)
-                setWeighting();
+                setWeighting(gradeTable.getSelectedColumn());
         }
     }
 
@@ -661,15 +722,18 @@ public class MainFrame extends JFrame {
         new CommentFrame(this, getCommentOfSelectedCell(selectedRow, selectedColumn));
     }
 
+    private void createSubCategoryFrame(int categoryIndex) {
+        new SubCategory(this, currentCourse.getCcriterion(), categoryIndex);
+    }
+
     //Listen to mouse clicks
     private class TableMouseListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent event) {
-            if (SwingUtilities.isRightMouseButton(event)) {
-                System.out.println("Right clicked!");
+            int selectedColumn = gradeTable.columnAtPoint(event.getPoint());
+            int selectedRow = gradeTable.rowAtPoint(event.getPoint());
 
-                int selectedColumn = gradeTable.columnAtPoint(event.getPoint());
-                int selectedRow = gradeTable.rowAtPoint(event.getPoint());
+            if (SwingUtilities.isRightMouseButton(event)) {
                 gradeTable.changeSelection(selectedRow, selectedColumn, false, false);
 
                 GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
@@ -679,9 +743,8 @@ public class MainFrame extends JFrame {
                 if (columnGroups.size() != 0 ) {
                     createCommentFrame(selectedRow, selectedColumn);
                 }
-
             } else {
-                setWeighting();
+                setWeighting(selectedColumn);
             }
         }
     }
@@ -699,11 +762,12 @@ public class MainFrame extends JFrame {
                 TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
                 List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
 
-//                if (columnGroups.size() != 0 ) {
-//                    String category = getCategory(selectedColumn, columnGroups,
-//                            (columnGroups.size() != 0));
-//                    new SubCategory(header.findIndexOfGroup(category));
-//                }
+                if (columnGroups.size() != 0 ) {
+                    String category = getCategory(selectedColumn, columnGroups,
+                            (columnGroups.size() != 0));
+                    int categoryIndex = header.findIndexOfGroup(category);
+                    createSubCategoryFrame(categoryIndex);
+                }
             }
         }
     }
