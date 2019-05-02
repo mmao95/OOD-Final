@@ -705,7 +705,9 @@ public class MainFrame extends JFrame {
             } else {
                 //!!Only useful when student id is in the second column!!
                 String stu_id = gradeTable.getValueAt(selectedRow, 1).toString();
-                String value = gradeTable.getValueAt(selectedRow, selectedColumn).toString();
+                GradeComp test = (GradeComp) gradeTable.getValueAt(selectedRow, selectedColumn);
+                String value = test.getScore();
+                System.out.println("value: " + value);
                 TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
                 List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
 
