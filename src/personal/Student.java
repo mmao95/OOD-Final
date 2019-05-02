@@ -24,7 +24,12 @@ public class Student implements Serializable {
      * @Author: Zhizhou Qiu
      * @Date: 2019/4/12
      **/
-    public Student(){}
+    public Student(){
+        this.id = "";
+        this.name = new Name();
+        this.email = "";
+        this.withdraw = "N";
+    }
 
     /**
      * @Description: getters and setters of String id, String full_name and String email
