@@ -104,6 +104,8 @@ public class Course implements Analysis,IO<Course>,Serializable{
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
         if(sortList.size()%2==0){
+            System.out.println(sortList);
+            System.out.println("size: " + sortList.size());
             dd = sortList.get(sortList.size()/2).getTtscore()+sortList.get(sortList.size()/2-1).getTtscore();
             dd /= 2;
         }else{
