@@ -196,6 +196,10 @@ public class Course implements Analysis,IO<Course>,Serializable{
             calculateTotal(cgrade.get(key));
         }
     }
+    
+    public void setCcriterion(NewCriterion c1){
+        ccriterion = c1;
+    }
 
     public void withDraw(Student s){
         s.withDraw();
@@ -235,14 +239,6 @@ public class Course implements Analysis,IO<Course>,Serializable{
         } catch (IOException io){
             io.printStackTrace();
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Course: \n" + "name: " + cname + '\n' +
-                "year: " + cyear + '\n' +
-                "semester: " + semester + '\n' +
-                "criterion: " + ccriterion.toString();
     }
 
     public void deleteOne(int cat, int index){

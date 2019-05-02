@@ -1,3 +1,5 @@
+package test;
+
 import course.Category;
 import course.Course;
 import course.Criterion;
@@ -23,13 +25,13 @@ public class SerializationTest {
         categories.add(exam);
         NewCriterion criterion = new NewCriterion(categories, "mycriterion");
         Course course = new Course("mycourse", "123","fall","2019", criterion);
-//        course.writeToFile("mycourse");
+        course.writeToFile("mycourse.txt");
 //        criterion.writeToFile("criterion");
 
         // read from file
-        NewCriterion newCriterion = criterion.readFromFile("criterion");
-        System.out.println(newCriterion.toString());
-        Course newCourse = course.readFromFile("mycourse");
-        System.out.println(newCourse.toString());
+//        NewCriterion newCriterion = criterion.readFromFile("criterion");
+//        System.out.println(newCriterion.toString());
+//        Course newCourse = course.readFromFile("mycourse.txt");
+//        System.out.println(newCourse.toString());
     }
 }
