@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/entrance.java
 //import UI.MainFrame;
 //
 ///**
@@ -14,7 +13,6 @@
 //    }
 //
 //}
-=======
 import UI.MainFrame;
 
 /**
@@ -32,4 +30,3 @@ public class Entrance {
     }
 
 }
->>>>>>> 40c4fe4e00da70b9fe530a43966b3c5df9445897:src/Entrance.java

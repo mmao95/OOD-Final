@@ -237,6 +237,14 @@ public class Course implements Analysis,IO<Course>,Serializable{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Course: \n" + "name: " + cname + '\n' +
+                "year: " + cyear + '\n' +
+                "semester: " + semester + '\n' +
+                "criterion: " + ccriterion.toString();
+    }
+
     public void deleteOne(int cat, int index){
         getCcriterion().getCategories().get(cat).deleteOne(index);
         for(Student k: cgrade.keySet()){
