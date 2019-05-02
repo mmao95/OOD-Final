@@ -81,6 +81,12 @@ public class Course implements Analysis,IO<Course>,Serializable{
             }
         }
     }
+
+    public void addCategory(){
+        for(Student k: cgrade.keySet()) {
+            getsGrade(k).addList();
+        }
+    }
     //get analysis data of total score
     public String[] getAnalysis(){
         String[] res = new String[5];
@@ -104,8 +110,6 @@ public class Course implements Analysis,IO<Course>,Serializable{
         res[1] = Double.toString(maxd);
         res[2] = Double.toString(mind);
         if(sortList.size()%2==0){
-            System.out.println(sortList);
-            System.out.println("size: " + sortList.size());
             dd = sortList.get(sortList.size()/2).getTtscore()+sortList.get(sortList.size()/2-1).getTtscore();
             dd /= 2;
         }else{
@@ -198,7 +202,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
             calculateTotal(cgrade.get(key));
         }
     }
-    
+
     public void setCcriterion(NewCriterion c1){
         ccriterion = c1;
     }
