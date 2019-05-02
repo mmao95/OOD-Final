@@ -485,6 +485,10 @@ public class MainFrame extends JFrame {
         Vector<String> headers = setUpTableHeader(criterion);
         Vector<Object> grades = loadData(criterion.getCategories().size(), grade);
 
+        for (int i = 0 ; i < grades.size() ; i++) {
+            System.out.println(grades.get(i));
+        }
+
         setUpTypes(criterion);
 
         SortTableModel dm = (SortTableModel) gradeTable.getModel();
@@ -551,8 +555,7 @@ public class MainFrame extends JFrame {
         for (int i = 0 ; i < criterion.getCategories().size() ; i++) {
             Category currentCategory = criterion.getCategories().get(i);
             for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
-                //classes.add(String.class);
-                classes.add(GradeComp.class);
+                classes.add(String.class);
             }
         }
 
@@ -591,6 +594,11 @@ public class MainFrame extends JFrame {
     /*** Grade Table Methods ***/
     public JTable getGradeTable() {
         return gradeTable;
+    }
+
+    public String getSelectedStudentId() {
+        String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
+        return stuId;
     }
 
     /**
@@ -705,9 +713,14 @@ public class MainFrame extends JFrame {
             } else {
                 //!!Only useful when student id is in the second column!!
                 String stu_id = gradeTable.getValueAt(selectedRow, 1).toString();
+<<<<<<< HEAD
                 GradeComp test = (GradeComp) gradeTable.getValueAt(selectedRow, selectedColumn);
                 String value = test.getScore();
                 System.out.println("value: " + value);
+=======
+                String value = gradeTable.getValueAt(selectedRow, selectedColumn).toString();
+                System.out.println(value);
+>>>>>>> 7e7310f455574694934e4a1c8f58b3f1d523fc5b
                 TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
                 List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
 
