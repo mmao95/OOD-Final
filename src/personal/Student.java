@@ -6,6 +6,7 @@ public class Student implements Serializable {
     private String id;
     private Name name;
     private String email;
+    private String withdraw;
 
     /**
      * @Description: Constructor of Student
@@ -16,17 +17,14 @@ public class Student implements Serializable {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.withdraw = "N";
     }
     /**
      * @Description: default constructor
      * @Author: Zhizhou Qiu
      * @Date: 2019/4/12
      **/
-    public Student(){
-        id = "";
-        email = "";
-        name = new Name();
-    }
+    public Student(){}
 
     /**
      * @Description: getters and setters of String id, String full_name and String email
@@ -47,6 +45,14 @@ public class Student implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public void withDraw(){
+        withdraw = "W";
+    }
+
+    public boolean ifWithdraw(){
+        return withdraw=="W";
     }
 
     public void setName(String first, String middle, String last) {
