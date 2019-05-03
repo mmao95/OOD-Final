@@ -2,25 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f22605e-b935-4e68-9db0-b559f05c8a32" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course.uml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/c.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/OOD_Summer2019.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/OOD_Summer2019.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/math_fall2019.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/math_fall2019.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/criterion4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycourse" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/newRawData.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/newRawData1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/newRawData2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCourse.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/归档.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/OOD_Final_jar/OOD-Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/OOD_Final_jar/OOD-Final2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/Entrance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/SerializationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/TableTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/AddSubCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/AddingPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/AddingPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/RemovePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/SearchPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/SearchPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/StatisticsPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/StatisticsPanel$ComboBoxListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/StatisticsPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/SwitchPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Bottom/SwitchPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Comment/CommentEditor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Comment/CommentPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Comment/CommentRenderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Header/CheckBox/CheckBoxTableModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Header/Groupable/ColumnGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Header/Groupable/GroupableTableHeader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/Header/Groupable/GroupableTableHeaderUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/ImagePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$SelectionChangedListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$TableChangedListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$TableHeaderListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame$TableMouseListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/UI/SortTableModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/Analysis.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/Category.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/Course.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/CriComp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/Criterion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/IO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/NewCriterion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/course/ReadRawData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/AddCourse$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/AddCourse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/AddStudentFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/AddStudentFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/CommentFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/CommentFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/Login.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/Statistics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/SubCategory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/SubCategory$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/SubCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/TotalCategory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/TotalCategory$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/frame/TotalCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/grade/Grade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/grade/GradeComp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/grade/Note.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/personal/GraduateStudent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/personal/Name.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/personal/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOD-Final/personal/UndergradStudent.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +79,8 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -45,21 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="49">
-              <caret line="228" column="21" selection-start-line="228" selection-start-column="21" selection-end-line="228" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#35985#36268#0" />
-                <element signature="e#36499#37524#0" />
-                <element signature="e#37530#37859#0" />
-                <element signature="e#37865#39486#0" />
-                <element signature="e#39492#39655#0" />
-                <element signature="e#39923#41003#0" />
-                <element signature="e#41009#42269#0" />
-                <element signature="e#42275#42545#0" />
-                <element signature="e#42551#42776#0" />
-                <element signature="e#42782#43285#0" />
-              </folding>
+            <state relative-caret-position="645">
+              <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -189,7 +221,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,7 +233,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,24 +426,24 @@
       <workItem from="1556897420929" duration="9761000" />
       <workItem from="1556912436120" duration="23000" />
       <workItem from="1556918579617" duration="239000" />
+      <workItem from="1556919489296" duration="212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227538000" />
+    <option name="totallyTimeSpent" value="227750000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1680" height="963" extended-state="6" />
+    <frame x="0" y="25" width="1680" height="963" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13186814" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14529915" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29621124" />
@@ -424,6 +456,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3272101" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -452,9 +485,7 @@
     <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/CheckBoxHeader.java" />
     <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/DynamicCheckBoxPanel.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JComponent.java" />
-    <entry file="file://$PROJECT_DIR$/c.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/c.txt" />
     <entry file="file://$PROJECT_DIR$/123_fall2019.txt" />
     <entry file="file://$PROJECT_DIR$/src/course/CriComp.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -469,9 +500,7 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/table/TableRowSorter.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/DefaultRowSorter.java" />
     <entry file="file://$PROJECT_DIR$/course/591_fall2019.txt" />
-    <entry file="file://$PROJECT_DIR$/raw.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/raw.json" />
     <entry file="file://$PROJECT_DIR$/src/UI/Header/Groupable/GroupableTableHeaderUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-141">
@@ -555,13 +584,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/newRawData.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="131" column="19" lean-forward="true" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/newRawData.json" />
     <entry file="file://$PROJECT_DIR$/src/TestJson.java" />
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/frame/Login.java">
@@ -680,21 +703,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="228" column="21" selection-start-line="228" selection-start-column="21" selection-end-line="228" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#35985#36268#0" />
-            <element signature="e#36499#37524#0" />
-            <element signature="e#37530#37859#0" />
-            <element signature="e#37865#39486#0" />
-            <element signature="e#39492#39655#0" />
-            <element signature="e#39923#41003#0" />
-            <element signature="e#41009#42269#0" />
-            <element signature="e#42275#42545#0" />
-            <element signature="e#42551#42776#0" />
-            <element signature="e#42782#43285#0" />
-          </folding>
+        <state relative-caret-position="645">
+          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
         </state>
       </provider>
     </entry>
