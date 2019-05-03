@@ -254,5 +254,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         }
     }
 
-
+    public HashMap<Student, Grade> getCgrade() {
+        return cgrade;
+    }
 }

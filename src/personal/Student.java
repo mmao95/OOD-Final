@@ -20,6 +20,12 @@ public class Student implements Serializable {
         this.type = type;
     }
 
+    public Student (String id, Name name, String email){
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     /**
      * @Description: default constructor
      * @Author: Zhizhou Qiu
