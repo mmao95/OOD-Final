@@ -15,6 +15,14 @@ public class Name implements Serializable {
         this.lname = "";
     }
 
+    public Name(String name){
+        this.fname = name;
+        this.mname = "";
+        this.lname = "";
+    }
+
+
+
     public Name(String f, String m, String l){
         this.fname = f;
         this.mname = m;

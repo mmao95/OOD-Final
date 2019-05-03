@@ -66,7 +66,10 @@ public class CommentFrame extends JFrame implements ActionListener {
 
         }
         else if (e.getActionCommand()=="Delete") {
-            commentTextArea.setText("");
+           // commentTextArea.setText("");
+            mainFrame.updateComment("");
+            this.mainFrame.setEnabled(true);
+            this.dispose();
         }
     }
 }

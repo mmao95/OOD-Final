@@ -1,5 +1,7 @@
 package UI.Header.CheckBox;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +21,12 @@ public class CheckBoxTableModel extends DefaultTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex) {
-        return Boolean.class;
+        if (getColumnCount() == 7)
+            return String.class;
+        else if (columnIndex <= 3 || columnIndex > getColumnCount() - 4)
+            return String.class;
+        else
+            return Boolean.class;
     }
 
 }

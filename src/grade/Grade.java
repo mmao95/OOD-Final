@@ -10,7 +10,7 @@ import java.util.List;
  * @Date:04-15-201921:20
  * @Description: this class represent the grade consist of 4 component(assignment, exam, project and attendance)
  **/
-public class Grade implements Serializable,Comparable{
+public class Grade implements Serializable,Comparable {
     private String uid;
     private List<List<GradeComp>> grade;
     private GradeComp extraCredit;
@@ -84,7 +84,7 @@ public class Grade implements Serializable,Comparable{
     }
 
     public boolean ifWithDraw(){
-        return wd == "W";
+        return wd.equals("W");
     }
     
     public void addList(){

@@ -44,8 +44,9 @@ public class CriComp implements Serializable {
         return toatalScore;
     }
 
-    public void setToatalScore(double toatalScore) {
-        this.toatalScore = toatalScore;
+    public void setToatalScore(double totalScore) {
+        System.out.println(totalScore);
+        this.toatalScore = totalScore;
     }
 
     public double getWeights() {
@@ -53,6 +54,7 @@ public class CriComp implements Serializable {
     }
 
     public void setWeights(double weights) {
+        System.out.println(weights);
         this.weights = weights;
     }
 }

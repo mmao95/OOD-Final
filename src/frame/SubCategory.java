@@ -1,6 +1,7 @@
 package frame;
 
 import UI.MainFrame;
+import course.Category;
 import course.NewCriterion;
 
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -64,7 +66,14 @@ public class SubCategory extends JFrame implements ActionListener {
         table = new JTable(finalData, tableHead){
             @Override
             public boolean isCellEditable(int row, int column) {
-                return super.isCellEditable(row, column);
+                if (column == 0) {
+                    if (row == 0)
+                        return true;
+                    else
+                        return false;
+                } else if (row == 0)
+                    return false;
+                return true;
             }
         };
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -138,7 +147,13 @@ public class SubCategory extends JFrame implements ActionListener {
 
     private boolean isNumeric(String str){
         Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
-        return pattern.matcher(str).matches();
+        if(pattern.matcher(str).matches()){
+            if(Double.valueOf(str) >= 0)
+                return true;
+            else
+                return false;
+        }
+        return false;
     }
 
     private boolean judgeWeightNumber(){
@@ -170,6 +185,17 @@ public class SubCategory extends JFrame implements ActionListener {
             return false;
     }
 
+    private void updateTabelData(){
+        Category category = newCriterion.getCategories().get(this.savedIndex);
+        category.setName(this.table.getValueAt(0, 0).toString());
+        System.out.println("nums"+category.getNumberOfTasks());
+        for(int i=0;i<category.getNumberOfTasks();i++){
+            category.getCriComps().get(i).setWeights(Double.valueOf(this.table.getValueAt(i+1,1).toString()));
+            category.getCriComps().get(i).setToatalScore(Double.valueOf(this.table.getValueAt(i+1,2).toString()));
+        }
+
+    }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="OK") {
             if(judgeWeightNumber()) {
@@ -177,8 +203,9 @@ public class SubCategory extends JFrame implements ActionListener {
                 {
                     if(judgeWeightSum())
                     {
-                        this.newCriterion.getCategories().get(this.savedIndex).setName(table.getValueAt(0, 0).toString());
+                        updateTabelData();
                         this.mainFrame.updateCriterion(newCriterion);
+
 //                    this.mainFrame.repaint();
                         this.mainFrame.setEnabled(true);
                         this.dispose();
@@ -187,7 +214,7 @@ public class SubCategory extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "The sum of item weight must be 1.0!", "Info", JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Full marks of each item must be legal number!", "Info", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Full marks of each item must be legal number bigger than 0!", "Info", JOptionPane.WARNING_MESSAGE);
                 }
             }
             else{

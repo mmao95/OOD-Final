@@ -120,11 +120,11 @@ public class ReadRawData {
     private static Name createName(JSONObject jsonObject){
         String name = jsonObject.get("name").toString();
         String[] arr = name.split(" ");
-        if (arr.length == 0) return new Name(null, null, null);
-        else if (arr.length == 1) return new Name(arr[0],null,null);
-        else if (arr.length == 2) return new Name(arr[0],null, arr[1]);
+        if (arr.length == 0) return new Name();
+        else if (arr.length == 1) return new Name(arr[0]);
+        else if (arr.length == 2) return new Name(arr[0],"", arr[1]);
         else if (arr.length == 3) return new Name(arr[0], arr[1], arr[2]);
-        else return new Name(name, null,null);
+        else return new Name(name);
     }
 
     private static final String prefix = "gradeOf";

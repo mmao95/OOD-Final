@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/OOD-Final.iml" filepath="$PROJECT_DIR$/.idea/OOD-Final.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OOD-Final.iml" filepath="$PROJECT_DIR$/OOD-Final.iml" />
     </modules>
   </component>
 </project>

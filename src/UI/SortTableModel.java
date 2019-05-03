@@ -3,6 +3,7 @@ package UI;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @Auther: Di Zhu
@@ -39,6 +40,9 @@ public class SortTableModel extends DefaultTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
+        if (column == 1 || column == getColumnCount() - 1 || column == 3) {
+            return false;
+        }
         return true;
     }
 
@@ -50,5 +54,4 @@ public class SortTableModel extends DefaultTableModel {
     public void setClassList(List<Class> classList) {
         this.classList = classList;
     }
-
 }

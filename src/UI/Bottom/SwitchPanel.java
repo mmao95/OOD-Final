@@ -25,7 +25,8 @@ public class SwitchPanel extends JPanel {
     private final static String adding = "Adding";
     private final static String removing = "Removing";
     private final static String statistics = "Statistics";
-    private String[] categories = new String[]{none, adding, removing, statistics};
+    private final static String searching  = "Search";
+    private String[] categories = new String[]{none, adding, removing, statistics, searching};
 
     public SwitchPanel() {
         super();
@@ -40,9 +41,6 @@ public class SwitchPanel extends JPanel {
 
     private void initialization() {
         this.setLayout(new FlowLayout());
-//        this.add(Box.createHorizontalStrut(5));
-//        this.add(new JSeparator(SwingConstants.VERTICAL));
-//        this.add(Box.createHorizontalStrut(5));
 
         instruction = new JLabel("Select operations:");
 
@@ -67,6 +65,7 @@ public class SwitchPanel extends JPanel {
         cards.add(new AddingPanel(mainFrame, course), adding);
         cards.add(new RemovePanel(mainFrame, course), removing);
         cards.add(new StatisticsPanel(course), statistics);
+        cards.add(new SearchPanel(mainFrame), searching);
 
         this.add(controller);
         this.add(cards);
@@ -82,6 +81,7 @@ public class SwitchPanel extends JPanel {
         cards.add(new AddingPanel(mainFrame, course), adding);
         cards.add(new RemovePanel(mainFrame, course), removing);
         cards.add(new StatisticsPanel(course), statistics);
+        cards.add(new SearchPanel(mainFrame), searching);
         categoryBox.setSelectedIndex(0);
     }
 
