@@ -39,6 +39,9 @@ public class SortTableModel extends DefaultTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
+        if (column == 1 || column == getColumnCount() - 1) {
+            return false;
+        }
         return true;
     }
 

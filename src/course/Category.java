@@ -79,6 +79,9 @@ public class Category implements Serializable {
 
     public void deleteOne(int index){
         criComps.remove(index);
+        for(int i=0;i<criComps.size();i++){
+            criComps.get(i).setWeights(1.0/(double)criComps.size());
+        }
     }
 
     public void setCriComps(List<CriComp> criComps) {

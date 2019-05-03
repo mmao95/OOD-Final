@@ -3,6 +3,8 @@ package UI.Bottom;
 import UI.MainFrame;
 import course.Category;
 import course.Course;
+import frame.AddStudentFrame;
+import personal.Name;
 import personal.Student;
 
 import javax.swing.*;
@@ -22,7 +24,10 @@ public class AddingPanel extends JPanel {
     private JComboBox categoryBox;
     private JButton addStudent;
     private JButton addSubCategory;
+    private JButton addCategory;
     String[] categories = new String[]{};
+
+    private String Id = "";
 
     public AddingPanel() {
         super();
@@ -53,15 +58,32 @@ public class AddingPanel extends JPanel {
         /*** Left Part ***/
         addStudent = new JButton("Add student");
         addStudent.addActionListener(e -> {
-            course.enrollStudent(new Student());
-            mainFrame.update(course);
+            if (course != null) {
+                new AddStudentFrame(mainFrame, course, this);
+//                course.enrollStudent(new Student(Id, new Name(), ""));
+//                mainFrame.update(course);
+            }
         });
         addStudent.setPreferredSize(new Dimension(128, 54));
+
+        addCategory = new JButton("Add category");
+        addCategory.addActionListener(e -> {
+            if (course != null) {
+                Category category = new Category();
+                course.getCcriterion().getCategories().add(category);
+                //course.updateGrade();
+                course.addCategory();
+                mainFrame.update(course);
+            }
+        });
+        addCategory.setPreferredSize(new Dimension(128, 54));
 
         /*** Right Part ***/
         JPanel rightPanel = new JPanel(new BorderLayout());
         addSubCategory = new JButton("Add column");
         addSubCategory.addActionListener(e-> {
+            if (course == null)
+                return;
             String cate = categories[categoryBox.getSelectedIndex()];
             for (int i = 0 ; i < course.getCcriterion().getCategories().size() ; i++) {
                 Category temp = course.getCcriterion().getCategories().get(i);
@@ -80,6 +102,7 @@ public class AddingPanel extends JPanel {
         /*** Add components to main panel ***/
         this.add(addStudent, BorderLayout.WEST);
         this.add(rightPanel, BorderLayout.CENTER);
+        this.add(addCategory, BorderLayout.EAST);
 
     }
 
@@ -94,5 +117,9 @@ public class AddingPanel extends JPanel {
         for (String str : categories) {
             categoryBox.addItem(str);
         }
+    }
+
+    public void setId(String id) {
+        this.Id = id;
     }
 }

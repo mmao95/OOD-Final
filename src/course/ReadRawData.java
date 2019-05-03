@@ -103,7 +103,7 @@ public class ReadRawData {
                 gradeMap.put(student,g);
 
             }
-
+            course.calculateAll();
             return course;
         } catch (IOException e) {
             e.printStackTrace();

@@ -55,6 +55,8 @@ public class StatisticsPanel extends JPanel {
         statBy = new JButton("Show statistics of");
         statBy.setPreferredSize(new Dimension(128, 54));
         statBy.addActionListener(e-> {
+            if (course == null)
+                return;
             if (categoryBox.getSelectedIndex() == 0) {
                 new Statistics(course);
             } else {

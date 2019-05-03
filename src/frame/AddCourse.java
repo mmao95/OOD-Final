@@ -37,16 +37,15 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
    private int radioButtonIndex;
    private Category singelCategory;
    private List<Category> returnCategoryList;
-   private List<NewCriterion> savedNewCriterion;
+   private List<NewCriterion> previousCriterion;
    private MainFrame mainFrame;
 
-   public AddCourse(List<NewCriterion> sampleList, MainFrame inputMainFrame) throws IOException, ClassNotFoundException{
+   public AddCourse(MainFrame inputMainFrame) throws IOException, ClassNotFoundException{
        // TODO Auto-generated constructor stub
 
        this.mainFrame = inputMainFrame;
 
        returnCategoryList = new ArrayList<>();
-       savedNewCriterion = deepCopy(sampleList);
 
        okButton = new JButton("OK");
        okButton.addActionListener(this);
@@ -65,11 +64,11 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        weightGroup.add(customizedWeightRadioButton);
        radioButtonIndex = 0;
 
-       courseIDLabel = new JLabel("Course ID                           ");
-       courseNameLabel = new JLabel("Course Name                      ");
-       semesterLabel = new JLabel("Semester                                ");
-       weightSettingLabel = new JLabel("Weight Setting                                                               ");
-       previousYearLabel = new JLabel("Saved criterion                                     ");
+       courseIDLabel = new JLabel("Course ID                                      ");
+       courseNameLabel = new JLabel("Course Name                               ");
+       semesterLabel = new JLabel("Semester                                          ");
+       weightSettingLabel = new JLabel("Weight Setting                                                                                ");
+       previousYearLabel = new JLabel("Saved criterion                                               ");
        categoryLabel = new JLabel("Category");
        numberLabel = new JLabel("Number");
        weightLabel = new JLabel("Weight");
@@ -81,11 +80,18 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        yearComboBox = new JComboBox<String>(yearList);
 
        List<String> previousCourseList = new ArrayList<>();
-       for (int i = 0; i < savedNewCriterion.size(); i++) {
-           previousCourseList.add(String.valueOf(savedNewCriterion.get(i).getName()));
-       }
 //        String[] previousCourseList = new String[]{"cs530", "cs542", "cs585", "cs640"};
        previousCourseComboBox = new JComboBox<String>(previousCourseList.toArray(new String[0]));
+       previousCriterion = new ArrayList<>();
+       File file = new File("pre//");
+       File[] fs = file.listFiles();
+       for(File f:fs){
+           NewCriterion newCriterion = new NewCriterion();
+           previousCriterion.add(newCriterion.readFromFile(f.toString()));
+       }
+
+       for (int i = 0; i < previousCriterion.size(); i++)
+           previousCourseComboBox.addItem(previousCriterion.get(i).getName());
        previousCourseComboBox.addActionListener(this);
 
        courseIDTextField = new JTextField(13);
@@ -203,13 +209,13 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        return dest;
    }
 
-   private int useNameFindIndex(String name){
-       for (int i = 0; i < savedNewCriterion.size(); i++){
-           if(savedNewCriterion.get(i).getName() == name)
-               return i;
-       }
-       return -1;
-   }
+//   private int useNameFindIndex(String name){
+//       for (int i = 0; i < savedNewCriterion.size(); i++){
+//           if(savedNewCriterion.get(i).getName() == name)
+//               return i;
+//       }
+//       return -1;
+//   }
 
    // When adding course work is finished (Click OK), a "Course" object is initialized.
    public void actionPerformed(ActionEvent e) {
@@ -239,7 +245,8 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        break;
                    case 2:
                        returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
-                               savedNewCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
+                               this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()));
+
                        //mainFrame.setCurrentCourse(returnCourse2);
                        mainFrame.addCourse(returnCourse);
                        this.mainFrame.setEnabled(true);
@@ -278,15 +285,27 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
            radioButtonIndex = 2;
            previousCourseComboBox.setEnabled(true);
 
-//            assignmentNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfAssignments()));
-//            assignmentWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfAssignments()));
-//            examNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfExams()));
-//            examWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfExams()));
-//            projectNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfProjects()));
-//            projectWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfProjects()));
-//            participationNumberTextField.setText(String.valueOf(1));
-//            participationWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfAttendance()));
+           String previousCategory = new String("");
+           String previousNumber = new String("");
+           String previousWeight = new String("");
+           System.out.println(previousCriterion.size());
+//           Cate n1 = previousCriterion.get(previousCourseComboBox.getSelectedIndex())
+           System.out.println("aaaa " + this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(0).getNumberOfTasks());
+           System.out.println("aaaa " + this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(1).getNumberOfTasks());
+           for (int i = 0; i < previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().size(); i++){
+//               System.out.println("aaaa0" + previousCourseComboBox.getSelectedIndex());
+//               System.out.println(this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getName());
+               previousCategory += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getName();
+               previousCategory += "\n";
+               previousNumber += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getNumberOfTasks();
+               previousNumber += "\n";
+               previousWeight += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getWeight();
+               previousWeight += "\n";
+           }
 
+           categoryTextArea.setText(previousCategory);
+           numberTextArea.setText(previousNumber);
+           weightTextArea.setText(previousWeight);
        }
    }
 
@@ -312,24 +331,6 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
            weightTextArea.setEditable(false);
            radioButtonIndex = 2;
            previousCourseComboBox.setEnabled(true);
-
-           List<NewCriterion> previousCriterion = new ArrayList<>();
-           File file = new File("pre//");
-           File[] fs = file.listFiles();
-           for(File f:fs){
-               NewCriterion newCriterion = new NewCriterion();
-               previousCriterion.add(newCriterion.readFromFile(f.toString()));
-           }
-
-
-//            assignmentNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfAssignments()));
-//            assignmentWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfAssignments()));
-//            examNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfExams()));
-//            examWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfExams()));
-//            projectNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfProjects()));
-//            projectWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfProjects()));
-//            participationNumberTextField.setText(String.valueOf(1));
-//            participationWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfAttendance()));
 
        }
        else if(e.getSource() == customizedWeightRadioButton){
