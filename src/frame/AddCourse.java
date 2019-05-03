@@ -27,13 +27,13 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
    protected JButton okButton, resetButton;
    protected JLabel courseIDLabel, courseNameLabel, semesterLabel, weightSettingLabel, previousYearLabel,
             categoryLabel, numberLabel, weightLabel;
-   protected JTextField courseIDTextField, courseNameTextField, semesterTextField;
+   protected JTextField courseIDTextField, courseNameTextField;
    protected JTextArea categoryTextArea, numberTextArea, weightTextArea;
    protected JPanel courseIDPanel, courseNamePanel, semesterPanel, weightSettingLabelPanel, weightSettingRadioButtonPanel, previousYearPanel,
             categoryPanel, numberPanel, weightPanel, buttonPanel, nullPanel;
    protected ButtonGroup weightGroup;
    protected JRadioButton defaultWeightRadioButton, previousWeightRadioButton, customizedWeightRadioButton;
-   protected JComboBox<String> yearComboBox, previousCourseComboBox;
+   protected JComboBox<String> semesterComboBox, yearComboBox, previousCourseComboBox;
    private int radioButtonIndex;
    private Category singelCategory;
    private List<Category> returnCategoryList;
@@ -74,6 +74,9 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        numberLabel = new JLabel("Number");
        weightLabel = new JLabel("Weight");
 
+       String[] semesterList = new String[]{"Spring", "Summer", "Fall"};
+       semesterComboBox = new JComboBox<String>(semesterList);
+
        String[] yearList = new String[]{"2018", "2019", "2020", "2021"};
        yearComboBox = new JComboBox<String>(yearList);
 
@@ -87,7 +90,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
 
        courseIDTextField = new JTextField(13);
        courseNameTextField = new JTextField(13);
-       semesterTextField = new JTextField(4);
+//       semesterComboBox
 
        categoryTextArea = new JTextArea("", 5, 10);
        categoryTextArea.setEditable(true);
@@ -118,7 +121,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        courseNamePanel.add(courseNameTextField);
 
        semesterPanel.add(semesterLabel);
-       semesterPanel.add(semesterTextField);
+       semesterPanel.add(semesterComboBox);
        semesterPanel.add(yearComboBox);
 
        weightSettingLabelPanel.add(weightSettingLabel);
@@ -228,14 +231,14 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        for (int i = 0; i < categoryElement.length; i++)
                            returnCategoryList.add(new Category(categoryElement[i], Double.parseDouble(weightElement[i]), Integer.parseInt(numberElement[i])));
                        tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
-                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
                        mainFrame.addCourse(returnCourse);
                        this.mainFrame.setEnabled(true);
                        this.dispose();
                        break;
                    case 2:
-                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
                                savedNewCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())));
                        //mainFrame.setCurrentCourse(returnCourse2);
                        mainFrame.addCourse(returnCourse);
@@ -249,7 +252,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                        for (int i = 0; i < categoryElement.length; i++)
                            returnCategoryList.add(new Category(categoryElement[i], Double.parseDouble(weightElement[i]), Integer.parseInt(numberElement[i])));
                        tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
-                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterTextField.getText(), yearComboBox.getSelectedItem().toString(),
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
                                tempCriterion);
                        mainFrame.addCourse(returnCourse);
                        this.mainFrame.setEnabled(true);
@@ -260,7 +263,6 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        else if (e.getActionCommand() == "Reset") {
            courseIDTextField.setText("");
            courseNameTextField.setText("");
-           semesterTextField.setText("");
            categoryTextArea.setText("");
            numberTextArea.setText("");
            weightTextArea.setText("");
@@ -311,6 +313,15 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
            radioButtonIndex = 2;
            previousCourseComboBox.setEnabled(true);
 
+           List<NewCriterion> previousCriterion = new ArrayList<>();
+           File file = new File("pre//");
+           File[] fs = file.listFiles();
+           for(File f:fs){
+               NewCriterion newCriterion = new NewCriterion();
+               previousCriterion.add(newCriterion.readFromFile(f.toString()));
+           }
+
+
 //            assignmentNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfAssignments()));
 //            assignmentWeightTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getWeightsOfAssignments()));
 //            examNumberTextField.setText(String.valueOf(savedCriterion.get(useNameFindIndex(previousCourseComboBox.getSelectedItem().toString())).getNumberOfExams()));
@@ -331,7 +342,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
        }
    }
 
-   private static boolean isNumeric(String str){
+   private boolean isNumeric(String str){
        Pattern pattern = Pattern.compile("[0-9]*");
        return pattern.matcher(str).matches();
    }
@@ -382,7 +393,6 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         if(radioButtonIndex == 1) {
             if(courseIDTextField.getText().equals("") ||
                     courseNameTextField.getText().equals("") ||
-                    semesterTextField.getText().equals("") ||
                     categoryTextArea.getText().equals("") ||
                     numberTextArea.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Inputted information is incomlplete!", "Info",JOptionPane.WARNING_MESSAGE);
@@ -406,8 +416,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         }
         else if(radioButtonIndex == 2){
             if(courseIDTextField.getText().equals("") ||
-                    courseNameTextField.getText().equals("") ||
-                    semesterTextField.getText().equals("")){
+                    courseNameTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Inputted information is incomlplete!", "Info",JOptionPane.WARNING_MESSAGE);
                 return false;
             }
@@ -417,7 +426,6 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         else if(radioButtonIndex == 3){
             if(courseIDTextField.getText().equals("") ||
                     courseNameTextField.getText().equals("") ||
-                    semesterTextField.getText().equals("") ||
                     categoryTextArea.getText().equals("") ||
                     numberTextArea.getText().equals("") ||
                     weightTextArea.getText().equals("")) {
