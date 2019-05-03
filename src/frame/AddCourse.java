@@ -344,7 +344,11 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
 
    private boolean isNumeric(String str){
        Pattern pattern = Pattern.compile("[0-9]*");
-       return pattern.matcher(str).matches();
+       if(pattern.matcher(str).matches()){
+          if(Integer.valueof(str) > 0)
+             return true;
+          else false;
+       }
    }
 
    private boolean isDouble(String str) {
@@ -455,7 +459,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                     }
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "All the number item must be intager bigger than 0!", "Info", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "All the number item must be integer bigger than 0!", "Info", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
             }
