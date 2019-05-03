@@ -455,7 +455,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                     }
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "All the number item must be intager!", "Info", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "All the number item must be intager bigger than 0!", "Info", JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
             }
