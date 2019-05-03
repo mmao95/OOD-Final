@@ -32,11 +32,19 @@ public class AddingPanel extends JPanel {
     //private JComboBox categoryBox;
     private JComboBox addingBox;
     private JButton addStudent;
+<<<<<<< HEAD
     //private JButton addSubCategory;
     private JButton addCategory;
     private JPanel rightPanel;
     //String[] categories = new String[]{};
     String[] addings = new String[]{"", "Student", "Category", "SubCategory"};
+
+    private String Id = "";
+=======
+    private JButton addSubCategory;
+    private JButton addCategory;
+    String[] categories = new String[]{};
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
 
     private String Id = "";
 
@@ -83,6 +91,11 @@ public class AddingPanel extends JPanel {
         addStudent.addActionListener(e -> {
             if (course != null) {
                 new AddStudentFrame(mainFrame, course, this);
+<<<<<<< HEAD
+=======
+//                course.enrollStudent(new Student(Id, new Name(), ""));
+//                mainFrame.update(course);
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             }
         });
         addStudent.setPreferredSize(new Dimension(128, 54));
@@ -95,6 +108,25 @@ public class AddingPanel extends JPanel {
                 //course.updateGrade();
                 course.addCategory();
                 mainFrame.update(course);
+<<<<<<< HEAD
+=======
+            }
+        });
+        addCategory.setPreferredSize(new Dimension(128, 54));
+
+        /*** Right Part ***/
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        addSubCategory = new JButton("Add column");
+        addSubCategory.addActionListener(e-> {
+            if (course == null)
+                return;
+            String cate = categories[categoryBox.getSelectedIndex()];
+            for (int i = 0 ; i < course.getCcriterion().getCategories().size() ; i++) {
+                Category temp = course.getCcriterion().getCategories().get(i);
+                if (temp.getName().equals(cate)) {
+                    course.getCcriterion().addTask(i);
+                }
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             }
         });
         addCategory.setPreferredSize(new Dimension(128, 54));
@@ -129,11 +161,17 @@ public class AddingPanel extends JPanel {
         cards.add(new AddSubCategory(mainFrame, course), subcategory);
 
         /*** Add components to main panel ***/
+<<<<<<< HEAD
         this.add(controller);
         this.add(cards);
         //this.add(addStudent);
         //this.add(rightPanel);
         //this.add(addCategory);
+=======
+        this.add(addStudent, BorderLayout.WEST);
+        this.add(rightPanel, BorderLayout.CENTER);
+        this.add(addCategory, BorderLayout.EAST);
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
 
     }
 
@@ -149,6 +187,10 @@ public class AddingPanel extends JPanel {
 //            categoryBox.addItem(str);
 //        }
 //    }
+
+    public void setId(String id) {
+        this.Id = id;
+    }
 
     public void setId(String id) {
         this.Id = id;

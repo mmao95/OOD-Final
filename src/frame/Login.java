@@ -78,10 +78,15 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand()=="Login") {
             boolean index = judgeInput();
+<<<<<<< HEAD
             if(index) {
                 mainFrame = new MainFrame();
                 this.dispose();
             }
+=======
+            if(index)
+                mainFrame = new MainFrame();
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         }
         else if (e.getActionCommand()=="Reset") {
             userNameTextField.setText("");

@@ -77,7 +77,10 @@ public class MainFrame extends JFrame {
     private Class[] type = {};
 
     private static final String fileDir = "course//";
+<<<<<<< HEAD
     private static final String criDir = "pre//";
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
     private File directory;
 
     private void initialization() {
@@ -97,13 +100,19 @@ public class MainFrame extends JFrame {
             int retrival = chooser.showSaveDialog(null);
             if (retrival == JFileChooser.APPROVE_OPTION) {
                 try {
+<<<<<<< HEAD
                     currentCourse.getCcriterion().writeToFile(criDir + chooser.getSelectedFile());
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
                     currentCourse.writeToFile(fileDir + chooser.getSelectedFile() + ".txt");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
+<<<<<<< HEAD
             currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
         });
         final JMenuItem exitMenuItem = new JMenuItem("Exit");
@@ -117,6 +126,12 @@ public class MainFrame extends JFrame {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
             DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
 
+<<<<<<< HEAD
+=======
+            System.out.println(node.getUserObject());
+            System.out.println(parent.getUserObject());
+
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             /** Remove File ***/
             for (String fileName : directory.list()) {
                 //Remove all semester
@@ -174,6 +189,7 @@ public class MainFrame extends JFrame {
         importCourseMenuItem.addActionListener(e-> {
             JFileChooser jFileChooser = new JFileChooser(System.getProperty("user.dir"));
             jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+<<<<<<< HEAD
             jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("json(*.json)", "json"));
             jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("text(*.txt)", "txt"));
             jFileChooser.showDialog(this, "Select");
@@ -192,6 +208,15 @@ public class MainFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "File type illegal or unreadable!", "Info", JOptionPane.WARNING_MESSAGE);
                 }
             }
+=======
+            jFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("text(*.txt, *.json)", "txt", "json"));
+            jFileChooser.showDialog(this, "Select");
+
+            Course course = ReadRawData.readRawData(jFileChooser.getSelectedFile().getAbsolutePath());
+
+            if (course != null)
+                addCourse(course, root);
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         });
         courseMenu.add(newCourseMenuItem);
         courseMenu.add(importCourseMenuItem);
@@ -220,12 +245,18 @@ public class MainFrame extends JFrame {
             if (node.isRoot() && node.isLeaf()) {
                 JOptionPane.showMessageDialog(null, "Please create or import course!", "Info", JOptionPane.WARNING_MESSAGE);
                 return;
+<<<<<<< HEAD
             } else if (node.isLeaf()) {
                 DefaultMutableTreeNode potentialRoot = (DefaultMutableTreeNode) node.getParent();
                 if (potentialRoot.isRoot()) {
                     JOptionPane.showMessageDialog(null, "This course does not have any semesters", "Info", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+=======
+            } else if (node.getParent().getParent() == null && node.getLastChild() == null) {
+                JOptionPane.showMessageDialog(null, "This course does not have any semesters", "Info", JOptionPane.WARNING_MESSAGE);
+            } else if (node.isLeaf()) {
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
                 try {
                     //Clear selection first
                     //If index of the selected item does not exist in another table
@@ -235,6 +266,10 @@ public class MainFrame extends JFrame {
                     DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
                     Course course = courseMap.get(parent.getUserObject()).get(nodeInfo);
                     update(course);
+<<<<<<< HEAD
+=======
+                    //setUpGradeTable(course.getCcriterion(), course.getList());
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
                     currentCourse = course;
                 } catch (NullPointerException exception) {
                     exception.printStackTrace();
@@ -258,7 +293,10 @@ public class MainFrame extends JFrame {
             }
 
             Color color = getForeground();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);
                 DefaultTableModel model =(DefaultTableModel) this.getModel();
@@ -434,7 +472,10 @@ public class MainFrame extends JFrame {
                     for (String courseName : courseMap.keySet()) {
                         for (String semester : courseMap.get(courseName).keySet()) {
                             Course course = courseMap.get(courseName).get(semester);
+<<<<<<< HEAD
                             course.getCcriterion().writeToFile(criDir + courseName + "_" + semester);
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
                             course.writeToFile(fileDir + courseName + "_" + semester + ".txt");
                         }
                     }
@@ -452,9 +493,12 @@ public class MainFrame extends JFrame {
         directory = new File(fileDir);
         if (!directory.exists())
             directory.mkdir();
+<<<<<<< HEAD
         File cri = new File(criDir);
         if (!cri.exists())
             cri.mkdir();
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         initialization();
         try {
             setUpTreeNodes();
@@ -469,8 +513,13 @@ public class MainFrame extends JFrame {
             //System.out.println(s);   591_fall2019.txt
             Course readCourse = new Course();
             Course temp = readCourse.readFromFile(fileDir + s);
+<<<<<<< HEAD
             if (temp != null)
                 addCourse(temp);
+=======
+
+            addCourse(temp);
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         }
     }
 
@@ -585,8 +634,11 @@ public class MainFrame extends JFrame {
         if (columnGroups.size() == 0) {
             if (category.equals("Extra")) {
                 currentCourse.getsGrade(student).getExtra().getNote().setNote(comment);
+<<<<<<< HEAD
 
                 currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
                 currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
             } else {
                 System.out.println("Cannot add a comment to non-grade items");
@@ -599,7 +651,10 @@ public class MainFrame extends JFrame {
             grade.getCategory(header.findIndexOfGroup(category)).get(subCategoryId - 1).getNote().setNote(comment);
 
             currentCourse.getList().put(student, grade);
+<<<<<<< HEAD
             currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
         }
     }
@@ -634,8 +689,12 @@ public class MainFrame extends JFrame {
         currentCourse.setCcriterion(newCriterion);
         currentCourse.calculateAll();
         update(currentCourse);
+<<<<<<< HEAD
 
         currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+=======
+        //setUpGradeTable(newCriterion, currentCourse.getList());
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
     }
 
@@ -790,7 +849,7 @@ public class MainFrame extends JFrame {
             case "Name":
                 String[] name = value.split(" ");
                 if (name.length == 2) {
-                    student.setName(name[0], "", name[1]);
+                    student.setName(name[0], null, name[1]);
                 } else if (name.length == 3) {
                     student.setName(name[0], name[1], name[2]);
                 }
@@ -829,7 +888,10 @@ public class MainFrame extends JFrame {
         currentCourse.getList().put(student, grade);
         currentCourse.calculateAll();
 
+<<<<<<< HEAD
         currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+=======
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
 
         /*** Update Map ***/

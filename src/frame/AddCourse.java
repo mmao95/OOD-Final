@@ -31,6 +31,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
     protected JTextArea categoryTextArea, numberTextArea, weightTextArea;
     protected JPanel courseIDPanel, courseNamePanel, semesterPanel, weightSettingLabelPanel, weightSettingRadioButtonPanel, previousYearPanel,
             categoryPanel, numberPanel, weightPanel, buttonPanel, nullPanel;
+<<<<<<< HEAD
     protected ButtonGroup weightGroup;
     protected JRadioButton defaultWeightRadioButton, previousWeightRadioButton, customizedWeightRadioButton;
     protected JComboBox<String> semesterComboBox, yearComboBox, previousCourseComboBox;
@@ -93,6 +94,70 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         for (int i = 0; i < previousCriterion.size(); i++)
             previousCourseComboBox.addItem(previousCriterion.get(i).getName());
         previousCourseComboBox.addActionListener(this);
+=======
+   protected ButtonGroup weightGroup;
+   protected JRadioButton defaultWeightRadioButton, previousWeightRadioButton, customizedWeightRadioButton;
+   protected JComboBox<String> semesterComboBox, yearComboBox, previousCourseComboBox;
+   private int radioButtonIndex;
+   private Category singelCategory;
+   private List<Category> returnCategoryList;
+   private List<NewCriterion> previousCriterion;
+   private MainFrame mainFrame;
+
+   public AddCourse(MainFrame inputMainFrame) throws IOException, ClassNotFoundException{
+       // TODO Auto-generated constructor stub
+
+       this.mainFrame = inputMainFrame;
+
+       returnCategoryList = new ArrayList<>();
+
+       okButton = new JButton("OK");
+       okButton.addActionListener(this);
+       resetButton = new JButton("Reset");
+       resetButton.addActionListener(this);
+
+       weightGroup = new ButtonGroup();
+       defaultWeightRadioButton = new JRadioButton("Default (Average) ");
+       previousWeightRadioButton = new JRadioButton("Previous ");
+       customizedWeightRadioButton = new JRadioButton("Customized ");
+       defaultWeightRadioButton.addItemListener(this);
+       previousWeightRadioButton.addItemListener(this);
+       customizedWeightRadioButton.addItemListener(this);
+       weightGroup.add(defaultWeightRadioButton);
+       weightGroup.add(previousWeightRadioButton);
+       weightGroup.add(customizedWeightRadioButton);
+       radioButtonIndex = 0;
+
+       courseIDLabel = new JLabel("Course ID                                      ");
+       courseNameLabel = new JLabel("Course Name                               ");
+       semesterLabel = new JLabel("Semester                                          ");
+       weightSettingLabel = new JLabel("Weight Setting                                                                                ");
+       previousYearLabel = new JLabel("Saved criterion                                               ");
+       categoryLabel = new JLabel("Category");
+       numberLabel = new JLabel("Number");
+       weightLabel = new JLabel("Weight");
+
+       String[] semesterList = new String[]{"Spring", "Summer", "Fall"};
+       semesterComboBox = new JComboBox<String>(semesterList);
+
+       String[] yearList = new String[]{"2018", "2019", "2020", "2021"};
+       yearComboBox = new JComboBox<String>(yearList);
+
+       List<String> previousCourseList = new ArrayList<>();
+//        String[] previousCourseList = new String[]{"cs530", "cs542", "cs585", "cs640"};
+       previousCourseComboBox = new JComboBox<String>(previousCourseList.toArray(new String[0]));
+       previousCriterion = new ArrayList<>();
+       File file = new File("pre//");
+       File[] fs = file.listFiles();
+       for(File f:fs){
+           NewCriterion newCriterion = new NewCriterion();
+           previousCriterion.add(newCriterion.readFromFile(f.toString()));
+       }
+
+       for (int i = 0; i < previousCriterion.size(); i++)
+           previousCourseComboBox.addItem(previousCriterion.get(i).getName());
+       previousCourseComboBox.addActionListener(this);
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
 
         courseIDTextField = new JTextField(13);
         courseNameTextField = new JTextField(13);
@@ -195,6 +260,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
                 dispose();
             }
         });
+<<<<<<< HEAD
     }
 
     public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
@@ -208,6 +274,21 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         List<T> dest = (List<T>) in.readObject();
         return dest;
     }
+=======
+   }
+
+   public static <T> List<T> deepCopy(List<T> src) throws IOException, ClassNotFoundException {
+       ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+       ObjectOutputStream out = new ObjectOutputStream(byteOut);
+       out.writeObject(src);
+
+       ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
+       ObjectInputStream in = new ObjectInputStream(byteIn);
+       @SuppressWarnings("unchecked")
+       List<T> dest = (List<T>) in.readObject();
+       return dest;
+   }
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
 
 //   private int useNameFindIndex(String name){
 //       for (int i = 0; i < savedNewCriterion.size(); i++){
@@ -217,6 +298,7 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
 //       return -1;
 //   }
 
+<<<<<<< HEAD
     // When adding course work is finished (Click OK), a "Course" object is initialized.
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() == "OK") {
@@ -363,6 +445,154 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
     }
 
     private boolean arrayIsNumeric(String[] arr){
+=======
+   // When adding course work is finished (Click OK), a "Course" object is initialized.
+   public void actionPerformed(ActionEvent e) {
+       if (e.getActionCommand() == "OK") {
+           boolean index = judgeInput();
+           String[] categoryElement;
+           String[] numberElement;
+           String[] weightElement;
+           NewCriterion tempCriterion;
+           Course returnCourse;
+           if (index)
+               switch (radioButtonIndex){
+                   case 1:
+                       categoryElement = categoryTextArea.getText().split("\n");
+                       numberElement = numberTextArea.getText().split("\n");
+                       weightElement = new String[categoryElement.length];
+                       for (int i = 0; i < categoryElement.length; i++)
+                           weightElement[i] = String.valueOf(1.0 / categoryElement.length);
+                       for (int i = 0; i < categoryElement.length; i++)
+                           returnCategoryList.add(new Category(categoryElement[i], Double.parseDouble(weightElement[i]), Integer.parseInt(numberElement[i])));
+                       tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
+                               tempCriterion);
+                       mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
+                       this.dispose();
+                       break;
+                   case 2:
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
+                               this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()));
+
+                       //mainFrame.setCurrentCourse(returnCourse2);
+                       mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
+                       this.dispose();
+                       break;
+                   case 3:
+                       categoryElement = categoryTextArea.getText().split("\n");
+                       numberElement = numberTextArea.getText().split("\n");
+                       weightElement = weightTextArea.getText().split("\n");
+                       for (int i = 0; i < categoryElement.length; i++)
+                           returnCategoryList.add(new Category(categoryElement[i], Double.parseDouble(weightElement[i]), Integer.parseInt(numberElement[i])));
+                       tempCriterion = new NewCriterion(returnCategoryList, courseNameTextField.getText());
+                       returnCourse = new Course(courseNameTextField.getText(), courseIDTextField.getText(), semesterComboBox.getSelectedItem().toString(), yearComboBox.getSelectedItem().toString(),
+                               tempCriterion);
+                       mainFrame.addCourse(returnCourse);
+                       this.mainFrame.setEnabled(true);
+                       this.dispose();
+                       break;
+               }
+       }
+       else if (e.getActionCommand() == "Reset") {
+           courseIDTextField.setText("");
+           courseNameTextField.setText("");
+           categoryTextArea.setText("");
+           numberTextArea.setText("");
+           weightTextArea.setText("");
+           weightGroup.clearSelection();
+           radioButtonIndex = 0;
+           previousCourseComboBox.setEnabled(true);
+       }
+       else if (e.getSource () == previousCourseComboBox){
+           clearCourseItems();
+           categoryTextArea.setEditable(false);
+           numberTextArea.setEditable(false);
+           weightTextArea.setEditable(false);
+           radioButtonIndex = 2;
+           previousCourseComboBox.setEnabled(true);
+
+           String previousCategory = new String("");
+           String previousNumber = new String("");
+           String previousWeight = new String("");
+           System.out.println(previousCriterion.size());
+//           Cate n1 = previousCriterion.get(previousCourseComboBox.getSelectedIndex())
+           System.out.println("aaaa " + this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(0).getNumberOfTasks());
+           System.out.println("aaaa " + this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(1).getNumberOfTasks());
+           for (int i = 0; i < previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().size(); i++){
+//               System.out.println("aaaa0" + previousCourseComboBox.getSelectedIndex());
+//               System.out.println(this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getName());
+               previousCategory += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getName();
+               previousCategory += "\n";
+               previousNumber += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getNumberOfTasks();
+               previousNumber += "\n";
+               previousWeight += this.previousCriterion.get(previousCourseComboBox.getSelectedIndex()).getCategories().get(i).getWeight();
+               previousWeight += "\n";
+           }
+
+           categoryTextArea.setText(previousCategory);
+           numberTextArea.setText(previousNumber);
+           weightTextArea.setText(previousWeight);
+       }
+   }
+
+   private void clearCourseItems() {
+       categoryTextArea.setText("");
+       numberTextArea.setText("");
+       weightTextArea.setText("");
+   }
+
+   public void itemStateChanged(ItemEvent e){
+       if(e.getSource() == defaultWeightRadioButton){
+           clearCourseItems();
+           categoryTextArea.setEditable(true);
+           numberTextArea.setEditable(true);
+           weightTextArea.setEditable(false);
+           radioButtonIndex = 1;
+           previousCourseComboBox.setEnabled(false);
+       }
+       else if(e.getSource() == previousWeightRadioButton){
+           clearCourseItems();
+           categoryTextArea.setEditable(false);
+           numberTextArea.setEditable(false);
+           weightTextArea.setEditable(false);
+           radioButtonIndex = 2;
+           previousCourseComboBox.setEnabled(true);
+
+       }
+       else if(e.getSource() == customizedWeightRadioButton){
+           clearCourseItems();
+           categoryTextArea.setEditable(true);
+           numberTextArea.setEditable(true);
+           weightTextArea.setEditable(true);
+           radioButtonIndex = 3;
+           previousCourseComboBox.setEnabled(false);
+       }
+   }
+
+   private boolean isNumeric(String str){
+       Pattern pattern = Pattern.compile("[0-9]*");
+       return pattern.matcher(str).matches();
+   }
+
+   private boolean isDouble(String str) {
+       if (null == str || "".equals(str)) {
+           return false;
+       }
+       Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
+       if(pattern.matcher(str).matches()){
+           if(Double.parseDouble(str) >= 0.0 && Double.parseDouble(str) <= 1.0)
+               return true;
+           else
+               return false;
+       }
+       return false;
+   }
+
+  private boolean arrayIsNumeric(String[] arr){
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
         boolean returnValue = true;
         for (int i = 0; i < arr.length; i++){
             if(!isNumeric(arr[i]))

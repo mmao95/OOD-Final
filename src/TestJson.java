@@ -1,5 +1,4 @@
-package course;
-
+import course.*;
 import grade.Grade;
 import grade.GradeComp;
 import org.json.simple.JSONArray;
@@ -9,24 +8,23 @@ import org.json.simple.parser.ParseException;
 import personal.Name;
 import personal.Student;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
- * @description: This is a class to read raw data from json file
+ * @description: this is used to test reading raw json data
  * @author: Zhizhou Qiu
  * @create: 04-23-2019
  **/
-public class ReadRawData {
+public class TestJson {
+    public static void main(String[] args){
 
-    public static Course readRawData(String path) {
         JSONParser jsonParser = new JSONParser();
 
-        try {
-            FileReader fileReader = new FileReader(path);
+        try{
+            FileReader fileReader = new FileReader(new File(args[0]));
 
             Object obj = jsonParser.parse(fileReader);
 
@@ -79,8 +77,7 @@ public class ReadRawData {
                 Student student = new Student(
                         jsonObject.get("id").toString(),
                         createName(jsonObject),
-                        jsonObject.get("email").toString(),
-                        jsonObject.get("type").toString()
+                        jsonObject.get("email").toString()
                 );
                 course.enrollStudent(student);
                 // get the mapping Grade object
@@ -96,36 +93,47 @@ public class ReadRawData {
                     for (int j = 0; j < gradeComps.size(); j++){
                         GradeComp gradeComp = gradeComps.get(j);
                         String key = prefix+name+(j+1);
+                        System.out.println(key);
                         String score = jsonObject.get(key).toString();
+                        System.out.println("score: " + score);
                         gradeComp.setScore(score);
                     }
                 }
+                System.out.println("===================");
 
                 gradeMap.put(student,g);
 
             }
+
             course.calculateAll();
-            return course;
-        } catch (IOException e) {
+            String[] res = course.getAnalysis();
+            for (String s : res){
+                System.out.println(s);
+            }
+
+
+        } catch (IOException e){
             e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (ParseException e){
             e.printStackTrace();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e){
             e.printStackTrace();
         }
 
-        return new Course();
+
     }
+
 
     private static Name createName(JSONObject jsonObject){
         String name = jsonObject.get("name").toString();
         String[] arr = name.split(" ");
-        if (arr.length == 0) return new Name();
-        else if (arr.length == 1) return new Name(arr[0]);
-        else if (arr.length == 2) return new Name(arr[0],"", arr[1]);
+        if (arr.length == 0) return new Name(null, null, null);
+        else if (arr.length == 1) return new Name(arr[0],null,null);
+        else if (arr.length == 2) return new Name(arr[0],null, arr[1]);
         else if (arr.length == 3) return new Name(arr[0], arr[1], arr[2]);
-        else return new Name(name);
+        else return new Name(name, null,null);
     }
+
 
     private static final String prefix = "gradeOf";
 }

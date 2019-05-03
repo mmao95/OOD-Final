@@ -40,7 +40,11 @@ public class SortTableModel extends DefaultTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
+<<<<<<< HEAD
         if (column == 1 || column == getColumnCount() - 1 || column == 3) {
+=======
+        if (column == 1 || column == getColumnCount() - 1) {
+>>>>>>> 6a64378c896bcc1ee8b33c0146068a04a68fa860
             return false;
         }
         return true;
