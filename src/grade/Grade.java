@@ -15,10 +15,12 @@ public class Grade implements Serializable,Comparable{
     private List<List<GradeComp>> grade;
     private GradeComp extraCredit;
     private double ttscore = 0;
+    private String wd;
     //default constructor
     public Grade(){
         grade = new ArrayList<>();
         extraCredit = new GradeComp();
+        wd = "";
     }
     public Grade(NewCriterion c, String id){
         uid = id;
@@ -31,6 +33,7 @@ public class Grade implements Serializable,Comparable{
             }
             grade.add(temp);
         }
+        wd = "";
     }
 
     //get list of grade of one category
@@ -74,6 +77,14 @@ public class Grade implements Serializable,Comparable{
 
     public int getCatelength(int cat){
         return grade.get(cat).size();
+    }
+
+    public void withDraw(){
+        wd = "W";
+    }
+
+    public boolean ifWithDraw(){
+        return wd == "W";
     }
     
     public void addList(){

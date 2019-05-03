@@ -97,7 +97,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double dd;
         List<Grade> sortList = new ArrayList<>();
         for (Student key : cgrade.keySet()) {
-            if(!key.ifWithdraw()){
+            if(!getsGrade(key).ifWithDraw()){
                 tt += cgrade.get(key).getTtscore();
                 maxd = Math.max(maxd,cgrade.get(key).getTtscore());
                 mind = Math.min(mind,cgrade.get(key).getTtscore());
@@ -137,7 +137,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
         double fs = ccriterion.getCategories().get(cat).getCriComps().get(index).getToatalScore();
         double sc;
         for (Student key : cgrade.keySet()) {
-            if(!key.ifWithdraw()){
+            if(!getsGrade(key).ifWithDraw()){
                 String rawsc = cgrade.get(key).getOne(cat,index).getScore();
                 if (rawsc.charAt(rawsc.length() - 1) == '%') {
                     sc = Double.valueOf(rawsc.substring(0, rawsc.length() - 1)) / 100;
@@ -208,7 +208,7 @@ public class Course implements Analysis,IO<Course>,Serializable{
     }
 
     public void withDraw(Student s){
-        s.withDraw();
+        getsGrade(s).withDraw();
     }
 
     @Override

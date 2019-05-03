@@ -6,7 +6,6 @@ public class Student implements Serializable {
     private String id;
     private Name name;
     private String email;
-    private String withdraw;
 
     /**
      * @Description: Constructor of Student
@@ -17,7 +16,6 @@ public class Student implements Serializable {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.withdraw = "N";
     }
     /**
      * @Description: default constructor
@@ -28,7 +26,6 @@ public class Student implements Serializable {
         this.id = "";
         this.name = new Name();
         this.email = "";
-        this.withdraw = "N";
     }
 
     /**
@@ -50,14 +47,6 @@ public class Student implements Serializable {
 
     public String getEmail() {
         return email;
-    }
-
-    public void withDraw(){
-        withdraw = "W";
-    }
-
-    public boolean ifWithdraw(){
-        return withdraw=="W";
     }
 
     public void setName(String first, String middle, String last) {
