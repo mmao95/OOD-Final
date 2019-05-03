@@ -79,7 +79,8 @@ public class ReadRawData {
                 Student student = new Student(
                         jsonObject.get("id").toString(),
                         createName(jsonObject),
-                        jsonObject.get("email").toString()
+                        jsonObject.get("email").toString(),
+                        jsonObject.get("type").toString()
                 );
                 course.enrollStudent(student);
                 // get the mapping Grade object
