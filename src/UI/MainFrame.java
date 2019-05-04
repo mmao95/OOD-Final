@@ -149,7 +149,8 @@ public class MainFrame extends JFrame {
             sortTableModel.setDataVector(empty, empty);
 
             CheckBoxTableModel checkBoxTableModel = (CheckBoxTableModel) fixedTable.getModel();
-            checkBoxTableModel.setDataVector(empty, empty);
+            checkBoxTableModel.setColumnCount(0);
+            //checkBoxTableModel.setDataVector(empty, empty);
 
             /*** Reset Bottom Panel ***/
             currentCourse = null;

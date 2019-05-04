@@ -208,14 +208,6 @@ public class AddCourse extends JFrame implements ActionListener, ItemListener {
         return dest;
     }
 
-//   private int useNameFindIndex(String name){
-//       for (int i = 0; i < savedNewCriterion.size(); i++){
-//           if(savedNewCriterion.get(i).getName() == name)
-//               return i;
-//       }
-//       return -1;
-//   }
-
     // When adding course work is finished (Click OK), a "Course" object is initialized.
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() == "OK") {
