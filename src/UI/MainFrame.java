@@ -10,25 +10,24 @@ import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import UI.Bottom.SwitchPanel;
-import UI.Comment.CommentEditor;
-import UI.Comment.CommentRenderer;
-import UI.Header.CheckBox.CheckBoxTableModel;
-import UI.Header.Groupable.ColumnGroup;
-import UI.Header.Groupable.GroupableTableHeader;
+import UI.Table.Header.CheckBox.CheckBoxTableModel;
+import UI.Table.Header.Groupable.ColumnGroup;
+import UI.Table.Header.Groupable.GroupableTableHeader;
+import UI.Bottom.ImagePanel;
+import UI.Table.SortTableModel;
 import course.Category;
 import course.Course;
 import course.ReadRawData;
-import frame.AddCourse;
+import UI.Frames.AddCourse;
 import course.NewCriterion;
-import frame.CommentFrame;
-import frame.SubCategory;
-import frame.TotalCategory;
+import UI.Frames.CommentFrame;
+import UI.Frames.SubCategory;
+import UI.Frames.TotalCategory;
 import grade.Grade;
 import grade.GradeComp;
 import personal.Student;
@@ -36,7 +35,7 @@ import personal.Student;
 /**
  * @Auther: Di Zhu
  * @Date: 04-12-2019 12:19
- * @Description:
+ * @Description: Main interface for user to do grading
  */
 public class MainFrame extends JFrame {
 
@@ -103,8 +102,7 @@ public class MainFrame extends JFrame {
                     ex.printStackTrace();
                 }
             }
-            currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
-            currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
+            saveCourseAndCriterion();
         });
         final JMenuItem exitMenuItem = new JMenuItem("Exit");
         fileMenu.add(saveChangesItem);
@@ -129,7 +127,6 @@ public class MainFrame extends JFrame {
                 }
                 //Remove one semester
                 else {
-                    System.out.println(fileDir + parent.getUserObject() + "_" + node.getUserObject());
                     File temp = new File(fileDir + parent.getUserObject() + "_" + node.getUserObject() + ".txt");
                     temp.delete();
                 }
@@ -260,6 +257,11 @@ public class MainFrame extends JFrame {
             Color color = getForeground();
 
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+
+
+                int modelRow = convertRowIndexToModel(row);
+                //int modelColumn = convertColumnIndexToModel(column);
+
                 Component component = super.prepareRenderer(renderer, row, column);
                 DefaultTableModel model =(DefaultTableModel) this.getModel();
 
@@ -268,11 +270,10 @@ public class MainFrame extends JFrame {
                 List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
 
                 String category = getCategory(column, columnGroups, columnGroups.size() != 0);
-                String stuID = model.getValueAt(row, 1).toString();
+                String stuID = model.getValueAt(modelRow, 1).toString();
                 Student stu = currentCourse.getStudent(stuID);
 
                 if (columnGroups.size() != 0) {
-                    //String category = getCategory(column, columnGroups, true);
                     int subCategory = getSubCategory(column, true);
 
                     if (!currentCourse.getsGrade(stu).getOne(header.findIndexOfGroup(category), subCategory - 1).getNote().getNote().equals("")) {
@@ -360,8 +361,6 @@ public class MainFrame extends JFrame {
         gradeTable.setColumnSelectionAllowed(true);
 
         //South
-        //Object[][] data = new Object[][] { {"a", "b", "c", "d", "e", "f"} };
-        //Object[] header = new Object[]{};
         fixedTable = new JTable();
 
         CheckBoxTableModel defaultTableModel = new CheckBoxTableModel(1, gradeTable.getColumnCount());
@@ -431,6 +430,7 @@ public class MainFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try{
+                    //Save course and criterion information when closing
                     for (String courseName : courseMap.keySet()) {
                         for (String semester : courseMap.get(courseName).keySet()) {
                             Course course = courseMap.get(courseName).get(semester);
@@ -465,6 +465,7 @@ public class MainFrame extends JFrame {
 
     /*** JTree Methods ***/
     private void setUpTreeNodes() {
+        //Set up index tree nodes when initializing the UI.frame
         for (String s : directory.list()) {
             //System.out.println(s);   591_fall2019.txt
             Course readCourse = new Course();
@@ -487,7 +488,7 @@ public class MainFrame extends JFrame {
     }
 
     /*** Table Set-ups ***/
-    //Interface for outside calling
+    //Method for outside calling
     public void update(Course course) {
         update(course, root);
     }
@@ -511,7 +512,7 @@ public class MainFrame extends JFrame {
         updatingFlag = false;
     }
 
-    //Interface for outside calling
+    //Method for outside calling
     public void addCourse(Course course) {
         //Clear selection first
         //If index of the selected item does not exist in another table
@@ -542,7 +543,7 @@ public class MainFrame extends JFrame {
             courseMap.put(courseName, subCourseMap);
         } else if (courseMap.containsKey(courseName)) {
             if (courseMap.get(courseName).containsKey(courseSemester)) {
-                System.out.println("Already exists!");
+                //Do nothing because course of this semester already exists
             } else {
                 //Set up new table model
                 setUpGradeTable(course.getCcriterion(), gradeMap);
@@ -567,16 +568,15 @@ public class MainFrame extends JFrame {
         jTree.scrollPathToVisible(semesterPath);
     }
 
+    //Method for outside calling
     public void updateComment(String comment) {
         updateCellComment(comment);
     }
 
     private void updateCellComment(String comment) {
-        //int selectedRow = gradeTable.getSelectedRow();
         int selectedColumn = gradeTable.getSelectedColumn();
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+        List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
         String category = getCategory(selectedColumn, columnGroups, columnGroups.size() != 0);
         String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
@@ -585,11 +585,10 @@ public class MainFrame extends JFrame {
         if (columnGroups.size() == 0) {
             if (category.equals("Extra")) {
                 currentCourse.getsGrade(student).getExtra().getNote().setNote(comment);
-
-                currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
-                currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
+                saveCourseAndCriterion();
             } else {
-                System.out.println("Cannot add a comment to non-grade items");
+                //Do nothing.
+                //Cannot add comment to such columns
             }
         } else {
             int subCategoryId = getSubCategory(selectedColumn, true);
@@ -599,8 +598,7 @@ public class MainFrame extends JFrame {
             grade.getCategory(header.findIndexOfGroup(category)).get(subCategoryId - 1).getNote().setNote(comment);
 
             currentCourse.getList().put(student, grade);
-            currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
-            currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
+            saveCourseAndCriterion();
         }
     }
 
@@ -609,9 +607,7 @@ public class MainFrame extends JFrame {
             return;
 
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-
-        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+        List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
         if (columnGroups.size() != 0) {
             String category = columnGroups.get(0).getHeaderValue();
@@ -627,16 +623,11 @@ public class MainFrame extends JFrame {
     }
 
     public void updateCriterion(NewCriterion newCriterion) {
-        for (int i = 0 ; i < newCriterion.getCategories().size() ; i++) {
-            System.out.println(newCriterion.getCategories().get(i).getName());
-        }
-
         currentCourse.setCcriterion(newCriterion);
         currentCourse.calculateAll();
         update(currentCourse);
 
-        currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
-        currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
+        saveCourseAndCriterion();
     }
 
     private void setUpGradeTable(NewCriterion criterion, HashMap<Student, Grade> grade) {
@@ -715,7 +706,6 @@ public class MainFrame extends JFrame {
             Category currentCategory = criterion.getCategories().get(i);
             for (int j = 0 ; j < currentCategory.getNumberOfTasks() ; j++) {
                 classes.add(String.class);
-                //classes.add(double.class);
             }
         }
 
@@ -728,7 +718,6 @@ public class MainFrame extends JFrame {
     private void groupingHeaders(NewCriterion criterion) {
         TableColumnModel cm = gradeTable.getColumnModel();
 
-        //Assignment Headers
         int startIndex = 4;
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
         header.getColumnGroups().clear();
@@ -766,8 +755,7 @@ public class MainFrame extends JFrame {
     }
 
     public String getSelectedStudentId() {
-        String stuId = gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
-        return stuId;
+        return gradeTable.getValueAt(gradeTable.getSelectedRow(), 1).toString();
     }
 
     /**
@@ -829,8 +817,7 @@ public class MainFrame extends JFrame {
         currentCourse.getList().put(student, grade);
         currentCourse.calculateAll();
 
-        currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
-        currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
+        saveCourseAndCriterion();
 
         /*** Update Map ***/
         Map<String, Course> subCourseMap = courseMap.get(courseName);
@@ -840,29 +827,12 @@ public class MainFrame extends JFrame {
         update(currentCourse);
     }
 
-    private String getCategory(int selectedColumn, List<ColumnGroup> columnGroups, boolean headerGrouped) {
-        if (headerGrouped) {
-            return columnGroups.get(0).getHeaderValue();
-        } else {
-            return gradeTable.getColumnName(selectedColumn);
-        }
-    }
-
-    private int getSubCategory(int selectedColumn, boolean headerGrouped) {
-        if (headerGrouped)
-            return Integer.parseInt(gradeTable.getColumnName(selectedColumn));
-        else
-            return -1;
-    }
-
     private String getCommentOfSelectedCell(int selectedRow, int selectedColumn) {
         //Get note
         String stuId = gradeTable.getValueAt(selectedRow, 1).toString();
 
         GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-
-        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-        List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+        List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
         String category = getCategory(selectedColumn, columnGroups, columnGroups.size() != 0);
         Student student = currentCourse.getStudent(stuId);
@@ -890,45 +860,26 @@ public class MainFrame extends JFrame {
     private class TableChangedListener implements TableModelListener {
         @Override
         public void tableChanged(TableModelEvent e) {
-            GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
             int selectedColumn = gradeTable.getSelectedColumn();
             int selectedRow = gradeTable.getSelectedRow();
             if (selectedColumn == -1 || selectedRow == -1) {
                 System.out.println("Nothing is selected!");
-            } else if (updatingFlag == true) {
-                System.out.println("Ignore");
+            } else if (updatingFlag) {
+                //Ignore because table is already changing
             } else {
                 //!!Only useful when student id is in the second column!!
                 String stu_id = gradeTable.getValueAt(selectedRow, 1).toString();
                 String value = gradeTable.getValueAt(selectedRow, selectedColumn).toString();
-                //System.out.println(value);
-                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-                List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+
+                List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
                 String category = getCategory(selectedColumn, columnGroups,
                         (columnGroups.size() != 0));
                 int index = getSubCategory(selectedColumn,
                         (columnGroups.size() != 0));
                 saveTableChanges(stu_id, category, index - 1, value);
-//                try {
-//                    saveTableChanges(stu_id, category, index - 1, value);
-//                } catch (NumberFormatException exception) {
-//
-//                }
             }
         }
-    }
-
-    private void createCommentFrame(int selectedRow, int selectedColumn) {
-        new CommentFrame(this, getCommentOfSelectedCell(selectedRow, selectedColumn));
-    }
-
-    private void createSubCategoryFrame(int categoryIndex) {
-        new SubCategory(this, currentCourse.getCcriterion(), categoryIndex);
-    }
-
-    private void createTotalCategoryFrame() {
-        new TotalCategory(this, currentCourse.getCcriterion());
     }
 
     //Listen to mouse clicks
@@ -941,9 +892,7 @@ public class MainFrame extends JFrame {
             if (SwingUtilities.isRightMouseButton(event)) {
                 gradeTable.changeSelection(selectedRow, selectedColumn, false, false);
 
-                GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-                List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+                List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
                 String category = getCategory(selectedColumn, columnGroups, columnGroups.size() != 0);
 
@@ -962,17 +911,13 @@ public class MainFrame extends JFrame {
         public void mousePressed(MouseEvent event) {
             if (event.getClickCount() == 2) {
                 int selectedColumn = gradeTable.columnAtPoint(event.getPoint());
-                int selectedRow = gradeTable.rowAtPoint(event.getPoint());
-                System.out.println(selectedRow);
+                //int selectedRow = gradeTable.rowAtPoint(event.getPoint());
 
                 GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
-                TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
-                List<ColumnGroup> columnGroups = header.getColumnGroups(tc);
+                List<ColumnGroup> columnGroups = getColumnGroups(selectedColumn);
 
                 String category = getCategory(selectedColumn, columnGroups, (columnGroups.size()!=0));
                 if (columnGroups.size() != 0 ) {
-                    //String category = getCategory(selectedColumn, columnGroups,
-                    //        (columnGroups.size() != 0));
                     int categoryIndex = header.findIndexOfGroup(category);
                     createSubCategoryFrame(categoryIndex);
                 } else if (category.equals("Total")) {
@@ -980,6 +925,45 @@ public class MainFrame extends JFrame {
                 }
             }
         }
+    }
+
+    /*** Other Methods ***/
+    private List<ColumnGroup> getColumnGroups(int selectedColumn) {
+        GroupableTableHeader header = (GroupableTableHeader) gradeTable.getTableHeader();
+        TableColumn tc = gradeTable.getColumnModel().getColumn(selectedColumn);
+        return header.getColumnGroups(tc);
+    }
+
+    private String getCategory(int selectedColumn, List<ColumnGroup> columnGroups, boolean headerGrouped) {
+        if (headerGrouped) {
+            return columnGroups.get(0).getHeaderValue();
+        } else {
+            return gradeTable.getColumnName(selectedColumn);
+        }
+    }
+
+    private int getSubCategory(int selectedColumn, boolean headerGrouped) {
+        if (headerGrouped)
+            return Integer.parseInt(gradeTable.getColumnName(selectedColumn));
+        else
+            return -1;
+    }
+
+    private void createCommentFrame(int selectedRow, int selectedColumn) {
+        new CommentFrame(this, getCommentOfSelectedCell(selectedRow, selectedColumn));
+    }
+
+    private void createSubCategoryFrame(int categoryIndex) {
+        new SubCategory(this, currentCourse.getCcriterion(), categoryIndex);
+    }
+
+    private void createTotalCategoryFrame() {
+        new TotalCategory(this, currentCourse.getCcriterion());
+    }
+
+    private void saveCourseAndCriterion() {
+        currentCourse.getCcriterion().writeToFile(criDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3]);
+        currentCourse.writeToFile(fileDir + currentCourse.getInfo()[0] + "_" + currentCourse.getInfo()[2] + currentCourse.getInfo()[3] + ".txt");
     }
 
     /*** Checker ***/

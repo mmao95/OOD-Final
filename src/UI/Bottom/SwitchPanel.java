@@ -1,5 +1,9 @@
 package UI.Bottom;
 
+import UI.Bottom.Functionality.AddingPanel;
+import UI.Bottom.Functionality.RemovePanel;
+import UI.Bottom.Functionality.SearchPanel;
+import UI.Bottom.Functionality.StatisticsPanel;
 import UI.MainFrame;
 import course.Course;
 
@@ -11,7 +15,8 @@ import java.awt.event.ItemListener;
 /**
  * @Auther: Di Zhu
  * @Date: 05-01-2019 12:26
- * @Description:
+ * @Description: Panel that shows at the bottom of MainFrame. User's access to adding,
+ *               removing, show statistics and searching operations.
  */
 public class SwitchPanel extends JPanel {
 
