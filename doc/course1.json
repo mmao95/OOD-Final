@@ -38,7 +38,7 @@
       {
         "name" : "tim",
         "id" : "124",
-        "email" : "tom@email.com",
+        "email" : "tim@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "50",
@@ -49,7 +49,7 @@
       {
         "name" : "jack",
         "id" : "125",
-        "email" : "tom@email.com",
+        "email" : "jack@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "100",
         "gradeOfAssignment2" : "100",
@@ -58,9 +58,9 @@
         "gradeOfExam2" : "100"
       },
       {
-        "name" : "abc",
+        "name" : "liam",
         "id" : "126",
-        "email" : "tom@email.com",
+        "email" : "liam@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "80",
@@ -80,9 +80,9 @@
         "gradeOfExam2" : "10"
       },
       {
-        "name" : "lackey",
+        "name" : "ethan",
         "id" : "128",
-        "email" : "tom@email.com",
+        "email" : "ethan@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "0",
         "gradeOfAssignment2" : "0",
@@ -91,9 +91,9 @@
         "gradeOfExam2" : "0"
       },
       {
-        "name" : "hui",
+        "name" : "Zoey",
         "id" : "129",
-        "email" : "tom@email.com",
+        "email" : "Zoey@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "100",
         "gradeOfAssignment2" : "80",
@@ -113,9 +113,9 @@
         "gradeOfExam2" : "40"
       },
       {
-        "name" : "newyork",
+        "name" : "megan",
         "id" : "1231",
-        "email" : "tom@email.com",
+        "email" : "megan@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "90",
@@ -126,7 +126,7 @@
       {
         "name" : "christin",
         "id" : "1232",
-        "email" : "tom@email.com",
+        "email" : "christin@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "100",
         "gradeOfAssignment2" : "40",
@@ -137,7 +137,7 @@
       {
         "name" : "andy",
         "id" : "1233",
-        "email" : "tom@email.com",
+        "email" : "andy@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "70",

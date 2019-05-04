@@ -61,9 +61,9 @@
         "gradeOfExam3" : "100"
       },
       {
-        "name" : "abc",
+        "name" : "ethan",
         "id" : "126",
-        "email" : "abc@email.com",
+        "email" : "ethan@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "80",
@@ -85,9 +85,9 @@
         "gradeOfExam3" : "10"
       },
       {
-        "name" : "lackey",
+        "name" : "marry",
         "id" : "128",
-        "email" : "lackey@email.com",
+        "email" : "marry@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "0",
         "gradeOfAssignment2" : "0",
@@ -97,9 +97,9 @@
         "gradeOfExam3" : "0"
       },
       {
-        "name" : "hui",
+        "name" : "oliver",
         "id" : "129",
-        "email" : "hui@email.com",
+        "email" : "oliver@email.com",
         "type" : "undergraduate",
         "gradeOfAssignment1" : "100",
         "gradeOfAssignment2" : "80",
@@ -109,9 +109,9 @@
         "gradeOfExam3" : "80"
       },
       {
-        "name" : "ohio",
+        "name" : "liam",
         "id" : "1230",
-        "email" : "ohio@email.com",
+        "email" : "liam@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "70",
         "gradeOfAssignment2" : "70",
@@ -121,9 +121,9 @@
         "gradeOfExam3" : "90"
       },
       {
-        "name" : "newyork",
+        "name" : "sersi",
         "id" : "1231",
-        "email" : "newyork@email.com",
+        "email" : "sersi@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "90",
@@ -140,7 +140,7 @@
         "gradeOfAssignment1" : "100",
         "gradeOfAssignment2" : "40",
         "gradeOfAssignment3" : "80",
-        "gradeOfExam1" : "60",
+        "gradeOfExam1" : "100",
         "gradeOfExam2" : "80",
         "gradeOfExam3" : "80"
       },
@@ -169,9 +169,9 @@
         "gradeOfExam3" : "83"
       },
       {
-        "name" : "yummy",
+        "name" : "ned",
         "id" : "1235",
-        "email" : "yummy@email.com",
+        "email" : "ned@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "90",
         "gradeOfAssignment2" : "50",
@@ -193,9 +193,9 @@
         "gradeOfExam3" : "86"
       },
       {
-        "name" : "oliva",
+        "name" : "sansa",
         "id" : "1237",
-        "email" : "oliva@email.com",
+        "email" : "sansa@email.com",
         "type" : "graduate",
         "gradeOfAssignment1" : "95",
         "gradeOfAssignment2" : "70",

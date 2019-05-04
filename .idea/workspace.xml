@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f22605e-b935-4e68-9db0-b559f05c8a32" name="Default" comment="" />
+    <list default="true" id="3f22605e-b935-4e68-9db0-b559f05c8a32" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/course1.json" beforeDir="false" afterPath="$PROJECT_DIR$/doc/course1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/course2.json" beforeDir="false" afterPath="$PROJECT_DIR$/doc/course2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/course3.json" beforeDir="false" afterPath="$PROJECT_DIR$/doc/course3.json" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,53 +18,26 @@
     <session id="1458782964">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSON" value="3" />
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JSON" value="116" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5808">
-              <caret line="266" column="23" selection-start-line="266" selection-start-column="23" selection-end-line="266" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#18364#18777#0" />
-                <element signature="e#18783#19218#0" />
-                <element signature="e#19362#20032#0" />
-                <element signature="e#20038#20345#0" />
-                <element signature="e#20351#22483#0" />
-                <element signature="e#22613#23840#0" />
-                <element signature="e#23846#24638#0" />
-                <element signature="e#24644#24861#0" />
-                <element signature="e#24867#25593#0" />
-                <element signature="e#25599#26245#0" />
-                <element signature="e#26251#27276#0" />
-                <element signature="e#27282#28032#0" />
-                <element signature="e#28838#29136#0" />
-                <element signature="e#29142#29309#0" />
-                <element signature="e#29550#29853#0" />
-                <element signature="e#32326#33275#0" />
-                <element signature="e#33281#33610#0" />
-                <element signature="e#33616#34836#0" />
-                <element signature="e#34842#35741#0" />
-                <element signature="e#35747#36736#0" />
-                <element signature="e#37058#37341#0" />
-                <element signature="e#37572#37735#0" />
-                <element signature="e#38352#38622#0" />
-                <element signature="e#38628#38853#0" />
-                <element signature="e#38859#39362#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -108,9 +86,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/UI/TableMouseListener.java" />
-        <option value="$PROJECT_DIR$/src/UI/Listener/TableChangedListener.java" />
-        <option value="$PROJECT_DIR$/src/UI/Listener/TableMouseListener.java" />
         <option value="$PROJECT_DIR$/src/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/frame/TestMain.java" />
         <option value="$PROJECT_DIR$/src/grade/GradeComp.java" />
@@ -159,6 +134,9 @@
         <option value="$PROJECT_DIR$/src/UI/Bottom/AddingPanel.java" />
         <option value="$PROJECT_DIR$/src/UI/Header/CheckBox/CheckBoxTableModel.java" />
         <option value="$PROJECT_DIR$/src/UI/MainFrame.java" />
+        <option value="$PROJECT_DIR$/doc/course1.json" />
+        <option value="$PROJECT_DIR$/doc/course2.json" />
+        <option value="$PROJECT_DIR$/doc/course3.json" />
       </list>
     </option>
   </component>
@@ -174,7 +152,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="2" />
     <option name="width" value="1429" />
     <option name="height" value="1047" />
@@ -184,7 +162,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -193,10 +170,16 @@
               <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
               <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="OOD-Final" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OOD-Final" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -388,23 +371,23 @@
       <workItem from="1556897420929" duration="9761000" />
       <workItem from="1556912436120" duration="23000" />
       <workItem from="1556936638831" duration="382000" />
+      <workItem from="1556938059443" duration="332000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227681000" />
+    <option name="totallyTimeSpent" value="228013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13186814" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12576313" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32934782" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29673913" />
@@ -417,6 +400,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32826087" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -440,10 +424,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/JTableHeaderCheckBox.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/table/DefaultTableModel.java" />
-    <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/CheckBoxHeader.java" />
-    <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/DynamicCheckBoxPanel.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JComponent.java" />
     <entry file="file://$PROJECT_DIR$/c.txt" />
     <entry file="file://$PROJECT_DIR$/123_fall2019.txt" />
@@ -556,9 +536,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/Comment/CommentEditor.java" />
     <entry file="file://$PROJECT_DIR$/src/UI/Header/CheckBox/CheckBoxTableModel.java" />
+    <entry file="file://$PROJECT_DIR$/doc/course3.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5082">
+          <caret line="231" column="24" selection-start-line="231" selection-start-column="18" selection-end-line="231" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/course2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3498">
+          <caret line="159" column="28" selection-start-line="159" selection-start-column="28" selection-end-line="159" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/course1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="857">
+          <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/criterion1">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5808">
+        <state relative-caret-position="852">
           <caret line="266" column="23" selection-start-line="266" selection-start-column="23" selection-end-line="266" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
