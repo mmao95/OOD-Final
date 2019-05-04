@@ -1,0 +1,55 @@
+[
+  {
+    "course" : "this is the course field",
+    "name" : "math",
+    "id" : "123",
+    "semester" : "fall",
+    "year" : "2019"
+  },
+
+  {
+    "criterion" : "this is the criterion firld",
+    "name" : "math_criterion",
+    "weightsOfAssignments" : "0.3",
+    "weightsOfExams" : "0.4",
+    "weightsOfProjects" : "0.2",
+    "weightsOfAttendance" : "0.1",
+    "numberOfAssignments" : "2",
+    "numberOfExams" : "1",
+    "numberOfProjects" : "1"
+  },
+  {
+    "student" : [
+      {
+        "name" : "tom",
+        "id" : "123",
+        "email" : "tom@email.com",
+        "gradeOfAssignment0" : "90",
+        "gradeOfAssignment1" : "70",
+        "gradeOfExam0" : "60",
+        "gradeOfProject0" : "75",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "jimmy",
+        "id" : "456",
+        "email" : "jimmy@email.com",
+        "gradeOfAssignment0" : "60",
+        "gradeOfAssignment1" : "70",
+        "gradeOfExam0" : "80",
+        "gradeOfProject0" : "75",
+        "gradeOfAttendance" : "100"
+      },
+      {
+        "name" : "zoey",
+        "id" : "789",
+        "email" : "zoey@email.com",
+        "gradeOfAssignment0" : "50",
+        "gradeOfAssignment1" : "60",
+        "gradeOfExam0" : "70",
+        "gradeOfProject0" : "85",
+        "gradeOfAttendance" : "100"
+      }
+    ]
+  }
+]
