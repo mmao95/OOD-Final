@@ -15,3 +15,5 @@ Once you open the correct directory, you will be able to run the program immedia
 ## Documents:
 
 To import a course, select Course -> Import course from file -> doc -> course3.json
+
+The 'pre' directory is used to save 'criterion' files, also some 'criterion' example files can be found in the 'doc' directory.
